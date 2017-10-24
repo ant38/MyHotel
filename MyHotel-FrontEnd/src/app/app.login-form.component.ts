@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {
   //REACTIVE_FORM_DIRECTIVES,
+  Validators,
   FormGroup,
   FormBuilder,
   FormControl
@@ -8,22 +9,23 @@ import {
 
 @Component({
   selector: 'login-form',
-  templateUrl: './app.login-form.component.html'//,// path:./
+  templateUrl: './app.login-form.component.html'//,  // path:./
   //directives: [REACTIVE_FORM_DIRECTIVES]
 })
 export class LoginForm {
-  loginForm: FormGroup;
-  username: FormControl;
-  password: FormControl;
+  username = new FormControl('', [
+    Validators.required,
+    Validators.minLength(5)
+  ]);
 
-  constructor (builder: FormBuilder) {
-    this.username = new FormControl('', []);
-    this.password = new FormControl('', []);
-    this.loginForm = builder.group({
-      username: this.username,
-      password: this.password
-    });
-  }
+  password = new FormControl('', [Validators.required]);
+
+  loginForm: FormGroup = this.builder.group({
+    username: this.username,
+    password: this.password
+  });
+
+  constructor(private builder: FormBuilder) { }
 
   login () {
     
