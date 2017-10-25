@@ -7,17 +7,24 @@ import { ReactiveFormsModule,FormsModule } from '@angular/forms';//Reac
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import { LoginComponent }      from './login.component';
+import { SigninComponent }          from './signin.component';
+
+import { AppRoutingModule }     from './app-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginForm
+    LoginForm,
+    LoginComponent,
+    SigninComponent
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule, //first test
     FormsModule,//////
-    HttpModule
+    HttpModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [
