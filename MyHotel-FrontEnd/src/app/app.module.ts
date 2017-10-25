@@ -9,15 +9,18 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { LoginComponent }      from './login.component';
 import { SigninComponent }          from './signin.component';
+import { DashboardComponent } from './dashboard.component';
 
 import { AppRoutingModule }     from './app-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
+    DashboardComponent,
     LoginForm,
     LoginComponent,
     SigninComponent
+
   ],
   imports: [
     BrowserModule,
@@ -28,8 +31,7 @@ import { AppRoutingModule }     from './app-routing.module';
   ],
   providers: [],
   bootstrap: [
-    AppComponent,
-    LoginForm
+    AppComponent
   ]
 })
 export class AppModule { }
