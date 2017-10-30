@@ -10,11 +10,14 @@ import { AppComponent } from './app.component';
 import { LoginComponent }      from './login.component';
 import { SigninComponent }          from './signin.component';
 
+import { AlertService, AuthenticationService, UserService } from './_services/index';
+import { AlertComponent } from './_directives/index';
 import { AppRoutingModule }     from './app-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
+    AlertComponent,
     LoginForm,
     LoginComponent,
     SigninComponent
@@ -26,10 +29,14 @@ import { AppRoutingModule }     from './app-routing.module';
     HttpModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    AlertService,/////
+        AuthenticationService,
+        UserService,
+  ],
   bootstrap: [
     AppComponent,
-    LoginForm
+    LoginForm//////only in declarations
   ]
 })
 export class AppModule { }
