@@ -6,12 +6,12 @@ import { LoginForm } from './app.login-form.component'//first test
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';//Reac
 import { HttpModule } from '@angular/http';
 
-import { AppComponent } from './app.component';
-import { LoginComponent }      from './login.component';
-import { SigninComponent }          from './signin.component';
+import { AppComponent }       from './app.component';
+import { LoginComponent }     from './login.component';
+import { SigninComponent }    from './signin.component';
 import { DashboardComponent } from './dashboard.component';
 
-import { AppRoutingModule }     from './app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -30,8 +30,6 @@ import { AppRoutingModule }     from './app-routing.module';
     AppRoutingModule
   ],
   providers: [],
-  bootstrap: [
-    AppComponent
-  ]
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }
