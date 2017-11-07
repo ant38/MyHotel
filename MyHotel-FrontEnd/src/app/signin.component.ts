@@ -4,8 +4,7 @@ import { Router } from '@angular/router';
 import { AlertService, UserService } from './_services/index';
 
 @Component({
-    //selector: 'USERsignin',
-    moduleId:module.id,
+    selector: 'USERsignin',
     templateUrl: 'signin.component.html'
 })
 
