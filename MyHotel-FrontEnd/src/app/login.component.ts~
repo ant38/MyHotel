@@ -11,8 +11,8 @@ import {
 } from '@angular/forms';
 
 @Component({
-  //selector: 'USERlogin',
-  moduleId:module.id,
+  selector: 'USERlogin',
+  //moduleId:module.id,
   templateUrl: './login.component.html'//,  // path:./
   //directives: [REACTIVE_FORM_DIRECTIVES]
 })
