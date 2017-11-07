@@ -45,9 +45,9 @@ const HOTELS: Hotel[] = [
 
 export class DashboardComponent {
     hotels = HOTELS;
-<<<<<<< HEAD
+
 }
-=======
+
     offres = OFFRES;
 }
->>>>>>> 78d204a4c8a0b4e5b95e0ea827c58e7b5f2b2e77
+
