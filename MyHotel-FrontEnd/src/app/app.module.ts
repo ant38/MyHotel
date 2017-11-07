@@ -15,14 +15,14 @@ import { LoginComponent }     from './login.component';
 import { SigninComponent }    from './signin.component';
 import { DashboardComponent } from './dashboard.component';
 
-
+<<<<<<< HEAD
 import { AlertService, AuthenticationService, UserService } from './_services/index';
 import { AlertComponent } from './_directives/index';
 import { AppRoutingModule }     from './app-routing.module';
 import { AuthGuard } from './_guards/index';
-
+=======
 import { AppRoutingModule } from './app-routing.module';
-
+>>>>>>> 78d204a4c8a0b4e5b95e0ea827c58e7b5f2b2e77
 
 @NgModule({
   declarations: [
@@ -44,7 +44,7 @@ import { AppRoutingModule } from './app-routing.module';
     HttpModule,
     AppRoutingModule
   ],
-
+<<<<<<< HEAD
   providers: [
     AuthGuard,
     AlertService,/////
@@ -60,9 +60,9 @@ import { AppRoutingModule } from './app-routing.module';
     //LoginForm/////only in declarations
 
   ]
-
+=======
   providers: [],
   bootstrap: [ AppComponent ]
-
+>>>>>>> 78d204a4c8a0b4e5b95e0ea827c58e7b5f2b2e77
 })
 export class AppModule { }
