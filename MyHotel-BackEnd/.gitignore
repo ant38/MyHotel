@@ -1,6 +1,6 @@
 ## Eclipse gitignore
 
-/build/
+build/
 .metadata
 bin/
 tmp/

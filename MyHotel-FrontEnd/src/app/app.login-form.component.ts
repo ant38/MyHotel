@@ -8,7 +8,8 @@ import {
 } from '@angular/forms';
 
 @Component({
-  selector: 'login-form',
+  //selector: 'login-form',
+    moduleId:module.id,
   templateUrl: './app.login-form.component.html'//,  // path:./
   //directives: [REACTIVE_FORM_DIRECTIVES]
 })
