@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule,FormsModule }    from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import { LoginForm } from './app.login-form.component'//first test
 
 // used to create fake backend
 import { fakeBackendProvider } from './_helpers/index';
@@ -34,7 +33,6 @@ import { DashboardComponent } from './dashboard.component';
         AlertComponent,
         HomeComponent,
         LoginComponent,
-        LoginForm,
         DashboardComponent,
         RegisterComponent
     ],
