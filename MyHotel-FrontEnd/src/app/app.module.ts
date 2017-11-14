@@ -20,6 +20,7 @@ import { LoginComponent } from './login/index';
 import { RegisterComponent } from './register/index';
 import { DashboardComponent } from './layout/dashboard/index';
 import { OffreComponent } from './layout/offre/index';
+import { PaiementComponent } from './layout/paiement/index';
 
 @NgModule({
     imports: [
@@ -36,7 +37,8 @@ import { OffreComponent } from './layout/offre/index';
         LoginComponent,
         DashboardComponent,
         RegisterComponent,
-        OffreComponent
+        OffreComponent,
+        PaiementComponent
     ],
     providers: [
         AuthGuard,
