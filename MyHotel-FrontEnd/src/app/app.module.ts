@@ -18,7 +18,7 @@ import { AlertService, AuthenticationService, UserService } from './_services/in
 import { HomeComponent } from './home/index';
 import { LoginComponent } from './login/index';
 import { RegisterComponent } from './register/index';
-import { DashboardComponent } from './dashboard.component';
+import { DashboardComponent } from './layout/dashboard/index';
 
 @NgModule({
     imports: [
