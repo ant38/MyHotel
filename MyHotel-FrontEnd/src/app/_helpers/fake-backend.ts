@@ -1,3 +1,7 @@
+/*Code source :
+http://jasonwatmore.com/post/2016/09/29/angular-2-user-registration-and-login-example-tutorial
+*/
+
 ﻿import { Http, BaseRequestOptions, Response, ResponseOptions, RequestMethod, XHRBackend, RequestOptions } from '@angular/http';
 import { MockBackend, MockConnection } from '@angular/http/testing';
 
