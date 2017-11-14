@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
-
-
 export class Hotel {
     id: number;
     name: string;
@@ -45,7 +43,7 @@ const HOTELS: Hotel[] = [
     styleUrls: [ './dashboard.component.css']
 })
 
-export class DashboardComponent {////
+export class DashboardComponent {
     hotels = HOTELS;
     offres = OFFRES;
 

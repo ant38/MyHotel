@@ -19,7 +19,15 @@ div :hover {
     margin-bottom: 20px;
 }
 
-.recherche{
+.recherche {
     
 }
 
+.searchField {
+    width: 160px;
+    height: 80px;
+    padding: 20px;
+    border: 8px solid red;
+    background: yellow;
+    box-sizing: content-box;
+}

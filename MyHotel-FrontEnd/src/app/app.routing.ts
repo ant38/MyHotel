@@ -4,11 +4,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/index';
 import { LoginComponent } from './login/index';
 import { RegisterComponent } from './register/index';
-import { DashboardComponent } from './dashboard.component';
+import { DashboardComponent } from './layout/dashboard/index';
 import { AuthGuard } from './_guards/index';
 
 const appRoutes: Routes = [
-    { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+    { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     { path: 'dashboard', component: DashboardComponent },
     //{ path: '', component: HomeComponent, canActivate: [AuthGuard] },
     { path: 'login', component: LoginComponent },
