@@ -9,17 +9,12 @@ import { AuthGuard } from './_guards/index';
 
 const appRoutes: Routes = [
 
-    { path: '/dashboard', component: DashboardComponent },
-    { path: '', component: HomeComponent, canActivate: [AuthGuard] },
-    { path: 'login', component: LoginComponent },
-    { path: 'register', component: RegisterComponent },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
 
-    // otherwise redirect to home(DashBoard)
-    { path: '**', redirectTo: '' }
 ];
 
-/*@NgModule({
-  imports: [ RouterModule.forRoot(appRoutes) ],
-  exports: [ RouterModule ]
-})*/
 export const routing = RouterModule.forRoot(appRoutes);
