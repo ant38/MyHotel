@@ -6,6 +6,7 @@ import { LoginComponent } from './login/index';
 import { RegisterComponent } from './register/index';
 import { DashboardComponent } from './layout/dashboard/index';
 import { AuthGuard } from './_guards/index';
+import { OffreComponent } from './layout/offre/index';
 
 const appRoutes: Routes = [
 
@@ -14,6 +15,7 @@ const appRoutes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'offre', component: OffreComponent},
 
 ];
 

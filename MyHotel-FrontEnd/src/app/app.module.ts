@@ -19,7 +19,7 @@ import { HomeComponent } from './home/index';
 import { LoginComponent } from './login/index';
 import { RegisterComponent } from './register/index';
 import { DashboardComponent } from './layout/dashboard/index';
-//import { OffreComponent } from './layout/offre/index';
+import { OffreComponent } from './layout/offre/index';
 
 @NgModule({
     imports: [
@@ -36,7 +36,7 @@ import { DashboardComponent } from './layout/dashboard/index';
         LoginComponent,
         DashboardComponent,
         RegisterComponent,
-        //OffreComponent
+        OffreComponent
     ],
     providers: [
         AuthGuard,

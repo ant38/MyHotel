@@ -1,10 +1,9 @@
 
 <br>
-<div class="hotels" *ngFor="let hotel of hotels">
-    <div class="offres" *ngFor="let offre of hotel.offres">
-        {{offre.name}} {{hotel.name}}
+
+    <div class="offres" *ngFor="let offre of offres">
+        {{offre.name}} {{offre.hotel.name}}
     </div>
-</div>
 
 <div class="searchField">
     <fieldset class="form-group">
