@@ -1,0 +1,35 @@
+
+<br>
+
+    <div class="offres" *ngFor="let offre of offres">
+        {{offre.name}} {{offre.hotel.name}}
+    </div>
+
+
+
+<div class="jumbotron">
+    <div class="container">
+            <a routerLink='/paiement' routerLinkActive="active">Paiement</a>
+        <div>
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
+
+
+<div class="searchField">
+    <fieldset class="form-group">
+        <input class="form-control">
+    </fieldset>
+
+    <fieldset class="form-group">
+            <input class="form-control" type="text">
+    </fieldset>
+
+    <fieldset class="form-group">
+        <input class="form-control" type="date" name="bday">
+    </fieldset>
+    <fieldset class="form-group">
+        <input class="form-control" type="date" name="bday">
+    </fieldset>
+</div>

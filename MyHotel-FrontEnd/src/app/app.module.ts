@@ -1,35 +1,57 @@
+﻿import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-
-import { LoginForm } from './app.login-form.component'//first test
-
-import { ReactiveFormsModule,FormsModule } from '@angular/forms';//Reac
+import { ReactiveFormsModule,FormsModule }    from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import { AppComponent } from './app.component';
-import { LoginComponent }      from './login.component';
-import { SigninComponent }          from './signin.component';
 
-import { AppRoutingModule }     from './app-routing.module';
+// used to create fake backend
+import { fakeBackendProvider } from './_helpers/index';
+import { MockBackend, MockConnection } from '@angular/http/testing';
+import { BaseRequestOptions } from '@angular/http';
+
+import { AppComponent }  from './app.component';
+import { routing }        from './app.routing';
+
+import { AlertComponent } from './_directives/index';
+import { AuthGuard } from './_guards/index';
+import { AlertService, AuthenticationService, UserService } from './_services/index';
+import { HomeComponent } from './home/index';
+import { LoginComponent } from './login/index';
+import { RegisterComponent } from './register/index';
+import { DashboardComponent } from './layout/dashboard/index';
+import { OffreComponent } from './layout/offre/index';
+import { PaiementComponent } from './layout/paiement/index';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginForm,
-    LoginComponent,
-    SigninComponent
-  ],
-  imports: [
-    BrowserModule,
-    ReactiveFormsModule, //first test
-    FormsModule,//////
-    HttpModule,
-    AppRoutingModule
-  ],
-  providers: [],
-  bootstrap: [
-    AppComponent,
-    LoginForm
-  ]
+    imports: [
+        BrowserModule,
+        ReactiveFormsModule, //first test
+        FormsModule,
+        HttpModule,
+        routing
+    ],
+    declarations: [
+        AppComponent,
+        AlertComponent,
+        HomeComponent,
+        LoginComponent,
+        DashboardComponent,
+        RegisterComponent,
+        OffreComponent,
+        PaiementComponent
+    ],
+    providers: [
+        AuthGuard,
+        AlertService,
+        AuthenticationService,
+        UserService,
+
+        // providers used to create fake backend
+        fakeBackendProvider,
+        MockBackend,
+        BaseRequestOptions
+    ],
+    bootstrap: [AppComponent]
 })
+
 export class AppModule { }
