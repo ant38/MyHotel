@@ -7,16 +7,23 @@ import { RegisterComponent } from './register/index';
 import { DashboardComponent } from './layout/dashboard/index';
 import { AuthGuard } from './_guards/index';
 import { OffreComponent } from './layout/offre/index';
-import { PaiementComponent } from "./layout/paiement/index";
+import { PaiementComponent } from './layout/paiement/index';
+import { ConfirmationResaComponent } from './layout/confirmationResa/index';
+import { RechercheComponent } from './layout/recherche/index';
 
 const appRoutes: Routes = [
 
   { path: 'dashboard', component: DashboardComponent },
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'offre', component: OffreComponent },
   { path: 'paiement', component: PaiementComponent, canActivate: [AuthGuard] },
+  { path: 'confirmationResa', component: ConfirmationResaComponent, canActivate: [AuthGuard] },
+  { path: 'recherche', component: RechercheComponent },
+  // otherwise redirect to home(DashBoard)
+  { path: '**', redirectTo: '' }
 ];
 
 export const routing = RouterModule.forRoot(appRoutes);

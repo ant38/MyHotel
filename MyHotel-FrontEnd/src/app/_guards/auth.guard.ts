@@ -1,5 +1,6 @@
 ﻿import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+
 //Modified by Qianqian: it's here to show the 1st page.(Not logged User)
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -15,5 +16,10 @@ export class AuthGuard implements CanActivate {
         // not logged in so redirect to DashBoard page with the return url
         this.router.navigate(['/dashboard'], { queryParams: { returnUrl: state.url }});
         return false;
+
+        /*import 'rxjs/add/operator/map';
+        return this.authService.isLoggedIn       // {1}
+      .take(1)                               // {2} 
+      .map((isLoggedIn: boolean) => {  */
     }
 }
