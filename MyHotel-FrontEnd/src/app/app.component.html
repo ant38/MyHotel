@@ -3,8 +3,9 @@
     <div class="container">
         <nav align="right">
           <a routerLink="/dashboard" routerLinkActive="active">Accueil</a>
-          <a routerLink="/login" routerLinkActive="active">Log In</a>
-          <a routerLink="/register" routerLinkActive="active">Sign In</a>
+          <a *ngIf="getUser()==undefined" routerLink="/login" routerLinkActive="active">S'identifier</a>
+          <a *ngIf="getUser()==undefined" routerLink="/register" routerLinkActive="active">S'enregistrer</a>
+          <a *ngIf="getUser()!=undefined" routerLink="/home" routerLinkActive="active">Mon espace</a>
         </nav>
         <div class="col-sm-8 col-sm-offset-2">
             <alert></alert>
