@@ -22,6 +22,8 @@ const appRoutes: Routes = [
   { path: 'paiement', component: PaiementComponent, canActivate: [AuthGuard] },
   { path: 'confirmationResa', component: ConfirmationResaComponent, canActivate: [AuthGuard] },
   { path: 'recherche', component: RechercheComponent },
+  // otherwise redirect to home(DashBoard)
+  { path: '**', redirectTo: '' }
 ];
 
 export const routing = RouterModule.forRoot(appRoutes);

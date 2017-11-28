@@ -39,4 +39,10 @@ export class LoginComponent implements OnInit {
                     this.loading = false;
                 });
     }
+/*
+onLoggedin() {
+        localStorage.setItem('isLoggedin', 'true');
+}
+*/
+
 }
