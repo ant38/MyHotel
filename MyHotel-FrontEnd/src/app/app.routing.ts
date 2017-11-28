@@ -16,8 +16,7 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'offre', component: OffreComponent },
-  { path: 'paiement', component: PaiementComponent },
-
+  { path: 'paiement', component: PaiementComponent, canActivate: [AuthGuard] },
 ];
 
 export const routing = RouterModule.forRoot(appRoutes);

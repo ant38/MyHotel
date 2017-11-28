@@ -5,6 +5,18 @@
         {{offre.name}} {{offre.hotel.name}}
     </div>
 
+
+
+<div class="jumbotron">
+    <div class="container">
+            <a routerLink='/paiement' routerLinkActive="active">Paiement</a>
+        <div>
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
+
+
 <div class="searchField">
     <fieldset class="form-group">
         <input class="form-control">
@@ -17,19 +29,7 @@
     <fieldset class="form-group">
         <input class="form-control" type="date" name="bday">
     </fieldset>
+    <fieldset class="form-group">
+        <input class="form-control" type="date" name="bday">
+    </fieldset>
 </div>
-
-
-<div class="btn-group" dropdown keyboardNav="true">
-        <button id="dropdown-keyboard-access" type="button" class="btn btn-info" dropdownToggle>
-          Dropdown with Keyboard Accessibility (Up and Down) <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdown-keyboard-access">
-          <li role="menuitem"><a class="dropdown-item" href="#">BMW Serie 1</a></li>
-          <li role="menuitem"><a class="dropdown-item" href="#">BMW Serie 5</a></li>
-          <li role="menuitem"><a class="dropdown-item" href="#">BMW Serie 3</a></li>
-          <li class="divider dropdown-divider"></li>
-          <li role="menuitem"><a class="dropdown-item" href="#">Porsche</a></li>
-          <li role="menuitem"><a class="dropdown-item" href="#">Audi New</a></li>
-        </ul>
-      </div>

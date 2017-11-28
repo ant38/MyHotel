@@ -1,5 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgModule } from '@angular/core';
+import { BrowserModule } from "@angular/platform-browser";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { HttpModule } from "@angular/http";
 import { FormControl } from '@angular/forms';
+import { PaiementComponent } from '../paiement/index';
+
+
+
 
 export class Hotel {
     id: number;
@@ -97,7 +104,6 @@ const OFFRES: Offre[] = [
     { id_offre: 59, name: 'offre59', dateIn:  new Date(2017, 11, 19), dateOut: new Date(2017, 12, 31), nbPersonne: 2, hotel: HOTELS[9], prix: 100, description: "1 chambre avec 2 lits simples"},
     { id_offre: 60, name: 'offre60', dateIn:  new Date(2017, 11, 20), dateOut: new Date(2017, 12, 31), nbPersonne: 2, hotel: HOTELS[0], prix: 100, description: "2 chambres avec 1 lit"},
 ];
-
 
 @Component({
 
