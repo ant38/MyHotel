@@ -5,7 +5,8 @@ import { HttpModule } from "@angular/http";
 import { FormControl } from '@angular/forms';
 import { PaiementComponent } from '../paiement/index';
 
-
+import { Http, Response, Headers } from '@angular/http';
+import 'rxjs/add/operator/map'
 
 
 export class Hotel {
@@ -115,6 +116,24 @@ const OFFRES: Offre[] = [
 export class DashboardComponent {
     hotels = HOTELS;
     offres = OFFRES;
+
+    data: any = null;
+
+  constructor(private _http: Http) {
+    this.getMyBlog();
+  }
+
+  private getMyBlog() {
+    var headers = new Headers();
+    headers.append('Access-Control-Allow-Origin','*');
+    headers.append('Content-Type','application/json');
+    return this._http.get('http://18.216.255.59/MyHotel/rest/hotels',{headers: headers})
+                .map((res: Response) => res.json())
+                 .subscribe(data => {
+                        this.data = data;
+                        console.log(this.data);
+                });
+  }
 
 }
 
