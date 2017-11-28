@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ConfirmationResaComponent } from '../confirmationResa/index';
 
 @Component({
   selector: 'paiement',

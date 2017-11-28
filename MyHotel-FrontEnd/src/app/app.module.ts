@@ -21,6 +21,7 @@ import { RegisterComponent } from './register/index';
 import { DashboardComponent } from './layout/dashboard/index';
 import { OffreComponent } from './layout/offre/index';
 import { PaiementComponent } from './layout/paiement/index';
+import { ConfirmationResaComponent } from './layout/confirmationResa/index';
 
 @NgModule({
     imports: [
@@ -38,7 +39,8 @@ import { PaiementComponent } from './layout/paiement/index';
         DashboardComponent,
         RegisterComponent,
         OffreComponent,
-        PaiementComponent
+        PaiementComponent,
+        ConfirmationResaComponent
     ],
     providers: [
         AuthGuard,
