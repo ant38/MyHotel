@@ -29,6 +29,13 @@ public class HotelService extends BaseService<HotelEntity> implements Serializab
         return entityManager.createQuery("SELECT o FROM Hotel o LEFT JOIN FETCH o.image", HotelEntity.class).getResultList();
     }
     
+    @Transactional
+    @Override
+    public HotelEntity find(Long id) {
+        if (id == null) return null;
+        return entityManager.createQuery("SELECT o FROM Hotel o LEFT JOIN FETCH o.image WHERE o.id="+id, HotelEntity.class).getSingleResult();
+    }
+    
     @Override
     @Transactional
     public long countAllEntries() {
