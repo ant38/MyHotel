@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui">
+<ui:composition template="/templates/layout.xhtml">
+  <ui:define name="content">
+
+    <h:form prependId="false" id="offerDataForm" onkeypress="if (event.keyCode == 13) {return false; }">
+
+        <p:dataTable id="offerTable" value="#{offerBean.offerList}" var="offer" resizableColumns="true" paginator="true"
+                paginatorTemplate=" {CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                rowsPerPageTemplate="5,10,25,50" rows="10" draggableColumns="true"
+                paginatorPosition="bottom" widgetVar="offerTable" emptyMessage="#{messages.label_no_records_found}"
+                reflow="true">
+        
+          <f:facet name="header" >
+
+              <p:commandButton value="#{messages.create_new_offer}" icon="ui-icon-plusthick" action="#{offerBean.prepareNewOffer()}"
+                      resetValues="true" update=":editOfferDialog" oncomplete="PF('editOfferDialogWidget').show()"
+                      style="float:left" />
+              
+              <p:commandButton id="toggler" type="button" value="#{messages.table_select_columns}" icon="ui-icon-calculator" />
+              <p:columnToggler datasource="offerTable" trigger="toggler" />
+          </f:facet>
+          
+          <p:column headerText="#{messages.field_label_offer_dateStart}" sortBy="#{offer.dateStart}" filterBy="#{offer.dateStart}">
+            <f:facet name="filter">
+                <p:inputText id="dateStartFilter"
+                        onkeyup="if (event.keyCode == 13) {PF('offerTable').filter(); updateDateStartFilter(); return false;}" >
+                    <p:remoteCommand name="updateDateStartFilter" update="offerTable:dateStartFilter" />
+                    <f:convertDateTime />
+                </p:inputText>
+            </f:facet>
+            <h:outputText value="#{offer.dateStart}"><f:convertDateTime /></h:outputText>
+          </p:column>
+
+          <p:column headerText="#{messages.field_label_offer_dateEnd}" sortBy="#{offer.dateEnd}" filterBy="#{offer.dateEnd}">
+            <f:facet name="filter">
+                <p:inputText id="dateEndFilter"
+                        onkeyup="if (event.keyCode == 13) {PF('offerTable').filter(); updateDateEndFilter(); return false;}" >
+                    <p:remoteCommand name="updateDateEndFilter" update="offerTable:dateEndFilter" />
+                    <f:convertDateTime />
+                </p:inputText>
+            </f:facet>
+            <h:outputText value="#{offer.dateEnd}"><f:convertDateTime /></h:outputText>
+          </p:column>
+
+          <p:column headerText="#{messages.field_label_offer_price}" sortBy="#{offer.price}" filterBy="#{offer.price}">
+            <f:facet name="filter">
+                <p:inputText id="priceFilter"
+                        onkeypress="if (event.keyCode == 13) {PF('offerTable').filter(); updatePriceFilter(); return false; }" >
+                    <p:remoteCommand name="updatePriceFilter" update="offerTable:priceFilter" />
+                    <f:convertNumber integerOnly="true" />
+                </p:inputText>
+            </f:facet>
+            <h:outputText value="#{offer.price}" ><f:convertNumber /></h:outputText>
+          </p:column>
+
+          <p:column headerText="#{messages.field_label_offer_room_plural}" styleClass="action-column" exportable="false">
+            
+            <p:commandButton icon="ui-icon-transfer-e-w"  title="#{messages.field_label_offer_room_plural}" action="#{offerBean.onRoomsDialog(offer)}" oncomplete="PF('offerRoomsDialogWidget').show()" update=":offerRoomsDialog"/>
+            
+          </p:column>
+          
+          <p:column styleClass="action-column" headerText="#{messages.table_actions_column}" width="115" exportable="false">
+            
+            <p:commandButton icon="ui-icon-zoomin" update=":viewOfferDialog" oncomplete="PF('viewOfferDialogWidget').show()" title="#{messages.label_view}">
+              <f:setPropertyActionListener value="#{offer}" target="#{offerBean.offer}" />
+            </p:commandButton>
+
+            <p:commandButton icon="ui-icon-pencil" update=":editOfferDialog"
+                resetValues="true" 
+                action="#{offerBean.onDialogOpen(offer)}"
+                oncomplete="PF('editOfferDialogWidget').show()"
+                title="#{messages.label_edit}" >
+            </p:commandButton>
+
+            <p:commandButton icon="ui-icon-close" 
+                oncomplete="PF('deleteOfferDialogWidget').show()"
+                title="#{messages.label_delete}" >
+                <f:setPropertyActionListener value="#{offer}"
+                    target="#{offerBean.offer}" />
+            </p:commandButton>
+    
+          </p:column>
+          
+        </p:dataTable>
+        
+    </h:form>
+
+    <p:confirmDialog id="deleteOfferDialog" widgetVar="deleteOfferDialogWidget"
+        header="#{messages.label_confirm_deletion}"
+        severity="alarm">
+        <f:facet name="message"><h:outputText value="#{messages.label_delete_record}" escape="false"/></f:facet>
+        <p:outputPanel>
+          <h:form>
+            <div style="text-align: center; margin:10px">
+              <p:commandButton value="#{messages.label_yes}" action="#{offerBean.delete}" update=":offerDataForm :growlForm:growl" oncomplete="PF('deleteOfferDialogWidget').hide()" />
+              <p:commandButton value="#{messages.label_no}" onclick="PF('deleteOfferDialogWidget').hide()" type="button" />
+            </div>
+          </h:form>
+        </p:outputPanel>
+    </p:confirmDialog>
+    
+    <p:dialog dynamic="true" id="editOfferDialog" header="#{messages.label_offer_caption}"
+            modal="true" widgetVar="editOfferDialogWidget" maximizable="true">
+        <p:ajax event="close" listener="#{offerBean.reset}"/>
+        <h:form id="editOfferForm" >
+            <p:outputPanel id="offerEditPanel">
+                <ui:include src="/pages/offer/offerEditInclude.xhtml"/>
+                <div style="text-align: center; margin:10px">
+                    <p:commandButton value="#{messages.label_save}"
+                            icon="ui-icon-disk" action="#{offerBean.persist}"
+                            update=":editOfferForm:offerEditPanel :offerDataForm :growlForm:growl"
+                            oncomplete="if(!args.validationFailed) PF('editOfferDialogWidget').hide()" />
+                    <p:commandButton value="#{messages.label_close}" icon="ui-icon-close" onclick="PF('editOfferDialogWidget').hide()" type="button" />
+                </div>
+            </p:outputPanel>
+        </h:form>
+    </p:dialog>
+    
+    <p:dialog dynamic="true" id="viewOfferDialog" header="#{messages.label_offer_caption}" modal="true" widgetVar="viewOfferDialogWidget" maximizable="true">
+        <p:ajax event="close" listener="#{offerBean.reset}" />
+        <h:form id="viewOfferForm">
+          <ui:include src="/pages/offer/offerViewInclude.xhtml"/>
+          <div style="text-align: center; margin:10px">
+              <p:commandButton value="#{messages.label_close}" icon="ui-icon-close" onclick="PF('viewOfferDialogWidget').hide()" type="button" />
+          </div>
+        </h:form>
+    </p:dialog>
+    
+    <p:dialog dynamic="true" id="offerRoomsDialog" header="#{messages.dialog_header_offer_room_plural}" modal="true" widgetVar="offerRoomsDialogWidget" maximizable="true">
+        <p:ajax event="close" listener="#{offerBean.reset}" />
+        <p:outputPanel id="offerRoomsPanel">
+            <h:form id="offerRoomsForm">
+                <ui:include src="/pages/offer/offerRoomInclude.xhtml" />
+                <div style="text-align: center; margin:10px">
+                    <p:commandButton value="#{messages.label_save}"
+                        icon="ui-icon-disk"
+                        action="#{offerBean.onRoomsSubmit}"
+                        update=":growlForm:growl"
+                        oncomplete="if(!args.validationFailed) PF('offerRoomsDialogWidget').hide()"
+                        partialSubmit="true" process="@this" />
+                    <p:commandButton value="#{messages.label_close}" icon="ui-icon-close" onclick="PF('offerRoomsDialogWidget').hide()" type="button" />
+                </div>
+            </h:form>
+        </p:outputPanel>
+    </p:dialog>
+    
+    <p:dialog dynamic="true" id="createRoomDialog"
+        header="#{messages.dialog_offer_create_room}" modal="true"
+        widgetVar="createRoomDialogWidget" maximizable="true">
+        <p:ajax event="close" listener="#{roomBean.reset}" />
+        <p:outputPanel id="createRoomPanel">
+                <h:form id="createRoomForm">
+                    <ui:include src="/pages/room/roomEditInclude.xhtml">
+                        <ui:param name="hideOfferSelectInput" value="true" />
+                    </ui:include>
+                    <div style="text-align: center; margin: 10px">
+                        <p:commandButton
+                            action="#{offerBean.updateRoom(roomBean.room)}"
+                            value="#{messages.label_save}" icon="ui-icon-disk"
+                            actionListener="#{roomBean.persist}"
+                            update=":offerRoomsPanel :createRoomPanel :growlForm:growl"
+                            oncomplete="if(!args.validationFailed) PF('createRoomDialogWidget').hide()" />
+                        <p:commandButton value="#{messages.label_close}"
+                            icon="ui-icon-close"
+                            onclick="PF('createRoomDialogWidget').hide()"
+                            type="button" />
+                    </div>
+                </h:form>
+            </p:outputPanel>
+    </p:dialog>
+    
+  </ui:define>
+</ui:composition>
+</html>

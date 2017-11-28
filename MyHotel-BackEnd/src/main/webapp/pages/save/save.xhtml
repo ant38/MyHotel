@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui">
+<ui:composition template="/templates/layout.xhtml">
+  <ui:define name="content">
+
+    <h:form prependId="false" id="saveDataForm" onkeypress="if (event.keyCode == 13) {return false; }">
+
+        <p:dataTable id="saveTable" value="#{saveBean.saveList}" var="save" resizableColumns="true" paginator="true"
+                paginatorTemplate=" {CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                rowsPerPageTemplate="5,10,25,50" rows="10" draggableColumns="true"
+                paginatorPosition="bottom" widgetVar="saveTable" emptyMessage="#{messages.label_no_records_found}"
+                reflow="true">
+        
+          <f:facet name="header" >
+
+              <p:commandButton value="#{messages.create_new_save}" icon="ui-icon-plusthick" action="#{saveBean.prepareNewSave()}"
+                      resetValues="true" update=":editSaveDialog" oncomplete="PF('editSaveDialogWidget').show()"
+                      style="float:left" />
+              
+              <p:commandButton id="toggler" type="button" value="#{messages.table_select_columns}" icon="ui-icon-calculator" />
+              <p:columnToggler datasource="saveTable" trigger="toggler" />
+          </f:facet>
+          
+          <p:column headerText="#{messages.field_label_save_date}" sortBy="#{save.date}" filterBy="#{save.date}">
+            <f:facet name="filter">
+                <p:inputText id="dateFilter"
+                        onkeyup="if (event.keyCode == 13) {PF('saveTable').filter(); updateDateFilter(); return false;}" >
+                    <p:remoteCommand name="updateDateFilter" update="saveTable:dateFilter" />
+                    <f:convertDateTime />
+                </p:inputText>
+            </f:facet>
+            <h:outputText value="#{save.date}"><f:convertDateTime /></h:outputText>
+          </p:column>
+
+          <p:column headerText="#{messages.field_label_save_client}" sortBy="#{save.client}" filterBy="#{save.client}">
+            <f:facet name="filter">
+            <p:selectOneMenu  id="clientFilter"
+                            style="width:145px;"
+                            onchange="PF('saveTable').filter(); return false;">
+                <f:selectItem noSelectionOption="true" itemLabel="" />
+                <f:selectItems itemLabel="#{client.username}"
+                            value="#{saveBean.clients}" 
+                            var="client" 
+                            itemValue="#{client}" />
+                <o:converter converterId="omnifaces.SelectItemsConverter" list="#{saveBean.clients}" />
+            </p:selectOneMenu>
+            </f:facet>
+            <h:outputText value="#{save.client.username}" />
+          </p:column>
+
+          <p:column headerText="#{messages.field_label_save_offer_plural}" styleClass="action-column" exportable="false">
+            
+            <p:commandButton icon="ui-icon-transfer-e-w"  title="#{messages.field_label_save_offer_plural}" action="#{saveBean.onOffersDialog(save)}" oncomplete="PF('saveOffersDialogWidget').show()" update=":saveOffersDialog"/>
+            
+          </p:column>
+          
+          <p:column styleClass="action-column" headerText="#{messages.table_actions_column}" width="115" exportable="false">
+            
+            <p:commandButton icon="ui-icon-zoomin" update=":viewSaveDialog" oncomplete="PF('viewSaveDialogWidget').show()" title="#{messages.label_view}">
+              <f:setPropertyActionListener value="#{save}" target="#{saveBean.save}" />
+            </p:commandButton>
+
+            <p:commandButton icon="ui-icon-pencil" update=":editSaveDialog"
+                resetValues="true" 
+                action="#{saveBean.onDialogOpen(save)}"
+                oncomplete="PF('editSaveDialogWidget').show()"
+                title="#{messages.label_edit}" >
+            </p:commandButton>
+
+            <p:commandButton icon="ui-icon-close" 
+                oncomplete="PF('deleteSaveDialogWidget').show()"
+                title="#{messages.label_delete}" >
+                <f:setPropertyActionListener value="#{save}"
+                    target="#{saveBean.save}" />
+            </p:commandButton>
+    
+          </p:column>
+          
+        </p:dataTable>
+        
+    </h:form>
+
+    <p:confirmDialog id="deleteSaveDialog" widgetVar="deleteSaveDialogWidget"
+        header="#{messages.label_confirm_deletion}"
+        severity="alarm">
+        <f:facet name="message"><h:outputText value="#{messages.label_delete_record}" escape="false"/></f:facet>
+        <p:outputPanel>
+          <h:form>
+            <div style="text-align: center; margin:10px">
+              <p:commandButton value="#{messages.label_yes}" action="#{saveBean.delete}" update=":saveDataForm :growlForm:growl" oncomplete="PF('deleteSaveDialogWidget').hide()" />
+              <p:commandButton value="#{messages.label_no}" onclick="PF('deleteSaveDialogWidget').hide()" type="button" />
+            </div>
+          </h:form>
+        </p:outputPanel>
+    </p:confirmDialog>
+    
+    <p:dialog dynamic="true" id="editSaveDialog" header="#{messages.label_save_caption}"
+            modal="true" widgetVar="editSaveDialogWidget" maximizable="true">
+        <p:ajax event="close" listener="#{saveBean.reset}"/>
+        <h:form id="editSaveForm" >
+            <p:outputPanel id="saveEditPanel">
+                <ui:include src="/pages/save/saveEditInclude.xhtml"/>
+                <div style="text-align: center; margin:10px">
+                    <p:commandButton value="#{messages.label_save}"
+                            icon="ui-icon-disk" action="#{saveBean.persist}"
+                            update=":editSaveForm:saveEditPanel :saveDataForm :growlForm:growl"
+                            oncomplete="if(!args.validationFailed) PF('editSaveDialogWidget').hide()" />
+                    <p:commandButton value="#{messages.label_close}" icon="ui-icon-close" onclick="PF('editSaveDialogWidget').hide()" type="button" />
+                </div>
+            </p:outputPanel>
+        </h:form>
+    </p:dialog>
+    
+    <p:dialog dynamic="true" id="viewSaveDialog" header="#{messages.label_save_caption}" modal="true" widgetVar="viewSaveDialogWidget" maximizable="true">
+        <p:ajax event="close" listener="#{saveBean.reset}" />
+        <h:form id="viewSaveForm">
+          <ui:include src="/pages/save/saveViewInclude.xhtml"/>
+          <div style="text-align: center; margin:10px">
+              <p:commandButton value="#{messages.label_close}" icon="ui-icon-close" onclick="PF('viewSaveDialogWidget').hide()" type="button" />
+          </div>
+        </h:form>
+    </p:dialog>
+    
+    <p:dialog dynamic="true" id="createClientFromEditDialog"
+        header="#{messages.dialog_save_create_client}" modal="true"
+        widgetVar="createClientFromEditDialogWidget" maximizable="true">
+        <p:ajax event="close" listener="#{clientBean.reset}" />
+        <p:outputPanel id="createClientPanel">
+                <h:form id="createClientForm">
+                    <ui:include src="/pages/client/clientEditInclude.xhtml">
+                        <ui:param name="hideSaveSelectInput" value="true" />
+                    </ui:include>
+                    <div style="text-align: center; margin: 10px">
+                        <p:commandButton
+                            action="#{saveBean.updateClient(clientBean.client)}"
+                            value="#{messages.label_save}" icon="ui-icon-disk"
+                            actionListener="#{clientBean.persist}"
+                            update=":editSaveForm:clientSelectInput :createClientPanel :growlForm:growl"
+                            oncomplete="if(!args.validationFailed) PF('createClientFromEditDialogWidget').hide()" />
+                        <p:commandButton value="#{messages.label_close}"
+                            icon="ui-icon-close"
+                            onclick="PF('createClientFromEditDialogWidget').hide()"
+                            type="button" />
+                    </div>
+                </h:form>
+            </p:outputPanel>
+    </p:dialog>
+    
+    <p:dialog dynamic="true" id="saveOffersDialog" header="#{messages.dialog_header_save_offer_plural}" modal="true" widgetVar="saveOffersDialogWidget" maximizable="true">
+        <p:ajax event="close" listener="#{saveBean.reset}" />
+        <p:outputPanel id="saveOffersPanel">
+            <h:form id="saveOffersForm">
+                <ui:include src="/pages/save/saveOfferInclude.xhtml" />
+                <div style="text-align: center; margin:10px">
+                    <p:commandButton value="#{messages.label_save}"
+                        icon="ui-icon-disk"
+                        action="#{saveBean.onOffersSubmit}"
+                        update=":growlForm:growl"
+                        oncomplete="if(!args.validationFailed) PF('saveOffersDialogWidget').hide()"
+                        partialSubmit="true" process="@this" />
+                    <p:commandButton value="#{messages.label_close}" icon="ui-icon-close" onclick="PF('saveOffersDialogWidget').hide()" type="button" />
+                </div>
+            </h:form>
+        </p:outputPanel>
+    </p:dialog>
+    
+    <p:dialog dynamic="true" id="createOfferDialog"
+        header="#{messages.dialog_save_create_offer}" modal="true"
+        widgetVar="createOfferDialogWidget" maximizable="true">
+        <p:ajax event="close" listener="#{offerBean.reset}" />
+        <p:outputPanel id="createOfferPanel">
+                <h:form id="createOfferForm">
+                    <ui:include src="/pages/offer/offerEditInclude.xhtml">
+                        <ui:param name="hideSaveSelectInput" value="true" />
+                    </ui:include>
+                    <div style="text-align: center; margin: 10px">
+                        <p:commandButton
+                            action="#{saveBean.updateOffer(offerBean.offer)}"
+                            value="#{messages.label_save}" icon="ui-icon-disk"
+                            actionListener="#{offerBean.persist}"
+                            update=":saveOffersPanel :createOfferPanel :growlForm:growl"
+                            oncomplete="if(!args.validationFailed) PF('createOfferDialogWidget').hide()" />
+                        <p:commandButton value="#{messages.label_close}"
+                            icon="ui-icon-close"
+                            onclick="PF('createOfferDialogWidget').hide()"
+                            type="button" />
+                    </div>
+                </h:form>
+            </p:outputPanel>
+    </p:dialog>
+    
+  </ui:define>
+</ui:composition>
+</html>
