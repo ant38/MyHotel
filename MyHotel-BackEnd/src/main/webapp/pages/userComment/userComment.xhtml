@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui">
+<ui:composition template="/templates/layout.xhtml">
+  <ui:define name="content">
+
+    <h:form prependId="false" id="userCommentDataForm" onkeypress="if (event.keyCode == 13) {return false; }">
+
+        <p:dataTable id="userCommentTable" value="#{userCommentBean.userCommentList}" var="userComment" resizableColumns="true" paginator="true"
+                paginatorTemplate=" {CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                rowsPerPageTemplate="5,10,25,50" rows="10" draggableColumns="true"
+                paginatorPosition="bottom" widgetVar="userCommentTable" emptyMessage="#{messages.label_no_records_found}"
+                reflow="true">
+        
+          <f:facet name="header" >
+
+              <p:commandButton value="#{messages.create_new_userComment}" icon="ui-icon-plusthick" action="#{userCommentBean.prepareNewUserComment()}"
+                      resetValues="true" update=":editUserCommentDialog" oncomplete="PF('editUserCommentDialogWidget').show()"
+                      style="float:left" />
+              
+              <p:commandButton id="toggler" type="button" value="#{messages.table_select_columns}" icon="ui-icon-calculator" />
+              <p:columnToggler datasource="userCommentTable" trigger="toggler" />
+          </f:facet>
+          
+          <p:column headerText="#{messages.label_image}">
+              <o:graphicImage value="#{userComment.image.content}" dataURI="true"
+                  rendered="#{not empty userComment.image.content}" width="50px"/>
+          </p:column>
+          
+          <p:column headerText="#{messages.field_label_userComment_rating}" sortBy="#{userComment.rating}" filterBy="#{userComment.rating}">
+            <f:facet name="filter">
+                <p:inputText id="ratingFilter"
+                        onkeypress="if (event.keyCode == 13) {PF('userCommentTable').filter(); updateRatingFilter(); return false; }" >
+                    <p:remoteCommand name="updateRatingFilter" update="userCommentTable:ratingFilter" />
+                    <f:convertNumber integerOnly="true" />
+                </p:inputText>
+            </f:facet>
+            <h:outputText value="#{userComment.rating}" ><f:convertNumber /></h:outputText>
+          </p:column>
+
+          <p:column  headerText="#{messages.field_label_userComment_comment}" sortBy="#{userComment.comment}" filterBy="#{userComment.comment}">
+            <f:facet name="filter">
+                <p:inputText id="commentFilter"
+                        onkeypress="if (event.keyCode == 13) {PF('userCommentTable').filter(); updateCommentFilter(); return false; }" >
+                    <p:remoteCommand name="updateCommentFilter" update="userCommentTable:commentFilter" />
+                </p:inputText>
+            </f:facet>
+            <h:outputText value="#{userComment.comment}" />
+          </p:column>
+
+          <p:column headerText="#{messages.field_label_userComment_client}" sortBy="#{userComment.client}" filterBy="#{userComment.client}">
+            <f:facet name="filter">
+            <p:selectOneMenu  id="clientFilter"
+                            style="width:145px;"
+                            onchange="PF('userCommentTable').filter(); return false;">
+                <f:selectItem noSelectionOption="true" itemLabel="" />
+                <f:selectItems itemLabel="#{client.username}"
+                            value="#{userCommentBean.clients}" 
+                            var="client" 
+                            itemValue="#{client}" />
+                <o:converter converterId="omnifaces.SelectItemsConverter" list="#{userCommentBean.clients}" />
+            </p:selectOneMenu>
+            </f:facet>
+            <h:outputText value="#{userComment.client.username}" />
+          </p:column>
+
+          <p:column headerText="#{messages.field_label_userComment_hotel}" sortBy="#{userComment.hotel}" filterBy="#{userComment.hotel}">
+            <f:facet name="filter">
+            <p:selectOneMenu  id="hotelFilter"
+                            style="width:145px;"
+                            onchange="PF('userCommentTable').filter(); return false;">
+                <f:selectItem noSelectionOption="true" itemLabel="" />
+                <f:selectItems itemLabel="#{hotel.name}"
+                            value="#{userCommentBean.hotels}" 
+                            var="hotel" 
+                            itemValue="#{hotel}" />
+                <o:converter converterId="omnifaces.SelectItemsConverter" list="#{userCommentBean.hotels}" />
+            </p:selectOneMenu>
+            </f:facet>
+            <h:outputText value="#{userComment.hotel.name}" />
+          </p:column>
+
+          <p:column styleClass="action-column" headerText="#{messages.table_actions_column}" width="115" exportable="false">
+            
+            <p:commandButton icon="ui-icon-zoomin" update=":viewUserCommentDialog" oncomplete="PF('viewUserCommentDialogWidget').show()" title="#{messages.label_view}">
+              <f:setPropertyActionListener value="#{userComment}" target="#{userCommentBean.userComment}" />
+            </p:commandButton>
+
+            <p:commandButton icon="ui-icon-pencil" update=":editUserCommentDialog"
+                resetValues="true" 
+                action="#{userCommentBean.onDialogOpen(userComment)}"
+                oncomplete="PF('editUserCommentDialogWidget').show()"
+                title="#{messages.label_edit}" >
+            </p:commandButton>
+
+            <p:commandButton icon="ui-icon-copy" update=":userCommentAttachmentsDialog" resetValues="true" oncomplete="PF('userCommentAttachmentsDialogWidget').show()" title="#{messages.label_attachments}">
+              <f:setPropertyActionListener value="#{userComment}" target="#{userCommentBean.userComment}" />
+            </p:commandButton>
+            
+            <p:commandButton icon="ui-icon-close" 
+                oncomplete="PF('deleteUserCommentDialogWidget').show()"
+                title="#{messages.label_delete}" >
+                <f:setPropertyActionListener value="#{userComment}"
+                    target="#{userCommentBean.userComment}" />
+            </p:commandButton>
+    
+          </p:column>
+          
+        </p:dataTable>
+        
+    </h:form>
+
+    <p:confirmDialog id="deleteUserCommentDialog" widgetVar="deleteUserCommentDialogWidget"
+        header="#{messages.label_confirm_deletion}"
+        severity="alarm">
+        <f:facet name="message"><h:outputText value="#{messages.label_delete_record}" escape="false"/></f:facet>
+        <p:outputPanel>
+          <h:form>
+            <div style="text-align: center; margin:10px">
+              <p:commandButton value="#{messages.label_yes}" action="#{userCommentBean.delete}" update=":userCommentDataForm :growlForm:growl" oncomplete="PF('deleteUserCommentDialogWidget').hide()" />
+              <p:commandButton value="#{messages.label_no}" onclick="PF('deleteUserCommentDialogWidget').hide()" type="button" />
+            </div>
+          </h:form>
+        </p:outputPanel>
+    </p:confirmDialog>
+    
+    <p:dialog dynamic="true" id="editUserCommentDialog" header="#{messages.label_userComment_caption}"
+            modal="true" widgetVar="editUserCommentDialogWidget" maximizable="true">
+        <p:ajax event="close" listener="#{userCommentBean.reset}"/>
+        <h:form id="editUserCommentForm" >
+            <p:outputPanel id="userCommentEditPanel">
+                <ui:include src="/pages/userComment/userCommentEditInclude.xhtml"/>
+                <div style="text-align: center; margin:10px">
+                    <p:commandButton value="#{messages.label_save}"
+                            icon="ui-icon-disk" action="#{userCommentBean.persist}"
+                            update=":editUserCommentForm:userCommentEditPanel :userCommentDataForm :growlForm:growl"
+                            oncomplete="if(!args.validationFailed) PF('editUserCommentDialogWidget').hide()" />
+                    <p:commandButton value="#{messages.label_close}" icon="ui-icon-close" onclick="PF('editUserCommentDialogWidget').hide()" type="button" />
+                </div>
+            </p:outputPanel>
+        </h:form>
+    </p:dialog>
+    
+    <p:dialog dynamic="true" id="viewUserCommentDialog" header="#{messages.label_userComment_caption}" modal="true" widgetVar="viewUserCommentDialogWidget" maximizable="true">
+        <p:ajax event="close" listener="#{userCommentBean.reset}" />
+        <h:form id="viewUserCommentForm">
+          <ui:include src="/pages/userComment/userCommentViewInclude.xhtml"/>
+          <div style="text-align: center; margin:10px">
+              <p:commandButton value="#{messages.label_close}" icon="ui-icon-close" onclick="PF('viewUserCommentDialogWidget').hide()" type="button" />
+          </div>
+        </h:form>
+    </p:dialog>
+    
+    <p:dialog dynamic="true" id="userCommentAttachmentsDialog" header="#{messages.label_attachments}" modal="true" widgetVar="userCommentAttachmentsDialogWidget" maximizable="true">
+        <p:ajax event="close" listener="#{userCommentBean.reset}" />
+        <p:outputPanel id="userCommentAttachmentsPanel">
+            <ui:include src="/pages/userComment/userCommentAttachmentsInclude.xhtml" />
+            <div style="text-align: center; margin:10px">
+                <h:form>
+                    <p:commandButton value="#{messages.label_close}" icon="ui-icon-close" onclick="PF('userCommentAttachmentsDialogWidget').hide()" type="button"/>
+                </h:form>
+            </div>
+        </p:outputPanel>
+    </p:dialog>
+    
+    <p:dialog dynamic="true" id="createClientFromEditDialog"
+        header="#{messages.dialog_userComment_create_client}" modal="true"
+        widgetVar="createClientFromEditDialogWidget" maximizable="true">
+        <p:ajax event="close" listener="#{clientBean.reset}" />
+        <p:outputPanel id="createClientPanel">
+                <h:form id="createClientForm">
+                    <ui:include src="/pages/client/clientEditInclude.xhtml">
+                        <ui:param name="hideCommentSelectInput" value="true" />
+                    </ui:include>
+                    <div style="text-align: center; margin: 10px">
+                        <p:commandButton
+                            action="#{userCommentBean.updateClient(clientBean.client)}"
+                            value="#{messages.label_save}" icon="ui-icon-disk"
+                            actionListener="#{clientBean.persist}"
+                            update=":editUserCommentForm:clientSelectInput :createClientPanel :growlForm:growl"
+                            oncomplete="if(!args.validationFailed) PF('createClientFromEditDialogWidget').hide()" />
+                        <p:commandButton value="#{messages.label_close}"
+                            icon="ui-icon-close"
+                            onclick="PF('createClientFromEditDialogWidget').hide()"
+                            type="button" />
+                    </div>
+                </h:form>
+            </p:outputPanel>
+    </p:dialog>
+    
+    <p:dialog dynamic="true" id="createHotelFromEditDialog"
+        header="#{messages.dialog_userComment_create_hotel}" modal="true"
+        widgetVar="createHotelFromEditDialogWidget" maximizable="true">
+        <p:ajax event="close" listener="#{hotelBean.reset}" />
+        <p:outputPanel id="createHotelPanel">
+                <h:form id="createHotelForm">
+                    <ui:include src="/pages/hotel/hotelEditInclude.xhtml">
+                        <ui:param name="hideCommentSelectInput" value="true" />
+                    </ui:include>
+                    <div style="text-align: center; margin: 10px">
+                        <p:commandButton
+                            action="#{userCommentBean.updateHotel(hotelBean.hotel)}"
+                            value="#{messages.label_save}" icon="ui-icon-disk"
+                            actionListener="#{hotelBean.persist}"
+                            update=":editUserCommentForm:hotelSelectInput :createHotelPanel :growlForm:growl"
+                            oncomplete="if(!args.validationFailed) PF('createHotelFromEditDialogWidget').hide()" />
+                        <p:commandButton value="#{messages.label_close}"
+                            icon="ui-icon-close"
+                            onclick="PF('createHotelFromEditDialogWidget').hide()"
+                            type="button" />
+                    </div>
+                </h:form>
+            </p:outputPanel>
+    </p:dialog>
+    
+  </ui:define>
+</ui:composition>
+</html>

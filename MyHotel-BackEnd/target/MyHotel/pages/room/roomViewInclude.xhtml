@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui">
+
+    <h:panelGrid columns="2" styleClass="dialog" columnClasses="col1,col2" >
+        
+        <h:outputText value="#{messages.field_label_room_places}:" />
+        <h:outputText value="#{roomBean.room.places}" />
+
+        <h:outputText value="#{messages.field_label_room_bathroom}:" />
+        <p:selectBooleanCheckbox disabled="true" value="#{roomBean.room.bathroom}" id="bathroomInput" />
+
+        <h:outputText value="#{messages.field_label_room_kitchen}:" />
+        <p:selectBooleanCheckbox disabled="true" value="#{roomBean.room.kitchen}" id="kitchenInput" />
+
+        <h:outputText value="#{messages.field_label_room_doubleBed}:" />
+        <h:outputText value="#{roomBean.room.doubleBed}" />
+
+        <h:outputText value="#{messages.field_label_room_simpleBed}:" />
+        <h:outputText value="#{roomBean.room.simpleBed}" />
+
+        <h:outputText value="#{messages.field_label_room_sofaBed}:" />
+        <h:outputText value="#{roomBean.room.sofaBed}" />
+
+        <h:outputText value="#{messages.field_label_room_tv}:" />
+        <p:selectBooleanCheckbox disabled="true" value="#{roomBean.room.tv}" id="tvInput" />
+
+        <h:outputText value="#{messages.field_label_room_size}:" />
+        <h:outputText value="#{roomBean.room.size}" />
+
+        <h:outputText value="#{messages.field_label_room_type}:" />
+        <h:outputText value="#{roomBean.getLabelForType(roomBean.room.type)}" />
+
+        <h:outputText value="#{messages.field_label_room_roomNumber}:" />
+        <h:outputText value="#{roomBean.room.roomNumber}" />
+
+        <h:outputText value="#{messages.field_label_room_hotel}:" />
+        <h:outputText value="#{roomBean.room.hotel.name}" />
+
+    </h:panelGrid>
+</html>

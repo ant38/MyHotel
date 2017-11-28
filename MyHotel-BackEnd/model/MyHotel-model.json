@@ -1,0 +1,1215 @@
+{
+  "info1": "======================================================================================================",
+  "info2": "= This Project was generated with generjee. http://generjee.com                                      =",
+  "info3": "= You can import this file into the generjee tool, then change the project model and generate again. =",
+  "info4": "======================================================================================================",
+  "entities": [
+    {
+      "name": "User",
+      "id": "User",
+      "lookupField": "username",
+      "fields": [
+        {
+          "id": 0,
+          "name": "id",
+          "type": "Autoincremented ID",
+          "editable": false,
+          "showInTable": false,
+          "required": true
+        },
+        {
+          "id": "username",
+          "name": "Username",
+          "type": "String",
+          "editable": false,
+          "showInTable": true,
+          "stringLength": 50,
+          "required": true
+        },
+        {
+          "id": "password",
+          "name": "Password",
+          "type": "Password",
+          "editable": false,
+          "showInTable": false,
+          "required": true
+        },
+        {
+          "id": "email",
+          "name": "E-mail",
+          "type": "String",
+          "editable": false,
+          "showInTable": true,
+          "stringLength": 50,
+          "required": true
+        },
+        {
+          "id": "roles",
+          "name": "Roles",
+          "type": "Enumeration",
+          "editable": false,
+          "showInTable": false,
+          "required": true
+        },
+        {
+          "id": "status",
+          "name": "Status",
+          "type": "Enumeration",
+          "editable": false,
+          "showInTable": true,
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "Client",
+      "id": 1,
+      "lookupField": "1",
+      "authorization": [
+        {
+          "roleId": 1,
+          "roleName": "Administrator",
+          "createPerm": 1,
+          "readPerm": 1,
+          "updatePerm": 1,
+          "deletePerm": 1,
+          "changeOwnerPerm": 1,
+          "ownerRoleEnabled": false
+        },
+        {
+          "roleId": 2,
+          "roleName": "Public",
+          "createPerm": 1,
+          "readPerm": 1,
+          "updatePerm": 1,
+          "deletePerm": 1,
+          "changeOwnerPerm": 0,
+          "ownerRoleEnabled": false
+        },
+        {
+          "roleId": "registered001",
+          "roleName": "Registered",
+          "createPerm": 0,
+          "readPerm": 0,
+          "updatePerm": 0,
+          "deletePerm": 0,
+          "changeOwnerPerm": 0,
+          "ownerRoleEnabled": false
+        },
+        {
+          "roleId": 4,
+          "roleName": "Client",
+          "createPerm": 0,
+          "readPerm": 0,
+          "updatePerm": 0,
+          "deletePerm": 0,
+          "changeOwnerPerm": 0,
+          "ownerRoleEnabled": false
+        },
+        {
+          "roleId": 5,
+          "roleName": "Hotelier",
+          "createPerm": 0,
+          "readPerm": 0,
+          "updatePerm": 0,
+          "deletePerm": 0,
+          "changeOwnerPerm": 0,
+          "ownerRoleEnabled": false
+        }
+      ],
+      "fields": [
+        {
+          "id": 0,
+          "name": "id",
+          "type": "Autoincremented ID",
+          "editable": false,
+          "showInTable": false,
+          "required": true
+        },
+        {
+          "id": 1,
+          "name": "Username",
+          "type": "String",
+          "editable": true,
+          "showInTable": true,
+          "stringLength": 50,
+          "required": true
+        },
+        {
+          "id": 2,
+          "name": "Password",
+          "type": "String",
+          "editable": true,
+          "showInTable": true,
+          "stringLength": 50,
+          "required": true
+        },
+        {
+          "id": 3,
+          "name": "Prenom",
+          "type": "String",
+          "editable": true,
+          "showInTable": true,
+          "stringLength": 50,
+          "required": true
+        },
+        {
+          "id": 4,
+          "name": "Nom",
+          "type": "String",
+          "editable": true,
+          "showInTable": true,
+          "stringLength": 50,
+          "required": true
+        },
+        {
+          "id": 5,
+          "name": "DateNaissance",
+          "type": "Date",
+          "editable": true,
+          "showInTable": true,
+          "required": true
+        },
+        {
+          "id": 6,
+          "name": "Email",
+          "type": "String",
+          "editable": true,
+          "showInTable": true,
+          "stringLength": 50,
+          "required": true
+        },
+        {
+          "id": 7,
+          "name": "Phone",
+          "type": "Number",
+          "editable": true,
+          "showInTable": true,
+          "integerLength": "30",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "Hotelier",
+      "id": 2,
+      "lookupField": "1",
+      "authorization": [
+        {
+          "roleId": 1,
+          "roleName": "Administrator",
+          "createPerm": 1,
+          "readPerm": 1,
+          "updatePerm": 1,
+          "deletePerm": 1,
+          "changeOwnerPerm": 1,
+          "ownerRoleEnabled": false
+        },
+        {
+          "roleId": 2,
+          "roleName": "Public",
+          "createPerm": 1,
+          "readPerm": 1,
+          "updatePerm": 1,
+          "deletePerm": 1,
+          "changeOwnerPerm": 0,
+          "ownerRoleEnabled": false
+        },
+        {
+          "roleId": "registered001",
+          "roleName": "Registered",
+          "createPerm": 0,
+          "readPerm": 0,
+          "updatePerm": 0,
+          "deletePerm": 0,
+          "changeOwnerPerm": 0,
+          "ownerRoleEnabled": false
+        },
+        {
+          "roleId": 4,
+          "roleName": "Client",
+          "createPerm": 0,
+          "readPerm": 0,
+          "updatePerm": 0,
+          "deletePerm": 0,
+          "changeOwnerPerm": 0,
+          "ownerRoleEnabled": false
+        },
+        {
+          "roleId": 5,
+          "roleName": "Hotelier",
+          "createPerm": 0,
+          "readPerm": 0,
+          "updatePerm": 0,
+          "deletePerm": 0,
+          "changeOwnerPerm": 0,
+          "ownerRoleEnabled": false
+        }
+      ],
+      "fields": [
+        {
+          "id": 0,
+          "name": "id",
+          "type": "Autoincremented ID",
+          "editable": false,
+          "showInTable": false,
+          "required": true
+        },
+        {
+          "id": 1,
+          "name": "Username",
+          "type": "String",
+          "editable": true,
+          "showInTable": true,
+          "stringLength": 50,
+          "required": true
+        },
+        {
+          "id": 2,
+          "name": "Password",
+          "type": "String",
+          "editable": true,
+          "showInTable": true,
+          "stringLength": 50,
+          "required": true
+        },
+        {
+          "id": 3,
+          "name": "Prenom",
+          "type": "String",
+          "editable": true,
+          "showInTable": true,
+          "stringLength": 50,
+          "required": true
+        },
+        {
+          "id": 4,
+          "name": "Nom",
+          "type": "String",
+          "editable": true,
+          "showInTable": true,
+          "stringLength": 50,
+          "required": true
+        },
+        {
+          "id": 5,
+          "name": "DateNaissance",
+          "type": "Date",
+          "editable": true,
+          "showInTable": true,
+          "required": true
+        },
+        {
+          "id": 6,
+          "name": "Status",
+          "type": "Enumeration (Single)",
+          "editable": true,
+          "showInTable": true,
+          "required": false,
+          "enumerationValues": "Admin, Receptionist, Agent"
+        },
+        {
+          "id": 7,
+          "name": "Email",
+          "type": "String",
+          "editable": true,
+          "showInTable": true,
+          "stringLength": 50,
+          "required": true
+        },
+        {
+          "id": 8,
+          "name": "Phone",
+          "type": "Number",
+          "editable": true,
+          "showInTable": true,
+          "integerLength": "30",
+          "required": true
+        },
+        {
+          "id": 10,
+          "name": "Hotel",
+          "type": "Relation",
+          "editable": true,
+          "showInTable": true,
+          "referenceType": "n:m",
+          "referenceEntity": "Hotel",
+          "useReverseRelation": true,
+          "reverseName": "Hotelier"
+        }
+      ]
+    },
+    {
+      "name": "UserComment",
+      "id": 3,
+      "lookupField": "2",
+      "attachmentsEnabled": true,
+      "imageUploadEnabled": true,
+      "authorization": [
+        {
+          "roleId": 1,
+          "roleName": "Administrator",
+          "createPerm": 1,
+          "readPerm": 1,
+          "updatePerm": 1,
+          "deletePerm": 1,
+          "changeOwnerPerm": 1,
+          "ownerRoleEnabled": false
+        },
+        {
+          "roleId": 2,
+          "roleName": "Public",
+          "createPerm": 1,
+          "readPerm": 1,
+          "updatePerm": 1,
+          "deletePerm": 1,
+          "changeOwnerPerm": 0,
+          "ownerRoleEnabled": false
+        },
+        {
+          "roleId": "registered001",
+          "roleName": "Registered",
+          "createPerm": 0,
+          "readPerm": 0,
+          "updatePerm": 0,
+          "deletePerm": 0,
+          "changeOwnerPerm": 0,
+          "ownerRoleEnabled": false
+        },
+        {
+          "roleId": 4,
+          "roleName": "Client",
+          "createPerm": 0,
+          "readPerm": 0,
+          "updatePerm": 0,
+          "deletePerm": 0,
+          "changeOwnerPerm": 0,
+          "ownerRoleEnabled": false
+        },
+        {
+          "roleId": 5,
+          "roleName": "Hotelier",
+          "createPerm": 0,
+          "readPerm": 0,
+          "updatePerm": 0,
+          "deletePerm": 0,
+          "changeOwnerPerm": 0,
+          "ownerRoleEnabled": false
+        }
+      ],
+      "fields": [
+        {
+          "id": 0,
+          "name": "id",
+          "type": "Autoincremented ID",
+          "editable": false,
+          "showInTable": false,
+          "required": true
+        },
+        {
+          "id": 1,
+          "name": "Rating",
+          "type": "Number",
+          "editable": true,
+          "showInTable": true,
+          "integerLength": "1",
+          "required": false
+        },
+        {
+          "id": 2,
+          "name": "Comment",
+          "type": "String",
+          "editable": true,
+          "showInTable": true,
+          "stringLength": "1000",
+          "required": true
+        },
+        {
+          "id": 4,
+          "name": "Client",
+          "type": "Relation",
+          "editable": true,
+          "showInTable": true,
+          "referenceType": "n:1",
+          "referenceEntity": "Client",
+          "useReverseRelation": true,
+          "reverseName": "Comment"
+        },
+        {
+          "id": 5,
+          "name": "Hotel",
+          "type": "Relation",
+          "editable": true,
+          "showInTable": true,
+          "referenceType": "n:1",
+          "referenceEntity": "Hotel",
+          "useReverseRelation": true,
+          "reverseName": "Comment"
+        }
+      ]
+    },
+    {
+      "name": "Specificity",
+      "id": 4,
+      "lookupField": 0,
+      "authorization": [
+        {
+          "roleId": 1,
+          "roleName": "Administrator",
+          "createPerm": 1,
+          "readPerm": 1,
+          "updatePerm": 1,
+          "deletePerm": 1,
+          "changeOwnerPerm": 1,
+          "ownerRoleEnabled": false
+        },
+        {
+          "roleId": 2,
+          "roleName": "Public",
+          "createPerm": 1,
+          "readPerm": 1,
+          "updatePerm": 1,
+          "deletePerm": 1,
+          "changeOwnerPerm": 0,
+          "ownerRoleEnabled": false
+        },
+        {
+          "roleId": "registered001",
+          "roleName": "Registered",
+          "createPerm": 0,
+          "readPerm": 0,
+          "updatePerm": 0,
+          "deletePerm": 0,
+          "changeOwnerPerm": 0,
+          "ownerRoleEnabled": false
+        },
+        {
+          "roleId": 4,
+          "roleName": "Client",
+          "createPerm": 0,
+          "readPerm": 0,
+          "updatePerm": 0,
+          "deletePerm": 0,
+          "changeOwnerPerm": 0,
+          "ownerRoleEnabled": false
+        },
+        {
+          "roleId": 5,
+          "roleName": "Hotelier",
+          "createPerm": 0,
+          "readPerm": 0,
+          "updatePerm": 0,
+          "deletePerm": 0,
+          "changeOwnerPerm": 0,
+          "ownerRoleEnabled": false
+        }
+      ],
+      "fields": [
+        {
+          "id": 0,
+          "name": "id",
+          "type": "Autoincremented ID",
+          "editable": false,
+          "showInTable": false,
+          "required": true
+        },
+        {
+          "id": 1,
+          "name": "Value",
+          "type": "String",
+          "editable": true,
+          "showInTable": true,
+          "stringLength": 50,
+          "required": true
+        },
+        {
+          "id": 3,
+          "name": "Hotel",
+          "type": "Relation",
+          "editable": true,
+          "showInTable": true,
+          "referenceType": "n:1",
+          "referenceEntity": "Hotel",
+          "useReverseRelation": true,
+          "reverseName": "Specificity"
+        }
+      ]
+    },
+    {
+      "name": "Hotel",
+      "id": 5,
+      "lookupField": "5",
+      "attachmentsEnabled": true,
+      "imageUploadEnabled": true,
+      "authorization": [
+        {
+          "roleId": 1,
+          "roleName": "Administrator",
+          "createPerm": 1,
+          "readPerm": 1,
+          "updatePerm": 1,
+          "deletePerm": 1,
+          "changeOwnerPerm": 1,
+          "ownerRoleEnabled": false
+        },
+        {
+          "roleId": 2,
+          "roleName": "Public",
+          "createPerm": 1,
+          "readPerm": 1,
+          "updatePerm": 1,
+          "deletePerm": 1,
+          "changeOwnerPerm": 0,
+          "ownerRoleEnabled": false
+        },
+        {
+          "roleId": "registered001",
+          "roleName": "Registered",
+          "createPerm": 0,
+          "readPerm": 0,
+          "updatePerm": 0,
+          "deletePerm": 0,
+          "changeOwnerPerm": 0,
+          "ownerRoleEnabled": false
+        },
+        {
+          "roleId": 4,
+          "roleName": "Client",
+          "createPerm": 0,
+          "readPerm": 0,
+          "updatePerm": 0,
+          "deletePerm": 0,
+          "changeOwnerPerm": 0,
+          "ownerRoleEnabled": false
+        },
+        {
+          "roleId": 5,
+          "roleName": "Hotelier",
+          "createPerm": 0,
+          "readPerm": 0,
+          "updatePerm": 0,
+          "deletePerm": 0,
+          "changeOwnerPerm": 0,
+          "ownerRoleEnabled": false
+        }
+      ],
+      "fields": [
+        {
+          "id": 0,
+          "name": "id",
+          "type": "Autoincremented ID",
+          "editable": false,
+          "showInTable": false,
+          "required": true
+        },
+        {
+          "id": 1,
+          "name": "Address",
+          "type": "String",
+          "editable": true,
+          "showInTable": true,
+          "stringLength": 50,
+          "required": true
+        },
+        {
+          "id": 2,
+          "name": "Town",
+          "type": "String",
+          "editable": true,
+          "showInTable": true,
+          "stringLength": 50,
+          "required": true
+        },
+        {
+          "id": 3,
+          "name": "PostalCode",
+          "type": "Number",
+          "editable": true,
+          "showInTable": true,
+          "integerLength": "10",
+          "required": true
+        },
+        {
+          "id": 4,
+          "name": "Country",
+          "type": "String",
+          "editable": true,
+          "showInTable": true,
+          "stringLength": 50,
+          "required": true
+        },
+        {
+          "id": 5,
+          "name": "Name",
+          "type": "String",
+          "editable": true,
+          "showInTable": true,
+          "stringLength": 50,
+          "required": true
+        },
+        {
+          "id": 6,
+          "name": "Description",
+          "type": "String",
+          "editable": true,
+          "showInTable": true,
+          "stringLength": "100",
+          "required": true
+        },
+        {
+          "id": 7,
+          "name": "WebSite",
+          "type": "String",
+          "editable": true,
+          "showInTable": true,
+          "stringLength": 50,
+          "required": false
+        },
+        {
+          "id": 8,
+          "name": "PayPal",
+          "type": "String",
+          "editable": true,
+          "showInTable": true,
+          "stringLength": 50,
+          "required": false
+        },
+        {
+          "id": 9,
+          "name": "Stars",
+          "type": "Number",
+          "editable": true,
+          "showInTable": true,
+          "integerLength": "1",
+          "required": true
+        },
+        {
+          "id": 10,
+          "name": "BabyBed",
+          "type": "Boolean",
+          "editable": true,
+          "showInTable": true,
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "Room",
+      "id": 6,
+      "lookupField": 0,
+      "authorization": [
+        {
+          "roleId": 1,
+          "roleName": "Administrator",
+          "createPerm": 1,
+          "readPerm": 1,
+          "updatePerm": 1,
+          "deletePerm": 1,
+          "changeOwnerPerm": 1,
+          "ownerRoleEnabled": false
+        },
+        {
+          "roleId": 2,
+          "roleName": "Public",
+          "createPerm": 1,
+          "readPerm": 1,
+          "updatePerm": 1,
+          "deletePerm": 1,
+          "changeOwnerPerm": 0,
+          "ownerRoleEnabled": false
+        },
+        {
+          "roleId": "registered001",
+          "roleName": "Registered",
+          "createPerm": 0,
+          "readPerm": 0,
+          "updatePerm": 0,
+          "deletePerm": 0,
+          "changeOwnerPerm": 0,
+          "ownerRoleEnabled": false
+        },
+        {
+          "roleId": 4,
+          "roleName": "Client",
+          "createPerm": 0,
+          "readPerm": 0,
+          "updatePerm": 0,
+          "deletePerm": 0,
+          "changeOwnerPerm": 0,
+          "ownerRoleEnabled": false
+        },
+        {
+          "roleId": 5,
+          "roleName": "Hotelier",
+          "createPerm": 0,
+          "readPerm": 0,
+          "updatePerm": 0,
+          "deletePerm": 0,
+          "changeOwnerPerm": 0,
+          "ownerRoleEnabled": false
+        }
+      ],
+      "fields": [
+        {
+          "id": 0,
+          "name": "id",
+          "type": "Autoincremented ID",
+          "editable": false,
+          "showInTable": false,
+          "required": true
+        },
+        {
+          "id": 1,
+          "name": "Places",
+          "type": "Number",
+          "editable": true,
+          "showInTable": true,
+          "integerLength": 5,
+          "required": true
+        },
+        {
+          "id": 2,
+          "name": "Bathroom",
+          "type": "Boolean",
+          "editable": true,
+          "showInTable": true,
+          "required": false
+        },
+        {
+          "id": 3,
+          "name": "Kitchen",
+          "type": "Boolean",
+          "editable": true,
+          "showInTable": true,
+          "required": false
+        },
+        {
+          "id": 4,
+          "name": "DoubleBed",
+          "type": "Number",
+          "editable": true,
+          "showInTable": true,
+          "integerLength": "1",
+          "required": true
+        },
+        {
+          "id": 5,
+          "name": "SimpleBed",
+          "type": "Number",
+          "editable": true,
+          "showInTable": true,
+          "integerLength": "2",
+          "required": true
+        },
+        {
+          "id": 6,
+          "name": "SofaBed",
+          "type": "Number",
+          "editable": true,
+          "showInTable": true,
+          "integerLength": 5,
+          "required": true
+        },
+        {
+          "id": 7,
+          "name": "TV",
+          "type": "Boolean",
+          "editable": true,
+          "showInTable": true,
+          "required": false
+        },
+        {
+          "id": 8,
+          "name": "Size",
+          "type": "Number",
+          "editable": true,
+          "showInTable": true,
+          "integerLength": 5,
+          "required": false
+        },
+        {
+          "id": 9,
+          "name": "Type",
+          "type": "Enumeration (Single)",
+          "editable": true,
+          "showInTable": true,
+          "required": false,
+          "enumerationValues": "Room, Suite, Dormitory"
+        },
+        {
+          "id": 10,
+          "name": "RoomNumber",
+          "type": "Number",
+          "editable": true,
+          "showInTable": true,
+          "integerLength": 5,
+          "required": true
+        },
+        {
+          "id": 12,
+          "name": "Hotel",
+          "type": "Relation",
+          "editable": true,
+          "showInTable": true,
+          "referenceType": "n:1",
+          "referenceEntity": "Hotel",
+          "useReverseRelation": true,
+          "reverseName": "Room"
+        },
+        {
+          "id": 13,
+          "name": "Offer",
+          "type": "Relation",
+          "editable": true,
+          "showInTable": true,
+          "referenceType": "n:m",
+          "referenceEntity": "Offer",
+          "useReverseRelation": true,
+          "reverseName": "Room"
+        }
+      ]
+    },
+    {
+      "name": "Booking",
+      "id": 7,
+      "lookupField": 0,
+      "authorization": [
+        {
+          "roleId": 1,
+          "roleName": "Administrator",
+          "createPerm": 1,
+          "readPerm": 1,
+          "updatePerm": 1,
+          "deletePerm": 1,
+          "changeOwnerPerm": 1,
+          "ownerRoleEnabled": false
+        },
+        {
+          "roleId": 2,
+          "roleName": "Public",
+          "createPerm": 1,
+          "readPerm": 1,
+          "updatePerm": 1,
+          "deletePerm": 1,
+          "changeOwnerPerm": 0,
+          "ownerRoleEnabled": false
+        },
+        {
+          "roleId": "registered001",
+          "roleName": "Registered",
+          "createPerm": 0,
+          "readPerm": 0,
+          "updatePerm": 0,
+          "deletePerm": 0,
+          "changeOwnerPerm": 0,
+          "ownerRoleEnabled": false
+        },
+        {
+          "roleId": 4,
+          "roleName": "Client",
+          "createPerm": 0,
+          "readPerm": 0,
+          "updatePerm": 0,
+          "deletePerm": 0,
+          "changeOwnerPerm": 0,
+          "ownerRoleEnabled": false
+        },
+        {
+          "roleId": 5,
+          "roleName": "Hotelier",
+          "createPerm": 0,
+          "readPerm": 0,
+          "updatePerm": 0,
+          "deletePerm": 0,
+          "changeOwnerPerm": 0,
+          "ownerRoleEnabled": false
+        }
+      ],
+      "fields": [
+        {
+          "id": 0,
+          "name": "id",
+          "type": "Autoincremented ID",
+          "editable": false,
+          "showInTable": false,
+          "required": true
+        },
+        {
+          "id": 1,
+          "name": "DateIn",
+          "type": "Date",
+          "editable": true,
+          "showInTable": true,
+          "required": true
+        },
+        {
+          "id": 2,
+          "name": "DateOut",
+          "type": "Date",
+          "editable": true,
+          "showInTable": true,
+          "required": true
+        },
+        {
+          "id": 3,
+          "name": "Paid",
+          "type": "Boolean",
+          "editable": true,
+          "showInTable": true,
+          "required": false
+        },
+        {
+          "id": 5,
+          "name": "Room",
+          "type": "Relation",
+          "editable": true,
+          "showInTable": true,
+          "referenceType": "n:m",
+          "referenceEntity": "Room",
+          "useReverseRelation": true,
+          "reverseName": "Booking"
+        },
+        {
+          "id": 6,
+          "name": "Client",
+          "type": "Relation",
+          "editable": true,
+          "showInTable": true,
+          "referenceType": "n:m",
+          "referenceEntity": "Client",
+          "useReverseRelation": true,
+          "reverseName": "Booking"
+        }
+      ]
+    },
+    {
+      "name": "Offer",
+      "id": 8,
+      "lookupField": 0,
+      "authorization": [
+        {
+          "roleId": 1,
+          "roleName": "Administrator",
+          "createPerm": 1,
+          "readPerm": 1,
+          "updatePerm": 1,
+          "deletePerm": 1,
+          "changeOwnerPerm": 1,
+          "ownerRoleEnabled": false
+        },
+        {
+          "roleId": 2,
+          "roleName": "Public",
+          "createPerm": 1,
+          "readPerm": 1,
+          "updatePerm": 1,
+          "deletePerm": 1,
+          "changeOwnerPerm": 0,
+          "ownerRoleEnabled": false
+        },
+        {
+          "roleId": "registered001",
+          "roleName": "Registered",
+          "createPerm": 0,
+          "readPerm": 0,
+          "updatePerm": 0,
+          "deletePerm": 0,
+          "changeOwnerPerm": 0,
+          "ownerRoleEnabled": false
+        },
+        {
+          "roleId": 4,
+          "roleName": "Client",
+          "createPerm": 0,
+          "readPerm": 0,
+          "updatePerm": 0,
+          "deletePerm": 0,
+          "changeOwnerPerm": 0,
+          "ownerRoleEnabled": false
+        },
+        {
+          "roleId": 5,
+          "roleName": "Hotelier",
+          "createPerm": 0,
+          "readPerm": 0,
+          "updatePerm": 0,
+          "deletePerm": 0,
+          "changeOwnerPerm": 0,
+          "ownerRoleEnabled": false
+        }
+      ],
+      "fields": [
+        {
+          "id": 0,
+          "name": "id",
+          "type": "Autoincremented ID",
+          "editable": false,
+          "showInTable": false,
+          "required": true
+        },
+        {
+          "id": 1,
+          "name": "DateStart",
+          "type": "Date",
+          "editable": true,
+          "showInTable": true,
+          "required": false
+        },
+        {
+          "id": 2,
+          "name": "DateEnd",
+          "type": "Date",
+          "editable": true,
+          "showInTable": true,
+          "required": true
+        },
+        {
+          "id": 3,
+          "name": "Price",
+          "type": "Number",
+          "editable": true,
+          "showInTable": true,
+          "integerLength": 5,
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "Save",
+      "id": 9,
+      "lookupField": 0,
+      "authorization": [
+        {
+          "roleId": 1,
+          "roleName": "Administrator",
+          "createPerm": 1,
+          "readPerm": 1,
+          "updatePerm": 1,
+          "deletePerm": 1,
+          "changeOwnerPerm": 1,
+          "ownerRoleEnabled": false
+        },
+        {
+          "roleId": 2,
+          "roleName": "Public",
+          "createPerm": 1,
+          "readPerm": 1,
+          "updatePerm": 1,
+          "deletePerm": 1,
+          "changeOwnerPerm": 0,
+          "ownerRoleEnabled": false
+        },
+        {
+          "roleId": "registered001",
+          "roleName": "Registered",
+          "createPerm": 0,
+          "readPerm": 0,
+          "updatePerm": 0,
+          "deletePerm": 0,
+          "changeOwnerPerm": 0,
+          "ownerRoleEnabled": false
+        },
+        {
+          "roleId": 4,
+          "roleName": "Client",
+          "createPerm": 0,
+          "readPerm": 0,
+          "updatePerm": 0,
+          "deletePerm": 0,
+          "changeOwnerPerm": 0,
+          "ownerRoleEnabled": false
+        },
+        {
+          "roleId": 5,
+          "roleName": "Hotelier",
+          "createPerm": 0,
+          "readPerm": 0,
+          "updatePerm": 0,
+          "deletePerm": 0,
+          "changeOwnerPerm": 0,
+          "ownerRoleEnabled": false
+        }
+      ],
+      "fields": [
+        {
+          "id": 0,
+          "name": "id",
+          "type": "Autoincremented ID",
+          "editable": false,
+          "showInTable": false,
+          "required": true
+        },
+        {
+          "id": 1,
+          "name": "Date",
+          "type": "Date",
+          "editable": true,
+          "showInTable": true,
+          "required": true
+        },
+        {
+          "id": 3,
+          "name": "Client",
+          "type": "Relation",
+          "editable": true,
+          "showInTable": true,
+          "referenceType": "n:1",
+          "referenceEntity": "Client",
+          "useReverseRelation": true,
+          "reverseName": "Save"
+        },
+        {
+          "id": 4,
+          "name": "Offer",
+          "type": "Relation",
+          "editable": true,
+          "showInTable": true,
+          "referenceType": "n:m",
+          "referenceEntity": "Offer"
+        }
+      ]
+    }
+  ],
+  "appSettings": {
+    "generjeeversion": "1.0",
+    "appName": "MyHotel",
+    "package": "com.myhotel.beans",
+    "masterDetailsStyle": "1",
+    "dataListStyle": "1",
+    "pfTheme": "omega",
+    "runtarget": "as",
+    "layer": {
+      "rest": false
+    },
+    "manageRolesAndUsers": true,
+    "createRegistrationForm": true,
+    "roles": [
+      {
+        "id": 1,
+        "name": "Administrator",
+        "canBeDeleted": false
+      },
+      {
+        "id": 2,
+        "name": "Public",
+        "canBeDeleted": false
+      },
+      {
+        "id": "registered001",
+        "name": "Registered",
+        "canBeDeleted": false
+      },
+      {
+        "id": 4,
+        "name": "Client",
+        "canBeDeleted": true
+      },
+      {
+        "id": 5,
+        "name": "Hotelier",
+        "canBeDeleted": true
+      }
+    ]
+  },
+  "guid": "d8578615-36bb-45ee-5664-85ec7a058861"
+}

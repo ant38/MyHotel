@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui">
+<ui:composition template="/templates/layout.xhtml">
+  <ui:define name="content">
+
+    <h:form prependId="false" id="specificityDataForm" onkeypress="if (event.keyCode == 13) {return false; }">
+
+        <p:dataTable id="specificityTable" value="#{specificityBean.specificityList}" var="specificity" resizableColumns="true" paginator="true"
+                paginatorTemplate=" {CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                rowsPerPageTemplate="5,10,25,50" rows="10" draggableColumns="true"
+                paginatorPosition="bottom" widgetVar="specificityTable" emptyMessage="#{messages.label_no_records_found}"
+                reflow="true">
+        
+          <f:facet name="header" >
+
+              <p:commandButton value="#{messages.create_new_specificity}" icon="ui-icon-plusthick" action="#{specificityBean.prepareNewSpecificity()}"
+                      resetValues="true" update=":editSpecificityDialog" oncomplete="PF('editSpecificityDialogWidget').show()"
+                      style="float:left" />
+              
+              <p:commandButton id="toggler" type="button" value="#{messages.table_select_columns}" icon="ui-icon-calculator" />
+              <p:columnToggler datasource="specificityTable" trigger="toggler" />
+          </f:facet>
+          
+          <p:column  headerText="#{messages.field_label_specificity_value}" sortBy="#{specificity.value}" filterBy="#{specificity.value}">
+            <f:facet name="filter">
+                <p:inputText id="valueFilter"
+                        onkeypress="if (event.keyCode == 13) {PF('specificityTable').filter(); updateValueFilter(); return false; }" >
+                    <p:remoteCommand name="updateValueFilter" update="specificityTable:valueFilter" />
+                </p:inputText>
+            </f:facet>
+            <h:outputText value="#{specificity.value}" />
+          </p:column>
+
+          <p:column headerText="#{messages.field_label_specificity_hotel}" sortBy="#{specificity.hotel}" filterBy="#{specificity.hotel}">
+            <f:facet name="filter">
+            <p:selectOneMenu  id="hotelFilter"
+                            style="width:145px;"
+                            onchange="PF('specificityTable').filter(); return false;">
+                <f:selectItem noSelectionOption="true" itemLabel="" />
+                <f:selectItems itemLabel="#{hotel.name}"
+                            value="#{specificityBean.hotels}" 
+                            var="hotel" 
+                            itemValue="#{hotel}" />
+                <o:converter converterId="omnifaces.SelectItemsConverter" list="#{specificityBean.hotels}" />
+            </p:selectOneMenu>
+            </f:facet>
+            <h:outputText value="#{specificity.hotel.name}" />
+          </p:column>
+
+          <p:column styleClass="action-column" headerText="#{messages.table_actions_column}" width="115" exportable="false">
+            
+            <p:commandButton icon="ui-icon-zoomin" update=":viewSpecificityDialog" oncomplete="PF('viewSpecificityDialogWidget').show()" title="#{messages.label_view}">
+              <f:setPropertyActionListener value="#{specificity}" target="#{specificityBean.specificity}" />
+            </p:commandButton>
+
+            <p:commandButton icon="ui-icon-pencil" update=":editSpecificityDialog"
+                resetValues="true" 
+                action="#{specificityBean.onDialogOpen(specificity)}"
+                oncomplete="PF('editSpecificityDialogWidget').show()"
+                title="#{messages.label_edit}" >
+            </p:commandButton>
+
+            <p:commandButton icon="ui-icon-close" 
+                oncomplete="PF('deleteSpecificityDialogWidget').show()"
+                title="#{messages.label_delete}" >
+                <f:setPropertyActionListener value="#{specificity}"
+                    target="#{specificityBean.specificity}" />
+            </p:commandButton>
+    
+          </p:column>
+          
+        </p:dataTable>
+        
+    </h:form>
+
+    <p:confirmDialog id="deleteSpecificityDialog" widgetVar="deleteSpecificityDialogWidget"
+        header="#{messages.label_confirm_deletion}"
+        severity="alarm">
+        <f:facet name="message"><h:outputText value="#{messages.label_delete_record}" escape="false"/></f:facet>
+        <p:outputPanel>
+          <h:form>
+            <div style="text-align: center; margin:10px">
+              <p:commandButton value="#{messages.label_yes}" action="#{specificityBean.delete}" update=":specificityDataForm :growlForm:growl" oncomplete="PF('deleteSpecificityDialogWidget').hide()" />
+              <p:commandButton value="#{messages.label_no}" onclick="PF('deleteSpecificityDialogWidget').hide()" type="button" />
+            </div>
+          </h:form>
+        </p:outputPanel>
+    </p:confirmDialog>
+    
+    <p:dialog dynamic="true" id="editSpecificityDialog" header="#{messages.label_specificity_caption}"
+            modal="true" widgetVar="editSpecificityDialogWidget" maximizable="true">
+        <p:ajax event="close" listener="#{specificityBean.reset}"/>
+        <h:form id="editSpecificityForm" >
+            <p:outputPanel id="specificityEditPanel">
+                <ui:include src="/pages/specificity/specificityEditInclude.xhtml"/>
+                <div style="text-align: center; margin:10px">
+                    <p:commandButton value="#{messages.label_save}"
+                            icon="ui-icon-disk" action="#{specificityBean.persist}"
+                            update=":editSpecificityForm:specificityEditPanel :specificityDataForm :growlForm:growl"
+                            oncomplete="if(!args.validationFailed) PF('editSpecificityDialogWidget').hide()" />
+                    <p:commandButton value="#{messages.label_close}" icon="ui-icon-close" onclick="PF('editSpecificityDialogWidget').hide()" type="button" />
+                </div>
+            </p:outputPanel>
+        </h:form>
+    </p:dialog>
+    
+    <p:dialog dynamic="true" id="viewSpecificityDialog" header="#{messages.label_specificity_caption}" modal="true" widgetVar="viewSpecificityDialogWidget" maximizable="true">
+        <p:ajax event="close" listener="#{specificityBean.reset}" />
+        <h:form id="viewSpecificityForm">
+          <ui:include src="/pages/specificity/specificityViewInclude.xhtml"/>
+          <div style="text-align: center; margin:10px">
+              <p:commandButton value="#{messages.label_close}" icon="ui-icon-close" onclick="PF('viewSpecificityDialogWidget').hide()" type="button" />
+          </div>
+        </h:form>
+    </p:dialog>
+    
+    <p:dialog dynamic="true" id="createHotelFromEditDialog"
+        header="#{messages.dialog_specificity_create_hotel}" modal="true"
+        widgetVar="createHotelFromEditDialogWidget" maximizable="true">
+        <p:ajax event="close" listener="#{hotelBean.reset}" />
+        <p:outputPanel id="createHotelPanel">
+                <h:form id="createHotelForm">
+                    <ui:include src="/pages/hotel/hotelEditInclude.xhtml">
+                        <ui:param name="hideSpecificitySelectInput" value="true" />
+                    </ui:include>
+                    <div style="text-align: center; margin: 10px">
+                        <p:commandButton
+                            action="#{specificityBean.updateHotel(hotelBean.hotel)}"
+                            value="#{messages.label_save}" icon="ui-icon-disk"
+                            actionListener="#{hotelBean.persist}"
+                            update=":editSpecificityForm:hotelSelectInput :createHotelPanel :growlForm:growl"
+                            oncomplete="if(!args.validationFailed) PF('createHotelFromEditDialogWidget').hide()" />
+                        <p:commandButton value="#{messages.label_close}"
+                            icon="ui-icon-close"
+                            onclick="PF('createHotelFromEditDialogWidget').hide()"
+                            type="button" />
+                    </div>
+                </h:form>
+            </p:outputPanel>
+    </p:dialog>
+    
+  </ui:define>
+</ui:composition>
+</html>

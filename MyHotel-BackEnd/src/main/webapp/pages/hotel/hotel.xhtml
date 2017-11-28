@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui">
+<ui:composition template="/templates/layout.xhtml">
+  <ui:define name="content">
+
+    <h:form prependId="false" id="hotelDataForm" onkeypress="if (event.keyCode == 13) {return false; }">
+
+        <p:dataTable id="hotelTable" value="#{hotelBean.hotelList}" var="hotel" resizableColumns="true" paginator="true"
+                paginatorTemplate=" {CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                rowsPerPageTemplate="5,10,25,50" rows="10" draggableColumns="true"
+                paginatorPosition="bottom" widgetVar="hotelTable" emptyMessage="#{messages.label_no_records_found}"
+                reflow="true">
+        
+          <f:facet name="header" >
+
+              <p:commandButton value="#{messages.create_new_hotel}" icon="ui-icon-plusthick" action="#{hotelBean.prepareNewHotel()}"
+                      resetValues="true" update=":editHotelDialog" oncomplete="PF('editHotelDialogWidget').show()"
+                      style="float:left" />
+              
+              <p:commandButton id="toggler" type="button" value="#{messages.table_select_columns}" icon="ui-icon-calculator" />
+              <p:columnToggler datasource="hotelTable" trigger="toggler" />
+          </f:facet>
+          
+          <p:column headerText="#{messages.label_image}">
+              <o:graphicImage value="#{hotel.image.content}" dataURI="true"
+                  rendered="#{not empty hotel.image.content}" width="50px"/>
+          </p:column>
+          
+          <p:column  headerText="#{messages.field_label_hotel_address}" sortBy="#{hotel.address}" filterBy="#{hotel.address}">
+            <f:facet name="filter">
+                <p:inputText id="addressFilter"
+                        onkeypress="if (event.keyCode == 13) {PF('hotelTable').filter(); updateAddressFilter(); return false; }" >
+                    <p:remoteCommand name="updateAddressFilter" update="hotelTable:addressFilter" />
+                </p:inputText>
+            </f:facet>
+            <h:outputText value="#{hotel.address}" />
+          </p:column>
+
+          <p:column  headerText="#{messages.field_label_hotel_town}" sortBy="#{hotel.town}" filterBy="#{hotel.town}">
+            <f:facet name="filter">
+                <p:inputText id="townFilter"
+                        onkeypress="if (event.keyCode == 13) {PF('hotelTable').filter(); updateTownFilter(); return false; }" >
+                    <p:remoteCommand name="updateTownFilter" update="hotelTable:townFilter" />
+                </p:inputText>
+            </f:facet>
+            <h:outputText value="#{hotel.town}" />
+          </p:column>
+
+          <p:column headerText="#{messages.field_label_hotel_postalCode}" sortBy="#{hotel.postalCode}" filterBy="#{hotel.postalCode}">
+            <f:facet name="filter">
+                <p:inputText id="postalCodeFilter"
+                        onkeypress="if (event.keyCode == 13) {PF('hotelTable').filter(); updatePostalCodeFilter(); return false; }" >
+                    <p:remoteCommand name="updatePostalCodeFilter" update="hotelTable:postalCodeFilter" />
+                    <f:convertNumber integerOnly="true" />
+                </p:inputText>
+            </f:facet>
+            <h:outputText value="#{hotel.postalCode}" ><f:convertNumber /></h:outputText>
+          </p:column>
+
+          <p:column  headerText="#{messages.field_label_hotel_country}" sortBy="#{hotel.country}" filterBy="#{hotel.country}">
+            <f:facet name="filter">
+                <p:inputText id="countryFilter"
+                        onkeypress="if (event.keyCode == 13) {PF('hotelTable').filter(); updateCountryFilter(); return false; }" >
+                    <p:remoteCommand name="updateCountryFilter" update="hotelTable:countryFilter" />
+                </p:inputText>
+            </f:facet>
+            <h:outputText value="#{hotel.country}" />
+          </p:column>
+
+          <p:column  headerText="#{messages.field_label_hotel_name}" sortBy="#{hotel.name}" filterBy="#{hotel.name}">
+            <f:facet name="filter">
+                <p:inputText id="nameFilter"
+                        onkeypress="if (event.keyCode == 13) {PF('hotelTable').filter(); updateNameFilter(); return false; }" >
+                    <p:remoteCommand name="updateNameFilter" update="hotelTable:nameFilter" />
+                </p:inputText>
+            </f:facet>
+            <h:outputText value="#{hotel.name}" />
+          </p:column>
+
+          <p:column  headerText="#{messages.field_label_hotel_description}" sortBy="#{hotel.description}" filterBy="#{hotel.description}">
+            <f:facet name="filter">
+                <p:inputText id="descriptionFilter"
+                        onkeypress="if (event.keyCode == 13) {PF('hotelTable').filter(); updateDescriptionFilter(); return false; }" >
+                    <p:remoteCommand name="updateDescriptionFilter" update="hotelTable:descriptionFilter" />
+                </p:inputText>
+            </f:facet>
+            <h:outputText value="#{hotel.description}" />
+          </p:column>
+
+          <p:column  headerText="#{messages.field_label_hotel_webSite}" sortBy="#{hotel.webSite}" filterBy="#{hotel.webSite}">
+            <f:facet name="filter">
+                <p:inputText id="webSiteFilter"
+                        onkeypress="if (event.keyCode == 13) {PF('hotelTable').filter(); updateWebSiteFilter(); return false; }" >
+                    <p:remoteCommand name="updateWebSiteFilter" update="hotelTable:webSiteFilter" />
+                </p:inputText>
+            </f:facet>
+            <h:outputText value="#{hotel.webSite}" />
+          </p:column>
+
+          <p:column  headerText="#{messages.field_label_hotel_payPal}" sortBy="#{hotel.payPal}" filterBy="#{hotel.payPal}">
+            <f:facet name="filter">
+                <p:inputText id="payPalFilter"
+                        onkeypress="if (event.keyCode == 13) {PF('hotelTable').filter(); updatePayPalFilter(); return false; }" >
+                    <p:remoteCommand name="updatePayPalFilter" update="hotelTable:payPalFilter" />
+                </p:inputText>
+            </f:facet>
+            <h:outputText value="#{hotel.payPal}" />
+          </p:column>
+
+          <p:column headerText="#{messages.field_label_hotel_stars}" sortBy="#{hotel.stars}" filterBy="#{hotel.stars}">
+            <f:facet name="filter">
+                <p:inputText id="starsFilter"
+                        onkeypress="if (event.keyCode == 13) {PF('hotelTable').filter(); updateStarsFilter(); return false; }" >
+                    <p:remoteCommand name="updateStarsFilter" update="hotelTable:starsFilter" />
+                    <f:convertNumber integerOnly="true" />
+                </p:inputText>
+            </f:facet>
+            <h:outputText value="#{hotel.stars}" ><f:convertNumber /></h:outputText>
+          </p:column>
+
+          <p:column headerText="#{messages.field_label_hotel_babyBed}" sortBy="#{hotel.babyBed}" filterBy="#{hotel.babyBed}" exportable="false">
+            <f:facet name="filter">
+                 <p:selectOneMenu converter="javax.faces.Boolean"
+                        onchange="PF('hotelTable').filter(); return false;" style="width:50%">
+                        <f:selectItem itemLabel="&nbsp;" itemValue="" />
+                        <f:selectItem itemLabel="#{messages.field_label_hotel_babyBed_true}" itemValue="true" />
+                        <f:selectItem itemLabel="#{messages.field_label_hotel_babyBed_false}" itemValue="false" />
+                </p:selectOneMenu>
+            </f:facet>
+            <h:panelGroup styleClass="ui-icon ui-icon-check" rendered="#{hotel.babyBed}"/>
+          </p:column>
+
+          <p:column headerText="#{messages.field_label_hotel_hotelier_plural}" styleClass="action-column" exportable="false">
+            
+            <p:commandButton icon="ui-icon-transfer-e-w"  title="#{messages.field_label_hotel_hotelier_plural}" action="#{hotelBean.onHoteliersDialog(hotel)}" oncomplete="PF('hotelHoteliersDialogWidget').show()" update=":hotelHoteliersDialog"/>
+            
+          </p:column>
+          
+          <p:column headerText="#{messages.field_label_hotel_comment_plural}" styleClass="action-column" exportable="false">
+            
+            <p:commandButton icon="ui-icon-transfer-e-w"  title="#{messages.field_label_hotel_comment_plural}" action="#{hotelBean.onCommentsDialog(hotel)}" oncomplete="PF('hotelCommentsDialogWidget').show()" update=":hotelCommentsDialog"/>
+            
+          </p:column>
+          
+          <p:column headerText="#{messages.field_label_hotel_specificity_plural}" styleClass="action-column" exportable="false">
+            
+            <p:commandButton icon="ui-icon-transfer-e-w"  title="#{messages.field_label_hotel_specificity_plural}" action="#{hotelBean.onSpecificitysDialog(hotel)}" oncomplete="PF('hotelSpecificitysDialogWidget').show()" update=":hotelSpecificitysDialog"/>
+            
+          </p:column>
+          
+          <p:column headerText="#{messages.field_label_hotel_room_plural}" styleClass="action-column" exportable="false">
+            
+            <p:commandButton icon="ui-icon-transfer-e-w"  title="#{messages.field_label_hotel_room_plural}" action="#{hotelBean.onRoomsDialog(hotel)}" oncomplete="PF('hotelRoomsDialogWidget').show()" update=":hotelRoomsDialog"/>
+            
+          </p:column>
+          
+          <p:column styleClass="action-column" headerText="#{messages.table_actions_column}" width="115" exportable="false">
+            
+            <p:commandButton icon="ui-icon-zoomin" update=":viewHotelDialog" oncomplete="PF('viewHotelDialogWidget').show()" title="#{messages.label_view}">
+              <f:setPropertyActionListener value="#{hotel}" target="#{hotelBean.hotel}" />
+            </p:commandButton>
+
+            <p:commandButton icon="ui-icon-pencil" update=":editHotelDialog"
+                resetValues="true" 
+                action="#{hotelBean.onDialogOpen(hotel)}"
+                oncomplete="PF('editHotelDialogWidget').show()"
+                title="#{messages.label_edit}" >
+            </p:commandButton>
+
+            <p:commandButton icon="ui-icon-copy" update=":hotelAttachmentsDialog" resetValues="true" oncomplete="PF('hotelAttachmentsDialogWidget').show()" title="#{messages.label_attachments}">
+              <f:setPropertyActionListener value="#{hotel}" target="#{hotelBean.hotel}" />
+            </p:commandButton>
+            
+            <p:commandButton icon="ui-icon-close" 
+                oncomplete="PF('deleteHotelDialogWidget').show()"
+                title="#{messages.label_delete}" >
+                <f:setPropertyActionListener value="#{hotel}"
+                    target="#{hotelBean.hotel}" />
+            </p:commandButton>
+    
+          </p:column>
+          
+        </p:dataTable>
+        
+    </h:form>
+
+    <p:confirmDialog id="deleteHotelDialog" widgetVar="deleteHotelDialogWidget"
+        header="#{messages.label_confirm_deletion}"
+        severity="alarm">
+        <f:facet name="message"><h:outputText value="#{messages.label_delete_record}" escape="false"/></f:facet>
+        <p:outputPanel>
+          <h:form>
+            <div style="text-align: center; margin:10px">
+              <p:commandButton value="#{messages.label_yes}" action="#{hotelBean.delete}" update=":hotelDataForm :growlForm:growl" oncomplete="PF('deleteHotelDialogWidget').hide()" />
+              <p:commandButton value="#{messages.label_no}" onclick="PF('deleteHotelDialogWidget').hide()" type="button" />
+            </div>
+          </h:form>
+        </p:outputPanel>
+    </p:confirmDialog>
+    
+    <p:dialog dynamic="true" id="editHotelDialog" header="#{messages.label_hotel_caption}"
+            modal="true" widgetVar="editHotelDialogWidget" maximizable="true">
+        <p:ajax event="close" listener="#{hotelBean.reset}"/>
+        <h:form id="editHotelForm" >
+            <p:outputPanel id="hotelEditPanel">
+                <ui:include src="/pages/hotel/hotelEditInclude.xhtml"/>
+                <div style="text-align: center; margin:10px">
+                    <p:commandButton value="#{messages.label_save}"
+                            icon="ui-icon-disk" action="#{hotelBean.persist}"
+                            update=":editHotelForm:hotelEditPanel :hotelDataForm :growlForm:growl"
+                            oncomplete="if(!args.validationFailed) PF('editHotelDialogWidget').hide()" />
+                    <p:commandButton value="#{messages.label_close}" icon="ui-icon-close" onclick="PF('editHotelDialogWidget').hide()" type="button" />
+                </div>
+            </p:outputPanel>
+        </h:form>
+    </p:dialog>
+    
+    <p:dialog dynamic="true" id="viewHotelDialog" header="#{messages.label_hotel_caption}" modal="true" widgetVar="viewHotelDialogWidget" maximizable="true">
+        <p:ajax event="close" listener="#{hotelBean.reset}" />
+        <h:form id="viewHotelForm">
+          <ui:include src="/pages/hotel/hotelViewInclude.xhtml"/>
+          <div style="text-align: center; margin:10px">
+              <p:commandButton value="#{messages.label_close}" icon="ui-icon-close" onclick="PF('viewHotelDialogWidget').hide()" type="button" />
+          </div>
+        </h:form>
+    </p:dialog>
+    
+    <p:dialog dynamic="true" id="hotelAttachmentsDialog" header="#{messages.label_attachments}" modal="true" widgetVar="hotelAttachmentsDialogWidget" maximizable="true">
+        <p:ajax event="close" listener="#{hotelBean.reset}" />
+        <p:outputPanel id="hotelAttachmentsPanel">
+            <ui:include src="/pages/hotel/hotelAttachmentsInclude.xhtml" />
+            <div style="text-align: center; margin:10px">
+                <h:form>
+                    <p:commandButton value="#{messages.label_close}" icon="ui-icon-close" onclick="PF('hotelAttachmentsDialogWidget').hide()" type="button"/>
+                </h:form>
+            </div>
+        </p:outputPanel>
+    </p:dialog>
+    
+    <p:dialog dynamic="true" id="hotelHoteliersDialog" header="#{messages.dialog_header_hotel_hotelier_plural}" modal="true" widgetVar="hotelHoteliersDialogWidget" maximizable="true">
+        <p:ajax event="close" listener="#{hotelBean.reset}" />
+        <p:outputPanel id="hotelHoteliersPanel">
+            <h:form id="hotelHoteliersForm">
+                <ui:include src="/pages/hotel/hotelHotelierInclude.xhtml" />
+                <div style="text-align: center; margin:10px">
+                    <p:commandButton value="#{messages.label_save}"
+                        icon="ui-icon-disk"
+                        action="#{hotelBean.onHoteliersSubmit}"
+                        update=":growlForm:growl"
+                        oncomplete="if(!args.validationFailed) PF('hotelHoteliersDialogWidget').hide()"
+                        partialSubmit="true" process="@this" />
+                    <p:commandButton value="#{messages.label_close}" icon="ui-icon-close" onclick="PF('hotelHoteliersDialogWidget').hide()" type="button" />
+                </div>
+            </h:form>
+        </p:outputPanel>
+    </p:dialog>
+    
+    <p:dialog dynamic="true" id="hotelCommentsDialog" header="#{messages.dialog_header_hotel_comment_plural}" modal="true" widgetVar="hotelCommentsDialogWidget" maximizable="true">
+        <p:ajax event="close" listener="#{hotelBean.reset}" />
+        <p:outputPanel id="hotelCommentsPanel">
+            <h:form id="hotelCommentsForm">
+                <ui:include src="/pages/hotel/hotelCommentInclude.xhtml" />
+                <div style="text-align: center; margin:10px">
+                    <p:commandButton value="#{messages.label_save}"
+                        icon="ui-icon-disk"
+                        action="#{hotelBean.onCommentsSubmit}"
+                        update=":growlForm:growl"
+                        oncomplete="if(!args.validationFailed) PF('hotelCommentsDialogWidget').hide()"
+                        partialSubmit="true" process="@this" />
+                    <p:commandButton value="#{messages.label_close}" icon="ui-icon-close" onclick="PF('hotelCommentsDialogWidget').hide()" type="button" />
+                </div>
+            </h:form>
+        </p:outputPanel>
+    </p:dialog>
+    
+    <p:dialog dynamic="true" id="hotelSpecificitysDialog" header="#{messages.dialog_header_hotel_specificity_plural}" modal="true" widgetVar="hotelSpecificitysDialogWidget" maximizable="true">
+        <p:ajax event="close" listener="#{hotelBean.reset}" />
+        <p:outputPanel id="hotelSpecificitysPanel">
+            <h:form id="hotelSpecificitysForm">
+                <ui:include src="/pages/hotel/hotelSpecificityInclude.xhtml" />
+                <div style="text-align: center; margin:10px">
+                    <p:commandButton value="#{messages.label_save}"
+                        icon="ui-icon-disk"
+                        action="#{hotelBean.onSpecificitysSubmit}"
+                        update=":growlForm:growl"
+                        oncomplete="if(!args.validationFailed) PF('hotelSpecificitysDialogWidget').hide()"
+                        partialSubmit="true" process="@this" />
+                    <p:commandButton value="#{messages.label_close}" icon="ui-icon-close" onclick="PF('hotelSpecificitysDialogWidget').hide()" type="button" />
+                </div>
+            </h:form>
+        </p:outputPanel>
+    </p:dialog>
+    
+    <p:dialog dynamic="true" id="hotelRoomsDialog" header="#{messages.dialog_header_hotel_room_plural}" modal="true" widgetVar="hotelRoomsDialogWidget" maximizable="true">
+        <p:ajax event="close" listener="#{hotelBean.reset}" />
+        <p:outputPanel id="hotelRoomsPanel">
+            <h:form id="hotelRoomsForm">
+                <ui:include src="/pages/hotel/hotelRoomInclude.xhtml" />
+                <div style="text-align: center; margin:10px">
+                    <p:commandButton value="#{messages.label_save}"
+                        icon="ui-icon-disk"
+                        action="#{hotelBean.onRoomsSubmit}"
+                        update=":growlForm:growl"
+                        oncomplete="if(!args.validationFailed) PF('hotelRoomsDialogWidget').hide()"
+                        partialSubmit="true" process="@this" />
+                    <p:commandButton value="#{messages.label_close}" icon="ui-icon-close" onclick="PF('hotelRoomsDialogWidget').hide()" type="button" />
+                </div>
+            </h:form>
+        </p:outputPanel>
+    </p:dialog>
+    
+    <p:dialog dynamic="true" id="createHotelierDialog"
+        header="#{messages.dialog_hotel_create_hotelier}" modal="true"
+        widgetVar="createHotelierDialogWidget" maximizable="true">
+        <p:ajax event="close" listener="#{hotelierBean.reset}" />
+        <p:outputPanel id="createHotelierPanel">
+                <h:form id="createHotelierForm">
+                    <ui:include src="/pages/hotelier/hotelierEditInclude.xhtml">
+                        <ui:param name="hideHotelSelectInput" value="true" />
+                    </ui:include>
+                    <div style="text-align: center; margin: 10px">
+                        <p:commandButton
+                            action="#{hotelBean.updateHotelier(hotelierBean.hotelier)}"
+                            value="#{messages.label_save}" icon="ui-icon-disk"
+                            actionListener="#{hotelierBean.persist}"
+                            update=":hotelHoteliersPanel :createHotelierPanel :growlForm:growl"
+                            oncomplete="if(!args.validationFailed) PF('createHotelierDialogWidget').hide()" />
+                        <p:commandButton value="#{messages.label_close}"
+                            icon="ui-icon-close"
+                            onclick="PF('createHotelierDialogWidget').hide()"
+                            type="button" />
+                    </div>
+                </h:form>
+            </p:outputPanel>
+    </p:dialog>
+    
+    <p:dialog dynamic="true" id="createCommentDialog"
+        header="#{messages.dialog_hotel_create_comment}" modal="true"
+        widgetVar="createCommentDialogWidget" maximizable="true">
+        <p:ajax event="close" listener="#{userCommentBean.reset}" />
+        <p:outputPanel id="createCommentPanel">
+                <h:form id="createCommentForm">
+                    <ui:include src="/pages/userComment/userCommentEditInclude.xhtml">
+                        <ui:param name="hideHotelSelectInput" value="true" />
+                    </ui:include>
+                    <div style="text-align: center; margin: 10px">
+                        <p:commandButton
+                            action="#{hotelBean.updateComment(userCommentBean.userComment)}"
+                            value="#{messages.label_save}" icon="ui-icon-disk"
+                            actionListener="#{userCommentBean.persist}"
+                            update=":hotelCommentsPanel :createCommentPanel :growlForm:growl"
+                            oncomplete="if(!args.validationFailed) PF('createCommentDialogWidget').hide()" />
+                        <p:commandButton value="#{messages.label_close}"
+                            icon="ui-icon-close"
+                            onclick="PF('createCommentDialogWidget').hide()"
+                            type="button" />
+                    </div>
+                </h:form>
+            </p:outputPanel>
+    </p:dialog>
+    
+    <p:dialog dynamic="true" id="createSpecificityDialog"
+        header="#{messages.dialog_hotel_create_specificity}" modal="true"
+        widgetVar="createSpecificityDialogWidget" maximizable="true">
+        <p:ajax event="close" listener="#{specificityBean.reset}" />
+        <p:outputPanel id="createSpecificityPanel">
+                <h:form id="createSpecificityForm">
+                    <ui:include src="/pages/specificity/specificityEditInclude.xhtml">
+                        <ui:param name="hideHotelSelectInput" value="true" />
+                    </ui:include>
+                    <div style="text-align: center; margin: 10px">
+                        <p:commandButton
+                            action="#{hotelBean.updateSpecificity(specificityBean.specificity)}"
+                            value="#{messages.label_save}" icon="ui-icon-disk"
+                            actionListener="#{specificityBean.persist}"
+                            update=":hotelSpecificitysPanel :createSpecificityPanel :growlForm:growl"
+                            oncomplete="if(!args.validationFailed) PF('createSpecificityDialogWidget').hide()" />
+                        <p:commandButton value="#{messages.label_close}"
+                            icon="ui-icon-close"
+                            onclick="PF('createSpecificityDialogWidget').hide()"
+                            type="button" />
+                    </div>
+                </h:form>
+            </p:outputPanel>
+    </p:dialog>
+    
+    <p:dialog dynamic="true" id="createRoomDialog"
+        header="#{messages.dialog_hotel_create_room}" modal="true"
+        widgetVar="createRoomDialogWidget" maximizable="true">
+        <p:ajax event="close" listener="#{roomBean.reset}" />
+        <p:outputPanel id="createRoomPanel">
+                <h:form id="createRoomForm">
+                    <ui:include src="/pages/room/roomEditInclude.xhtml">
+                        <ui:param name="hideHotelSelectInput" value="true" />
+                    </ui:include>
+                    <div style="text-align: center; margin: 10px">
+                        <p:commandButton
+                            action="#{hotelBean.updateRoom(roomBean.room)}"
+                            value="#{messages.label_save}" icon="ui-icon-disk"
+                            actionListener="#{roomBean.persist}"
+                            update=":hotelRoomsPanel :createRoomPanel :growlForm:growl"
+                            oncomplete="if(!args.validationFailed) PF('createRoomDialogWidget').hide()" />
+                        <p:commandButton value="#{messages.label_close}"
+                            icon="ui-icon-close"
+                            onclick="PF('createRoomDialogWidget').hide()"
+                            type="button" />
+                    </div>
+                </h:form>
+            </p:outputPanel>
+    </p:dialog>
+    
+  </ui:define>
+</ui:composition>
+</html>

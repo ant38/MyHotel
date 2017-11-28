@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui">
+<ui:composition template="/templates/layout.xhtml">
+  <ui:define name="content">
+
+    <h:form prependId="false" id="bookingDataForm" onkeypress="if (event.keyCode == 13) {return false; }">
+
+        <p:dataTable id="bookingTable" value="#{bookingBean.bookingList}" var="booking" resizableColumns="true" paginator="true"
+                paginatorTemplate=" {CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                rowsPerPageTemplate="5,10,25,50" rows="10" draggableColumns="true"
+                paginatorPosition="bottom" widgetVar="bookingTable" emptyMessage="#{messages.label_no_records_found}"
+                reflow="true">
+        
+          <f:facet name="header" >
+
+              <p:commandButton value="#{messages.create_new_booking}" icon="ui-icon-plusthick" action="#{bookingBean.prepareNewBooking()}"
+                      resetValues="true" update=":editBookingDialog" oncomplete="PF('editBookingDialogWidget').show()"
+                      style="float:left" />
+              
+              <p:commandButton id="toggler" type="button" value="#{messages.table_select_columns}" icon="ui-icon-calculator" />
+              <p:columnToggler datasource="bookingTable" trigger="toggler" />
+          </f:facet>
+          
+          <p:column headerText="#{messages.field_label_booking_dateIn}" sortBy="#{booking.dateIn}" filterBy="#{booking.dateIn}">
+            <f:facet name="filter">
+                <p:inputText id="dateInFilter"
+                        onkeyup="if (event.keyCode == 13) {PF('bookingTable').filter(); updateDateInFilter(); return false;}" >
+                    <p:remoteCommand name="updateDateInFilter" update="bookingTable:dateInFilter" />
+                    <f:convertDateTime />
+                </p:inputText>
+            </f:facet>
+            <h:outputText value="#{booking.dateIn}"><f:convertDateTime /></h:outputText>
+          </p:column>
+
+          <p:column headerText="#{messages.field_label_booking_dateOut}" sortBy="#{booking.dateOut}" filterBy="#{booking.dateOut}">
+            <f:facet name="filter">
+                <p:inputText id="dateOutFilter"
+                        onkeyup="if (event.keyCode == 13) {PF('bookingTable').filter(); updateDateOutFilter(); return false;}" >
+                    <p:remoteCommand name="updateDateOutFilter" update="bookingTable:dateOutFilter" />
+                    <f:convertDateTime />
+                </p:inputText>
+            </f:facet>
+            <h:outputText value="#{booking.dateOut}"><f:convertDateTime /></h:outputText>
+          </p:column>
+
+          <p:column headerText="#{messages.field_label_booking_paid}" sortBy="#{booking.paid}" filterBy="#{booking.paid}" exportable="false">
+            <f:facet name="filter">
+                 <p:selectOneMenu converter="javax.faces.Boolean"
+                        onchange="PF('bookingTable').filter(); return false;" style="width:50%">
+                        <f:selectItem itemLabel="&nbsp;" itemValue="" />
+                        <f:selectItem itemLabel="#{messages.field_label_booking_paid_true}" itemValue="true" />
+                        <f:selectItem itemLabel="#{messages.field_label_booking_paid_false}" itemValue="false" />
+                </p:selectOneMenu>
+            </f:facet>
+            <h:panelGroup styleClass="ui-icon ui-icon-check" rendered="#{booking.paid}"/>
+          </p:column>
+
+          <p:column headerText="#{messages.field_label_booking_room_plural}" styleClass="action-column" exportable="false">
+            
+            <p:commandButton icon="ui-icon-transfer-e-w"  title="#{messages.field_label_booking_room_plural}" action="#{bookingBean.onRoomsDialog(booking)}" oncomplete="PF('bookingRoomsDialogWidget').show()" update=":bookingRoomsDialog"/>
+            
+          </p:column>
+          
+          <p:column headerText="#{messages.field_label_booking_client_plural}" styleClass="action-column" exportable="false">
+            
+            <p:commandButton icon="ui-icon-transfer-e-w"  title="#{messages.field_label_booking_client_plural}" action="#{bookingBean.onClientsDialog(booking)}" oncomplete="PF('bookingClientsDialogWidget').show()" update=":bookingClientsDialog"/>
+            
+          </p:column>
+          
+          <p:column styleClass="action-column" headerText="#{messages.table_actions_column}" width="115" exportable="false">
+            
+            <p:commandButton icon="ui-icon-zoomin" update=":viewBookingDialog" oncomplete="PF('viewBookingDialogWidget').show()" title="#{messages.label_view}">
+              <f:setPropertyActionListener value="#{booking}" target="#{bookingBean.booking}" />
+            </p:commandButton>
+
+            <p:commandButton icon="ui-icon-pencil" update=":editBookingDialog"
+                resetValues="true" 
+                action="#{bookingBean.onDialogOpen(booking)}"
+                oncomplete="PF('editBookingDialogWidget').show()"
+                title="#{messages.label_edit}" >
+            </p:commandButton>
+
+            <p:commandButton icon="ui-icon-close" 
+                oncomplete="PF('deleteBookingDialogWidget').show()"
+                title="#{messages.label_delete}" >
+                <f:setPropertyActionListener value="#{booking}"
+                    target="#{bookingBean.booking}" />
+            </p:commandButton>
+    
+          </p:column>
+          
+        </p:dataTable>
+        
+    </h:form>
+
+    <p:confirmDialog id="deleteBookingDialog" widgetVar="deleteBookingDialogWidget"
+        header="#{messages.label_confirm_deletion}"
+        severity="alarm">
+        <f:facet name="message"><h:outputText value="#{messages.label_delete_record}" escape="false"/></f:facet>
+        <p:outputPanel>
+          <h:form>
+            <div style="text-align: center; margin:10px">
+              <p:commandButton value="#{messages.label_yes}" action="#{bookingBean.delete}" update=":bookingDataForm :growlForm:growl" oncomplete="PF('deleteBookingDialogWidget').hide()" />
+              <p:commandButton value="#{messages.label_no}" onclick="PF('deleteBookingDialogWidget').hide()" type="button" />
+            </div>
+          </h:form>
+        </p:outputPanel>
+    </p:confirmDialog>
+    
+    <p:dialog dynamic="true" id="editBookingDialog" header="#{messages.label_booking_caption}"
+            modal="true" widgetVar="editBookingDialogWidget" maximizable="true">
+        <p:ajax event="close" listener="#{bookingBean.reset}"/>
+        <h:form id="editBookingForm" >
+            <p:outputPanel id="bookingEditPanel">
+                <ui:include src="/pages/booking/bookingEditInclude.xhtml"/>
+                <div style="text-align: center; margin:10px">
+                    <p:commandButton value="#{messages.label_save}"
+                            icon="ui-icon-disk" action="#{bookingBean.persist}"
+                            update=":editBookingForm:bookingEditPanel :bookingDataForm :growlForm:growl"
+                            oncomplete="if(!args.validationFailed) PF('editBookingDialogWidget').hide()" />
+                    <p:commandButton value="#{messages.label_close}" icon="ui-icon-close" onclick="PF('editBookingDialogWidget').hide()" type="button" />
+                </div>
+            </p:outputPanel>
+        </h:form>
+    </p:dialog>
+    
+    <p:dialog dynamic="true" id="viewBookingDialog" header="#{messages.label_booking_caption}" modal="true" widgetVar="viewBookingDialogWidget" maximizable="true">
+        <p:ajax event="close" listener="#{bookingBean.reset}" />
+        <h:form id="viewBookingForm">
+          <ui:include src="/pages/booking/bookingViewInclude.xhtml"/>
+          <div style="text-align: center; margin:10px">
+              <p:commandButton value="#{messages.label_close}" icon="ui-icon-close" onclick="PF('viewBookingDialogWidget').hide()" type="button" />
+          </div>
+        </h:form>
+    </p:dialog>
+    
+    <p:dialog dynamic="true" id="bookingRoomsDialog" header="#{messages.dialog_header_booking_room_plural}" modal="true" widgetVar="bookingRoomsDialogWidget" maximizable="true">
+        <p:ajax event="close" listener="#{bookingBean.reset}" />
+        <p:outputPanel id="bookingRoomsPanel">
+            <h:form id="bookingRoomsForm">
+                <ui:include src="/pages/booking/bookingRoomInclude.xhtml" />
+                <div style="text-align: center; margin:10px">
+                    <p:commandButton value="#{messages.label_save}"
+                        icon="ui-icon-disk"
+                        action="#{bookingBean.onRoomsSubmit}"
+                        update=":growlForm:growl"
+                        oncomplete="if(!args.validationFailed) PF('bookingRoomsDialogWidget').hide()"
+                        partialSubmit="true" process="@this" />
+                    <p:commandButton value="#{messages.label_close}" icon="ui-icon-close" onclick="PF('bookingRoomsDialogWidget').hide()" type="button" />
+                </div>
+            </h:form>
+        </p:outputPanel>
+    </p:dialog>
+    
+    <p:dialog dynamic="true" id="bookingClientsDialog" header="#{messages.dialog_header_booking_client_plural}" modal="true" widgetVar="bookingClientsDialogWidget" maximizable="true">
+        <p:ajax event="close" listener="#{bookingBean.reset}" />
+        <p:outputPanel id="bookingClientsPanel">
+            <h:form id="bookingClientsForm">
+                <ui:include src="/pages/booking/bookingClientInclude.xhtml" />
+                <div style="text-align: center; margin:10px">
+                    <p:commandButton value="#{messages.label_save}"
+                        icon="ui-icon-disk"
+                        action="#{bookingBean.onClientsSubmit}"
+                        update=":growlForm:growl"
+                        oncomplete="if(!args.validationFailed) PF('bookingClientsDialogWidget').hide()"
+                        partialSubmit="true" process="@this" />
+                    <p:commandButton value="#{messages.label_close}" icon="ui-icon-close" onclick="PF('bookingClientsDialogWidget').hide()" type="button" />
+                </div>
+            </h:form>
+        </p:outputPanel>
+    </p:dialog>
+    
+    <p:dialog dynamic="true" id="createRoomDialog"
+        header="#{messages.dialog_booking_create_room}" modal="true"
+        widgetVar="createRoomDialogWidget" maximizable="true">
+        <p:ajax event="close" listener="#{roomBean.reset}" />
+        <p:outputPanel id="createRoomPanel">
+                <h:form id="createRoomForm">
+                    <ui:include src="/pages/room/roomEditInclude.xhtml">
+                        <ui:param name="hideBookingSelectInput" value="true" />
+                    </ui:include>
+                    <div style="text-align: center; margin: 10px">
+                        <p:commandButton
+                            action="#{bookingBean.updateRoom(roomBean.room)}"
+                            value="#{messages.label_save}" icon="ui-icon-disk"
+                            actionListener="#{roomBean.persist}"
+                            update=":bookingRoomsPanel :createRoomPanel :growlForm:growl"
+                            oncomplete="if(!args.validationFailed) PF('createRoomDialogWidget').hide()" />
+                        <p:commandButton value="#{messages.label_close}"
+                            icon="ui-icon-close"
+                            onclick="PF('createRoomDialogWidget').hide()"
+                            type="button" />
+                    </div>
+                </h:form>
+            </p:outputPanel>
+    </p:dialog>
+    
+    <p:dialog dynamic="true" id="createClientDialog"
+        header="#{messages.dialog_booking_create_client}" modal="true"
+        widgetVar="createClientDialogWidget" maximizable="true">
+        <p:ajax event="close" listener="#{clientBean.reset}" />
+        <p:outputPanel id="createClientPanel">
+                <h:form id="createClientForm">
+                    <ui:include src="/pages/client/clientEditInclude.xhtml">
+                        <ui:param name="hideBookingSelectInput" value="true" />
+                    </ui:include>
+                    <div style="text-align: center; margin: 10px">
+                        <p:commandButton
+                            action="#{bookingBean.updateClient(clientBean.client)}"
+                            value="#{messages.label_save}" icon="ui-icon-disk"
+                            actionListener="#{clientBean.persist}"
+                            update=":bookingClientsPanel :createClientPanel :growlForm:growl"
+                            oncomplete="if(!args.validationFailed) PF('createClientDialogWidget').hide()" />
+                        <p:commandButton value="#{messages.label_close}"
+                            icon="ui-icon-close"
+                            onclick="PF('createClientDialogWidget').hide()"
+                            type="button" />
+                    </div>
+                </h:form>
+            </p:outputPanel>
+    </p:dialog>
+    
+  </ui:define>
+</ui:composition>
+</html>
