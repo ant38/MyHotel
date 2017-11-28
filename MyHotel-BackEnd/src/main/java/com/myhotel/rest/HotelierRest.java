@@ -12,26 +12,26 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 
-import com.myhotel.beans.domain.HotelEntity;
-import com.myhotel.beans.service.HotelService;
+import com.myhotel.beans.domain.HotelierEntity;
+import com.myhotel.beans.service.HotelierService;
 
 @Stateless
 @ApplicationPath("/rest")
-@Path("hotels")
+@Path("hoteliers")
 @Produces(MediaType.APPLICATION_JSON)
-public class HotelRest extends Application {
+public class HotelierRest extends Application {
 	
 	@Inject
-	HotelService hotelService;
+	private HotelierService hotelierService;
 	
 	@GET
-	public List<HotelEntity> getHotels() {
-		return hotelService.findAllHotelEntities();
+	public List<HotelierEntity> getHoteliers() {
+		return hotelierService.findAllHotelierEntities();
 	}
 	
 	@GET
 	@Path("{id}")
-	public HotelEntity getHotel(@PathParam("id") Long id) {
-		return hotelService.find(id);
+	public HotelierEntity getHotelier(@PathParam("id") Long id) {
+		return hotelierService.find(id);
 	}
 }

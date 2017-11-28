@@ -16,6 +16,7 @@
 /mnt/d/Antoine/Documents/GitHub/MyHotel/MyHotel-BackEnd/src/main/java/com/myhotel/beans/domain/HotelierEntity.java
 /mnt/d/Antoine/Documents/GitHub/MyHotel/MyHotel-BackEnd/src/main/java/com/myhotel/beans/domain/security/UserStatus.java
 /mnt/d/Antoine/Documents/GitHub/MyHotel/MyHotel-BackEnd/src/main/java/com/myhotel/beans/domain/RoomType.java
+/mnt/d/Antoine/Documents/GitHub/MyHotel/MyHotel-BackEnd/src/main/java/com/myhotel/rest/HotelierRest.java
 /mnt/d/Antoine/Documents/GitHub/MyHotel/MyHotel-BackEnd/src/main/java/com/myhotel/beans/web/security/LoginBean.java
 /mnt/d/Antoine/Documents/GitHub/MyHotel/MyHotel-BackEnd/src/main/java/com/myhotel/beans/service/security/JdbcSaltRealm.java
 /mnt/d/Antoine/Documents/GitHub/MyHotel/MyHotel-BackEnd/src/main/java/com/myhotel/beans/web/SaveBean.java
