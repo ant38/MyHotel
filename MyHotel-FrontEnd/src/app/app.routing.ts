@@ -9,6 +9,7 @@ import { AuthGuard } from './_guards/index';
 import { OffreComponent } from './layout/offre/index';
 import { PaiementComponent } from './layout/paiement/index';
 import { ConfirmationResaComponent } from './layout/confirmationResa/index';
+import { RechercheComponent } from './layout/recherche/index';
 
 const appRoutes: Routes = [
 
@@ -19,7 +20,8 @@ const appRoutes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'offre', component: OffreComponent },
   { path: 'paiement', component: PaiementComponent, canActivate: [AuthGuard] },
-  { path: 'confirmationResa', component: ConfirmationResaComponent, canActivate: [AuthGuard] },  
+  { path: 'confirmationResa', component: ConfirmationResaComponent, canActivate: [AuthGuard] },
+  { path: 'recherche', component: RechercheComponent },
 ];
 
 export const routing = RouterModule.forRoot(appRoutes);

@@ -8,5 +8,6 @@ import { FormControl } from "@angular/forms";
 })
 
 export class RechercheComponent {
+    name = new FormControl();
     
 }
