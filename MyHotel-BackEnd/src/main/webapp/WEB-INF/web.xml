@@ -144,12 +144,4 @@
     <extension>ttf</extension>
     <mime-type>application/font-sfnt</mime-type>
   </mime-mapping>
-  <servlet>
-    <servlet-name>TestHotel2</servlet-name>
-    <servlet-class>com.myhotel.beans.web.TestHotel2</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>TestHotel2</servlet-name>
-    <url-pattern>/testhotel</url-pattern>
-  </servlet-mapping>
 </web-app>
