@@ -1,7 +1,7 @@
 
 <br>
-<h2 style="color:blue;">the content has been retrieved from REST API:</h2>
-{{data}}
+<h2 style="color:blue">the content has been retrieved from REST API:</h2>
+hotel_id :{{data[0]['id']}}
 <br>
     <div class="offres" *ngFor="let offre of offres">
         {{offre.name}} {{offre.hotel.name}}
