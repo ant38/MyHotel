@@ -30,6 +30,13 @@ public class UserCommentService extends BaseService<UserCommentEntity> implement
         return entityManager.createQuery("SELECT o FROM UserComment o LEFT JOIN FETCH o.image", UserCommentEntity.class).getResultList();
     }
     
+    @Transactional
+    @Override
+    public UserCommentEntity find(Long id) {
+        if (id == null) return null;
+        return entityManager.createQuery("SELECT o FROM UserComment o LEFT JOIN FETCH o.image WHERE o.id="+id, UserCommentEntity.class).getSingleResult();
+    }
+    
     @Override
     @Transactional
     public long countAllEntries() {

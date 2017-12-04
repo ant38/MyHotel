@@ -17,6 +17,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity(name="Save")
 @Table(name="\"SAVE\"")
 public class SaveEntity extends BaseEntity implements Serializable {
@@ -36,6 +38,7 @@ public class SaveEntity extends BaseEntity implements Serializable {
     @JoinTable(name="SAVE_OFFERS",
               joinColumns={@JoinColumn(name="SAVE_ID", referencedColumnName="ID")},
               inverseJoinColumns={@JoinColumn(name="OFFER_ID", referencedColumnName="ID")})
+    @JsonManagedReference
     private List<OfferEntity> offers;
 
     public Date getDate() {

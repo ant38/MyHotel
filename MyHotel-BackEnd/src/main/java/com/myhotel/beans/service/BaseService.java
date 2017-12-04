@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import javax.ws.rs.core.Response.ResponseBuilder;
 
 import org.primefaces.model.SortOrder;
 
@@ -87,6 +88,10 @@ public class BaseService<T extends BaseEntity> {
     public long countAllEntries() {
         // overwrite this method in extending class
         throw new UnsupportedOperationException("Method countAllEntries() not implemented for this entity service.");
+    }
+    
+    public static ResponseBuilder headers(ResponseBuilder rb) {
+    	return rb.header("Access-Control-Allow-Origin", "*").header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT");
     }
 
 }
