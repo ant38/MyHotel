@@ -23,6 +23,7 @@ public class HotelEntity extends BaseEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+    @JsonBackReference
     private HotelImage image;
     
     @Size(max = 50)
