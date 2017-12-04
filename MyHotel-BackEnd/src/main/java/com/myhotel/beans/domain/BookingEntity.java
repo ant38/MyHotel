@@ -16,6 +16,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity(name="Booking")
 @Table(name="\"BOOKING\"")
 public class BookingEntity extends BaseEntity implements Serializable {
@@ -39,12 +41,14 @@ public class BookingEntity extends BaseEntity implements Serializable {
     @JoinTable(name="BOOKING_ROOMS",
               joinColumns={@JoinColumn(name="BOOKING_ID", referencedColumnName="ID")},
               inverseJoinColumns={@JoinColumn(name="ROOM_ID", referencedColumnName="ID")})
+    @JsonManagedReference
     private List<RoomEntity> rooms;
 
     @ManyToMany(fetch=FetchType.LAZY, cascade = CascadeType.DETACH)
     @JoinTable(name="BOOKING_CLIENTS",
               joinColumns={@JoinColumn(name="BOOKING_ID", referencedColumnName="ID")},
               inverseJoinColumns={@JoinColumn(name="CLIENT_ID", referencedColumnName="ID")})
+    @JsonManagedReference
     private List<ClientEntity> clients;
 
     public Date getDateIn() {
