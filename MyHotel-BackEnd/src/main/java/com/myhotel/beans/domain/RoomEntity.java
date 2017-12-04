@@ -18,6 +18,8 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity(name="Room")
 @Table(name="\"ROOM\"")
 public class RoomEntity extends BaseEntity implements Serializable {
@@ -74,6 +76,7 @@ public class RoomEntity extends BaseEntity implements Serializable {
     @JoinTable(name="ROOM_OFFERS",
               joinColumns={@JoinColumn(name="ROOM_ID", referencedColumnName="ID")},
               inverseJoinColumns={@JoinColumn(name="OFFER_ID", referencedColumnName="ID")})
+    @JsonBackReference
     private List<OfferEntity> offers;
 
     public void setBookings(List<BookingEntity> bookings) {
@@ -85,6 +88,7 @@ public class RoomEntity extends BaseEntity implements Serializable {
     }
 
     @ManyToMany(mappedBy="rooms", fetch=FetchType.LAZY, cascade = CascadeType.DETACH)
+    @JsonBackReference
     private List<BookingEntity> bookings;
 
     public Integer getPlaces() {

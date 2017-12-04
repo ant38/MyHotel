@@ -3,9 +3,10 @@
     <div class="container">
         <nav align="right">
           <a routerLink="/dashboard" routerLinkActive="active">Accueil</a>
-          <a *ngIf="getUser()==undefined" routerLink="/login" routerLinkActive="active">S'identifier</a>
-          <a *ngIf="getUser()==undefined" routerLink="/register" routerLinkActive="active">S'enregistrer</a>
-          <a *ngIf="getUser()!=undefined" routerLink="/home" routerLinkActive="active">Mon espace</a>
+          ﻿<!--<?php if(currentUser) : ?>-->
+          <a routerLink="/login" routerLinkActive="active" *ngIf="getUser()==null">S'identifier</a>
+          <a routerLink="/register" routerLinkActive="active" *ngIf="getUser()==null">S'enregistrer</a>
+          <a routerLink="/home" routerLinkActive="active"  *ngIf="getUser()!=null">Mon espace</a>
         </nav>
         <div class="col-sm-8 col-sm-offset-2">
             <alert></alert>

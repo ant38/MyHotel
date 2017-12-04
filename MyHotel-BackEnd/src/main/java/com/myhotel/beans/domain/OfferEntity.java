@@ -15,6 +15,9 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity(name="Offer")
 @Table(name="\"OFFER\"")
 public class OfferEntity extends BaseEntity implements Serializable {
@@ -44,6 +47,7 @@ public class OfferEntity extends BaseEntity implements Serializable {
     }
 
     @ManyToMany(mappedBy="offers", fetch=FetchType.LAZY, cascade = CascadeType.DETACH)
+    @JsonManagedReference
     private List<RoomEntity> rooms;
 
     public void setSaves(List<SaveEntity> saves) {
@@ -55,6 +59,7 @@ public class OfferEntity extends BaseEntity implements Serializable {
     }
 
     @ManyToMany(mappedBy="offers", fetch=FetchType.LAZY, cascade = CascadeType.DETACH)
+    @JsonBackReference
     private List<SaveEntity> saves;
 
     public Date getDateStart() {

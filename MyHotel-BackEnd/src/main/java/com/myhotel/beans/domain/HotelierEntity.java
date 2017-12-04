@@ -20,6 +20,8 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity(name="Hotelier")
 @Table(name="\"HOTELIER\"")
 public class HotelierEntity extends BaseEntity implements Serializable {
@@ -69,6 +71,7 @@ public class HotelierEntity extends BaseEntity implements Serializable {
     @JoinTable(name="HOTELIER_HOTELS",
               joinColumns={@JoinColumn(name="HOTELIER_ID", referencedColumnName="ID")},
               inverseJoinColumns={@JoinColumn(name="HOTEL_ID", referencedColumnName="ID")})
+    @JsonManagedReference
     private List<HotelEntity> hotels;
 
     public String getUsername() {

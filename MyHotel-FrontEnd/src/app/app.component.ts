@@ -9,9 +9,11 @@
 
 export class AppComponent {
 
+    //console.log(!this.isLoggedIn$);
+
     getUser() {
         let user =  JSON.parse(localStorage.getItem('currentUser'));
-        console.log("user: "+user);
+        //console.log("user: "+user);
         return user;
     }
  }

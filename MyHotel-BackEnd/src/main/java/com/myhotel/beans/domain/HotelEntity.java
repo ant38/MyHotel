@@ -14,6 +14,8 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity(name="Hotel")
 @Table(name="\"HOTEL\"")
 public class HotelEntity extends BaseEntity implements Serializable {
@@ -21,6 +23,7 @@ public class HotelEntity extends BaseEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+    @JsonBackReference
     private HotelImage image;
     
     @Size(max = 50)
@@ -78,6 +81,7 @@ public class HotelEntity extends BaseEntity implements Serializable {
     }
 
     @ManyToMany(mappedBy="hotels", fetch=FetchType.LAZY, cascade = CascadeType.DETACH)
+    @JsonBackReference
     private List<HotelierEntity> hoteliers;
 
     public HotelImage getImage() {

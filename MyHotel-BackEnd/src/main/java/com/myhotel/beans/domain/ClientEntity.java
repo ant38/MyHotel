@@ -16,6 +16,8 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity(name="Client")
 @Table(name="\"CLIENT\"")
 public class ClientEntity extends BaseEntity implements Serializable {
@@ -65,6 +67,7 @@ public class ClientEntity extends BaseEntity implements Serializable {
     }
 
     @ManyToMany(mappedBy="clients", fetch=FetchType.LAZY, cascade = CascadeType.DETACH)
+    @JsonBackReference
     private List<BookingEntity> bookings;
 
     public String getUsername() {
