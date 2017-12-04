@@ -1,3 +1,10 @@
-<label class="center-block">Name:
-    <input class="form-control" [formControl]="Name">
-</label>
+<form [formGroup]="lieuForm" novalidate>
+    <div class="form-group">
+        <label class="center-block">LIEU:
+            <input class="form-control" formControlName="hotel">
+        </label>
+    </div>
+</form>
+
+<p>Form value: {{ lieuForm.value | json }} </p>
+<p>Form status: {{ lieuForm.status | json }}</p>
