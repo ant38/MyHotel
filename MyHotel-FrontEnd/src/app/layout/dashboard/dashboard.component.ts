@@ -124,10 +124,7 @@ export class DashboardComponent {
   }
 
   private getMyBlog() {
-    var headers = new Headers();
-    headers.append('Access-Control-Allow-Origin','*');
-    headers.append('Content-Type','application/json');
-    return this._http.get('http://18.216.255.59/MyHotel/rest/hotels',{headers: headers})
+    return this._http.get('http://18.216.255.59/MyHotel/rest/hotels')
                 .map((res: Response) => res.json())
                  .subscribe(data => {
                         this.data = data;
