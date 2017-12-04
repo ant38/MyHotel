@@ -11,6 +11,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import com.myhotel.beans.domain.ClientEntity;
 import com.myhotel.beans.service.ClientService;
@@ -25,13 +26,15 @@ public class ClientRest extends Application {
 	private ClientService clientService;
 	
 	@GET
-	public List<ClientEntity> getClients() {
-		return clientService.findAllClientEntities();
+	public Response getClients() {
+		List<ClientEntity> clients = clientService.findAllClientEntities();
+		return ClientService.headers(Response.ok(clients)).build();
 	}
 	
 	@GET
 	@Path("{id}")
-	public ClientEntity getClient(@PathParam("id") Long id) {
-		return clientService.find(id);
+	public Response getClient(@PathParam("id") Long id) {
+		ClientEntity client = clientService.find(id);
+		return ClientService.headers(Response.ok(client)).build();
 	}
 }

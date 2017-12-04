@@ -11,6 +11,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import com.myhotel.beans.domain.OfferEntity;
 import com.myhotel.beans.service.OfferService;
@@ -25,13 +26,15 @@ public class OfferRest extends Application {
 	private OfferService offerService;
 	
 	@GET
-	public List<OfferEntity> getOffers() {
-		return offerService.findAllOfferEntities();
+	public Response getOffers() {
+		List<OfferEntity> offers = offerService.findAllOfferEntities();
+		return OfferService.headers(Response.ok(offers)).build();
 	}
 	
 	@GET
 	@Path("{id}")
-	public OfferEntity getOffer(@PathParam("id") Long id) {
-		return offerService.find(id);
+	public Response getOffer(@PathParam("id") Long id) {
+		OfferEntity offer = offerService.find(id);
+		return OfferService.headers(Response.ok(offer)).build();
 	}
 }

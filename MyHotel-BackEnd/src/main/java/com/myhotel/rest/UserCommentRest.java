@@ -11,6 +11,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import com.myhotel.beans.domain.UserCommentEntity;
 import com.myhotel.beans.service.UserCommentService;
@@ -25,13 +26,15 @@ public class UserCommentRest extends Application {
 	private UserCommentService userCommentService;
 	
 	@GET
-	public List<UserCommentEntity> getUserComments() {
-		return userCommentService.findAllUserCommentEntities();
+	public Response getUserComments() {
+		List<UserCommentEntity> userComments = userCommentService.findAllUserCommentEntities();
+		return UserCommentService.headers(Response.ok(userComments)).build();
 	}
 	
 	@GET
 	@Path("{id}")
-	public UserCommentEntity getUserComment(@PathParam("id") Long id) {
-		return userCommentService.find(id);
+	public Response getUserComment(@PathParam("id") Long id) {
+		UserCommentEntity userComment = userCommentService.find(id);
+		return UserCommentService.headers(Response.ok(userComment)).build();
 	}
 }

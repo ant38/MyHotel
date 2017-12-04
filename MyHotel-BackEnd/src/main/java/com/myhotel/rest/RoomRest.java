@@ -11,6 +11,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import com.myhotel.beans.domain.RoomEntity;
 import com.myhotel.beans.service.RoomService;
@@ -25,13 +26,15 @@ public class RoomRest extends Application {
 	private RoomService roomService;
 	
 	@GET
-	public List<RoomEntity> getRooms() {
-		return roomService.findAllRoomEntities();
+	public Response getRooms() {
+		List<RoomEntity> rooms = roomService.findAllRoomEntities();
+		return RoomService.headers(Response.ok(rooms)).build();
 	}
 	
 	@GET
 	@Path("{id}")
-	public RoomEntity getRoom(@PathParam("id") Long id) {
-		return roomService.find(id);
+	public Response getRoom(@PathParam("id") Long id) {
+		RoomEntity room = roomService.find(id);
+		return RoomService.headers(Response.ok(room)).build();
 	}
 }

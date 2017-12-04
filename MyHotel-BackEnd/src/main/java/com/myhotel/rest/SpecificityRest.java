@@ -11,6 +11,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import com.myhotel.beans.domain.SpecificityEntity;
 import com.myhotel.beans.service.SpecificityService;
@@ -22,17 +23,19 @@ import com.myhotel.beans.service.SpecificityService;
 public class SpecificityRest extends Application {
 
 	@Inject
-	private SpecificityService specityService;
+	private SpecificityService specificityService;
 	
 	@GET
-	public List<SpecificityEntity> getSpecificities() {
-		return specityService.findAllSpecificityEntities();
+	public Response getSpecificities() {
+		List<SpecificityEntity> specificities = specificityService.findAllSpecificityEntities();
+		return SpecificityService.headers(Response.ok(specificities)).build();
 	}
 	
 	@GET
 	@Path("{id}")
-	public SpecificityEntity getSpecificity(@PathParam("id") Long id) {
-		return specityService.find(id);
+	public Response getSpecificity(@PathParam("id") Long id) {
+		SpecificityEntity specificity = specificityService.find(id);
+		return SpecificityService.headers(Response.ok(specificity)).build();
 	}
 	
 }

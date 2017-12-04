@@ -11,6 +11,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import com.myhotel.beans.domain.SaveEntity;
 import com.myhotel.beans.service.SaveService;
@@ -25,13 +26,15 @@ public class SaveRest extends Application {
 	private SaveService saveService;
 	
 	@GET
-	public List<SaveEntity> getSaves() {
-		return saveService.findAllSaveEntities();
+	public Response getSaves() {
+		List<SaveEntity> saves = saveService.findAllSaveEntities();
+		return SaveService.headers(Response.ok(saves)).build();
 	}
 	
 	@GET
 	@Path("{id}")
-	public SaveEntity getSave(@PathParam("id") Long id) {
-		return saveService.find(id);
+	public Response getSave(@PathParam("id") Long id) {
+		SaveEntity save = saveService.find(id);
+		return SaveService.headers(Response.ok(save)).build();
 	}
 }
