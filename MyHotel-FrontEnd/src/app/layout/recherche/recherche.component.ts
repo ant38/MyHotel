@@ -1,5 +1,7 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, NgModule } from '@angular/core';
+import { FormControl } from "@angular/forms";
+import { HotelService } from "../../_services/index";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { log } from 'util';
 
 @Component ({
@@ -9,14 +11,12 @@ import { log } from 'util';
 })
 
 export class RechercheComponent {
-    
-
-
+    allHotel: any = null;
     hotelForm: FormGroup; // <-- hotelForm is of type FormGroup
     lieuVar: string;
     petitDejVar: boolean = false;
 
-    constructor(private fb: FormBuilder) { // <-- inject FormBuilder
+    constructor(private hotelService: HotelService, private fb: FormBuilder) { // <-- inject FormBuilder
         this.createForm();       
     }
 
@@ -34,4 +34,13 @@ export class RechercheComponent {
     onKeyLieu(event: any){
         console.log(this.lieuVar);
     }    
+
+    getHotels(): void {
+        this.hotelService.getAllHotel().subscribe(hotels => this.allHotel = hotels);
+        console.log(this.allHotel);
+    }
+
+    ngOnInit() {
+        this.getHotels();
+    }
  }

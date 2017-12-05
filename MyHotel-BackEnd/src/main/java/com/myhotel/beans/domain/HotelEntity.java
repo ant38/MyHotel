@@ -37,7 +37,7 @@ public class HotelEntity extends BaseEntity implements Serializable {
     private String town;
 
     @Column(name="\"postalCode\"")
-    @Digits(integer = 4, fraction = 0)
+    @Digits(integer = 10, fraction = 0)
     @NotNull
     private Integer postalCode;
 

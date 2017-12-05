@@ -114,9 +114,6 @@ const OFFRES: Offre[] = [
 })
 
 export class DashboardComponent {
-    hotels = HOTELS;
-    offres = OFFRES;
-
     data: any = null;
 
   constructor(private _http: Http) {
