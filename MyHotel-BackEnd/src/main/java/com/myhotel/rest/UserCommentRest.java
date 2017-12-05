@@ -14,6 +14,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.myhotel.beans.domain.UserCommentEntity;
+import com.myhotel.beans.domain.UserCommentImage;
 import com.myhotel.beans.service.UserCommentService;
 
 @Stateless
@@ -36,5 +37,13 @@ public class UserCommentRest extends Application {
 	public Response getUserComment(@PathParam("id") Long id) {
 		UserCommentEntity userComment = userCommentService.find(id);
 		return UserCommentService.headers(Response.ok(userComment)).build();
+	}
+	
+	@GET
+	@Path("{id}/getImage")
+	public Response getImage(@PathParam("id") Long id) {
+		UserCommentEntity userComment = userCommentService.find(id);
+		UserCommentImage image = userComment.getImage();
+		return UserCommentService.headers(Response.ok(image)).build();
 	}
 }
