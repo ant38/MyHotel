@@ -14,6 +14,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.myhotel.beans.domain.HotelEntity;
+import com.myhotel.beans.domain.HotelImage;
 import com.myhotel.beans.service.HotelService;
 
 @Stateless
@@ -36,5 +37,13 @@ public class HotelRest extends Application {
 	public Response getHotel(@PathParam("id") Long id) {
 		HotelEntity hotel = hotelService.find(id);
 		return HotelService.headers(Response.ok(hotel)).build();
+	}
+	
+	@GET
+	@Path("{id}/getImage")
+	public Response getImage(@PathParam("id") Long id) {
+		HotelEntity hotel = hotelService.find(id);
+		HotelImage image = hotel.getImage();
+		return HotelService.headers(Response.ok(image)).build();
 	}
 }
