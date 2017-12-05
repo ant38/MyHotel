@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Component, OnChanges, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { log } from 'util';
 
 @Component ({
@@ -9,21 +9,29 @@ import { log } from 'util';
 })
 
 export class RechercheComponent {
-    lieuForm: FormGroup; // <-- lieuForm is of type FormGroup
-    ee: string;
+    
+
+
+    hotelForm: FormGroup; // <-- hotelForm is of type FormGroup
+    lieuVar: string;
+    petitDejVar: boolean = false;
 
     constructor(private fb: FormBuilder) { // <-- inject FormBuilder
-        this.createForm();
-        console.log("Form Submitted!");        
+        this.createForm();       
     }
 
     createForm() {
-        this.lieuForm = this.fb.group({
-            hotel: ['', Validators.required ], // <-- the FormControl called "hotel"
+        this.hotelForm = this.fb.group({
+            lieu: '', //Validators.required ], // <-- the FormControl called "lieu"
+            petitDej: '',
         })
     }
     
-    onKey(event: any){
-        console.log(this.ee);
+    handleChange(e) {
+        console.log(this.petitDejVar)
     }
+
+    onKeyLieu(event: any){
+        console.log(this.lieuVar);
+    }    
  }

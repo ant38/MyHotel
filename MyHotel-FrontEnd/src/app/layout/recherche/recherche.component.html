@@ -1,12 +1,15 @@
-<form [formGroup]="lieuForm" novalidate>
+<form [formGroup]="hotelForm">
     <div class="form-group">
-        <label class="center-block">LIEU:
-            <input class="form-control" (keyup)="onKey($event)" [(ngModel)]="ee" formControlName="hotel">
+        <label class="center-block">Lieu:
+            <input class="form-control" (keyup)="onKeyLieu($event)" [(ngModel)]="lieuVar" formControlName="lieu">
+        </label>
+    </div>
+    <div class="checkbox">
+        <label class="center-box">
+            <input type="checkbox" checked (change)="handleChange($event)" [(ngModel)]="petitDejVar" formControlName="petitDej">Petit Déjeuner.
         </label>
     </div>
 </form>
 
-<!-- <p>Form value: {{ lieuForm.value | json }} </p>
-<p>Form status: {{ lieuForm.status | json }}</p>
-<p>Form status: {{ ee }}</p> -->
+<!-- <p>heroForm value: {{ hotelForm.value | json}}</p> -->
 
