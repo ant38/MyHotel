@@ -5,8 +5,6 @@
         </label>
     </div>
 </form>
-
-<!-- <p>Form value: {{ lieuForm.value | json }} </p>
-<p>Form status: {{ lieuForm.status | json }}</p>
-<p>Form status: {{ ee }}</p> -->
-
+<div *ngFor="let hotel of allHotel">
+    <h1>{{hotel.name}}</h1>
+</div>

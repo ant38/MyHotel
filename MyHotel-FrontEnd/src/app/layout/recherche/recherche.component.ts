@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgModule } from '@angular/core';
+import { FormControl } from "@angular/forms";
+import { HotelService } from "../../_services/index";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { log } from 'util';
 
@@ -9,10 +11,11 @@ import { log } from 'util';
 })
 
 export class RechercheComponent {
+    allHotel: any = null;
     lieuForm: FormGroup; // <-- lieuForm is of type FormGroup
     ee: string;
 
-    constructor(private fb: FormBuilder) { // <-- inject FormBuilder
+    constructor(private hotelService: HotelService, private fb: FormBuilder) { // <-- inject FormBuilder
         this.createForm();
         console.log("Form Submitted!");        
     }
@@ -25,5 +28,14 @@ export class RechercheComponent {
     
     onKey(event: any){
         console.log(this.ee);
+    }
+
+    getHotels(): void {
+        this.hotelService.getAllHotel().subscribe(hotels => this.allHotel = hotels);
+        console.log(this.allHotel);
+    }
+
+    ngOnInit() {
+        this.getHotels();
     }
  }
