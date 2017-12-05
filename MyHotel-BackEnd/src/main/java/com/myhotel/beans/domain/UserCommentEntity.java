@@ -14,6 +14,8 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity(name="UserComment")
 @Table(name="\"USERCOMMENT\"")
 public class UserCommentEntity extends BaseEntity implements Serializable {
@@ -21,6 +23,7 @@ public class UserCommentEntity extends BaseEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+    @JsonBackReference
     private UserCommentImage image;
     
     @Column(name="\"rating\"")
