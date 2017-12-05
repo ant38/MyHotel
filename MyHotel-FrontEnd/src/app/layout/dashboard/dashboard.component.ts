@@ -5,10 +5,7 @@ import { HttpModule } from "@angular/http";
 import { FormControl } from '@angular/forms';
 import { PaiementComponent } from '../paiement/index';
 
-import { Http, Response, Headers } from '@angular/http';
-import 'rxjs/add/operator/map'
-
-
+/*
 export class Hotel {
     id: number;
     name: string;
@@ -105,6 +102,7 @@ const OFFRES: Offre[] = [
     { id_offre: 59, name: 'offre59', dateIn:  new Date(2017, 11, 19), dateOut: new Date(2017, 12, 31), nbPersonne: 2, hotel: HOTELS[9], prix: 100, description: "1 chambre avec 2 lits simples"},
     { id_offre: 60, name: 'offre60', dateIn:  new Date(2017, 11, 20), dateOut: new Date(2017, 12, 31), nbPersonne: 2, hotel: HOTELS[0], prix: 100, description: "2 chambres avec 1 lit"},
 ];
+*/
 
 @Component({
 
@@ -114,20 +112,7 @@ const OFFRES: Offre[] = [
 })
 
 export class DashboardComponent {
-    data: any = null;
-
-  constructor(private _http: Http) {
-    this.getMyBlog();
-  }
-
-  private getMyBlog() {
-    return this._http.get('http://18.216.255.59/MyHotel/rest/hotels')
-                .map((res: Response) => res.json())
-                 .subscribe(data => {
-                        this.data = data;
-                        console.log(this.data[0]['id']);
-                });
-  }
+  constructor() {}
 
 }
 
