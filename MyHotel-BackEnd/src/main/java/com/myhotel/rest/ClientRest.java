@@ -6,9 +6,11 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -36,5 +38,12 @@ public class ClientRest extends Application {
 	public Response getClient(@PathParam("id") Long id) {
 		ClientEntity client = clientService.find(id);
 		return ClientService.headers(Response.ok(client)).build();
+	}
+	
+	@POST
+	@Path("isClient")
+	public Response isClient(@QueryParam("username") String username, @QueryParam("password") String password) {
+		Long result = clientService.isClient(username, password);
+		return ClientService.headers(Response.ok(result>0)).build();
 	}
 }
