@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { log } from 'util';
 
 @Component ({
     selector: 'recherche',
@@ -8,6 +9,21 @@ import { FormControl } from "@angular/forms";
 })
 
 export class RechercheComponent {
-    name = new FormControl();
+    lieuForm: FormGroup; // <-- lieuForm is of type FormGroup
+    ee: string;
+
+    constructor(private fb: FormBuilder) { // <-- inject FormBuilder
+        this.createForm();
+        console.log("Form Submitted!");        
+    }
+
+    createForm() {
+        this.lieuForm = this.fb.group({
+            hotel: ['', Validators.required ], // <-- the FormControl called "hotel"
+        })
+    }
     
-}
+    onKey(event: any){
+        console.log(this.ee);
+    }
+ }
