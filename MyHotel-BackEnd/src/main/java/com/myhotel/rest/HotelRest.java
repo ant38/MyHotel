@@ -15,7 +15,9 @@ import javax.ws.rs.core.Response;
 
 import com.myhotel.beans.domain.HotelEntity;
 import com.myhotel.beans.domain.HotelImage;
+import com.myhotel.beans.domain.SpecificityEntity;
 import com.myhotel.beans.service.HotelService;
+import com.myhotel.beans.service.SpecificityService;
 
 @Stateless
 @ApplicationPath("/rest")
@@ -25,6 +27,9 @@ public class HotelRest extends Application {
 	
 	@Inject
 	HotelService hotelService;
+	
+	@Inject
+	SpecificityService specificityService;
 	
 	@GET
 	public Response getHotels() {
@@ -45,5 +50,13 @@ public class HotelRest extends Application {
 		HotelEntity hotel = hotelService.find(id);
 		HotelImage image = hotel.getImage();
 		return HotelService.headers(Response.ok(image)).build();
+	}
+	
+	@GET
+	@Path("{id}/getSpecificities")
+	public Response getSpecificities(@PathParam("id") Long id) {
+		HotelEntity hotel = hotelService.find(id);
+		List<SpecificityEntity> specificities = specificityService.findSpecificitysByHotel(hotel);
+		return HotelService.headers(Response.ok(specificities)).build();
 	}
 }
