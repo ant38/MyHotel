@@ -14,7 +14,16 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.myhotel.beans.domain.HotelEntity;
+import com.myhotel.beans.domain.HotelImage;
+import com.myhotel.beans.domain.HotelierEntity;
+import com.myhotel.beans.domain.RoomEntity;
+import com.myhotel.beans.domain.SpecificityEntity;
+import com.myhotel.beans.domain.UserCommentEntity;
 import com.myhotel.beans.service.HotelService;
+import com.myhotel.beans.service.HotelierService;
+import com.myhotel.beans.service.RoomService;
+import com.myhotel.beans.service.SpecificityService;
+import com.myhotel.beans.service.UserCommentService;
 
 @Stateless
 @ApplicationPath("/rest")
@@ -24,6 +33,15 @@ public class HotelRest extends Application {
 	
 	@Inject
 	HotelService hotelService;
+	
+	@Inject
+	SpecificityService specificityService;
+	@Inject
+	UserCommentService userCommentService;
+	@Inject
+	RoomService roomService;
+	@Inject
+	HotelierService hotelierService;
 	
 	@GET
 	public Response getHotels() {
@@ -36,5 +54,45 @@ public class HotelRest extends Application {
 	public Response getHotel(@PathParam("id") Long id) {
 		HotelEntity hotel = hotelService.find(id);
 		return HotelService.headers(Response.ok(hotel)).build();
+	}
+	
+	@GET
+	@Path("{id}/getImage")
+	public Response getImage(@PathParam("id") Long id) {
+		HotelEntity hotel = hotelService.find(id);
+		HotelImage image = hotel.getImage();
+		return HotelService.headers(Response.ok(image)).build();
+	}
+	
+	@GET
+	@Path("{id}/getSpecificities")
+	public Response getSpecificities(@PathParam("id") Long id) {
+		HotelEntity hotel = hotelService.find(id);
+		List<SpecificityEntity> specificities = specificityService.findSpecificitysByHotel(hotel);
+		return HotelService.headers(Response.ok(specificities)).build();
+	}
+	
+	@GET
+	@Path("{id}/getUserComments")
+	public Response getUserComments(@PathParam("id") Long id) {
+		HotelEntity hotel = hotelService.find(id);
+		List<UserCommentEntity> userComments = userCommentService.findCommentsByHotel(hotel);
+		return HotelService.headers(Response.ok(userComments)).build();
+	}
+	
+	@GET
+	@Path("{id}/getRooms")
+	public Response getRooms(@PathParam("id") Long id) {
+		HotelEntity hotel = hotelService.find(id);
+		List<RoomEntity> rooms = roomService.findRoomsByHotel(hotel);
+		return HotelService.headers(Response.ok(rooms)).build();
+	}
+	
+	@GET
+	@Path("{id}/getHoteliers")
+	public Response getHoteliers(@PathParam("id") Long id) {
+		HotelEntity hotel = hotelService.find(id);
+		List<HotelierEntity> hoteliers = hotelierService.findHoteliersByHotel(hotel);
+		return HotelService.headers(Response.ok(hoteliers)).build();
 	}
 }

@@ -125,7 +125,7 @@ export class DashboardComponent {
                 .map((res: Response) => res.json())
                  .subscribe(data => {
                         this.data = data;
-                        console.log(this.data);
+                        console.log(this.data[0]['id']);
                 });
   }
 
