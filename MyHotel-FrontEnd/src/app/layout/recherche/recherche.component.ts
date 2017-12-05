@@ -12,23 +12,28 @@ import { log } from 'util';
 
 export class RechercheComponent {
     allHotel: any = null;
-    lieuForm: FormGroup; // <-- lieuForm is of type FormGroup
-    ee: string;
+    hotelForm: FormGroup; // <-- hotelForm is of type FormGroup
+    lieuVar: string;
+    petitDejVar: boolean = false;
 
     constructor(private hotelService: HotelService, private fb: FormBuilder) { // <-- inject FormBuilder
-        this.createForm();
-        console.log("Form Submitted!");        
+        this.createForm();       
     }
 
     createForm() {
-        this.lieuForm = this.fb.group({
-            hotel: ['', Validators.required ], // <-- the FormControl called "hotel"
+        this.hotelForm = this.fb.group({
+            lieu: '', //Validators.required ], // <-- the FormControl called "lieu"
+            petitDej: '',
         })
     }
     
-    onKey(event: any){
-        console.log(this.ee);
+    handleChange(e) {
+        console.log(this.petitDejVar)
     }
+
+    onKeyLieu(event: any){
+        console.log(this.lieuVar);
+    }    
 
     getHotels(): void {
         this.hotelService.getAllHotel().subscribe(hotels => this.allHotel = hotels);
