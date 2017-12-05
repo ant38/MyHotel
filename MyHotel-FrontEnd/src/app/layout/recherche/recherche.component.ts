@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgModule } from '@angular/core';
 import { FormControl } from "@angular/forms";
+import { HotelService } from "../../_services/index";
 
 @Component ({
     selector: 'recherche',
@@ -9,5 +10,17 @@ import { FormControl } from "@angular/forms";
 
 export class RechercheComponent {
     name = new FormControl();
+
+    allHotel: any = null;
+
+    constructor(private hotelService: HotelService){}
+
+    getHotels(): void {
+        this.hotelService.getAllHotel().subscribe(hotels => this.allHotel = hotels);
+        console.log(this.allHotel);
+    }
     
+    ngOnInit() {
+        this.getHotels();
+    }
 }

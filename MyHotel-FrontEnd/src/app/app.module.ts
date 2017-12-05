@@ -1,7 +1,7 @@
 ﻿import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule,FormsModule }    from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpModule, Headers } from '@angular/http';
 
 
 // used to create fake backend
@@ -14,7 +14,7 @@ import { routing }        from './app.routing';
 
 import { AlertComponent } from './_directives/index';
 import { AuthGuard } from './_guards/index';
-import { AlertService, AuthenticationService, UserService } from './_services/index';
+import { AlertService, AuthenticationService, UserService, HotelService } from './_services/index';
 import { HomeComponent } from './home/index';
 import { LoginComponent } from './login/index';
 import { RegisterComponent } from './register/index';
@@ -23,6 +23,7 @@ import { OffreComponent } from './layout/offre/index';
 import { PaiementComponent } from './layout/paiement/index';
 import { ConfirmationResaComponent } from './layout/confirmationResa/index';
 import { RechercheComponent } from './layout/recherche/index';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 @NgModule({
     imports: [
@@ -30,6 +31,7 @@ import { RechercheComponent } from './layout/recherche/index';
         ReactiveFormsModule, //first test
         FormsModule,
         HttpModule,
+        HttpClientModule,
         routing
     ],
     declarations: [
@@ -49,7 +51,9 @@ import { RechercheComponent } from './layout/recherche/index';
         AlertService,
         AuthenticationService,
         UserService,
-
+        HotelService,
+        HttpClientModule,
+    
         // providers used to create fake backend
         fakeBackendProvider,
         MockBackend,
