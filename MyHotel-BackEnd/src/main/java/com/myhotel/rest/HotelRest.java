@@ -15,10 +15,12 @@ import javax.ws.rs.core.Response;
 
 import com.myhotel.beans.domain.HotelEntity;
 import com.myhotel.beans.domain.HotelImage;
+import com.myhotel.beans.domain.HotelierEntity;
 import com.myhotel.beans.domain.RoomEntity;
 import com.myhotel.beans.domain.SpecificityEntity;
 import com.myhotel.beans.domain.UserCommentEntity;
 import com.myhotel.beans.service.HotelService;
+import com.myhotel.beans.service.HotelierService;
 import com.myhotel.beans.service.RoomService;
 import com.myhotel.beans.service.SpecificityService;
 import com.myhotel.beans.service.UserCommentService;
@@ -38,6 +40,8 @@ public class HotelRest extends Application {
 	UserCommentService userCommentService;
 	@Inject
 	RoomService roomService;
+	@Inject
+	HotelierService hotelierService;
 	
 	@GET
 	public Response getHotels() {
@@ -82,5 +86,13 @@ public class HotelRest extends Application {
 		HotelEntity hotel = hotelService.find(id);
 		List<RoomEntity> rooms = roomService.findRoomsByHotel(hotel);
 		return HotelService.headers(Response.ok(rooms)).build();
+	}
+	
+	@GET
+	@Path("{id}/getHoteliers")
+	public Response getHoteliers(@PathParam("id") Long id) {
+		HotelEntity hotel = hotelService.find(id);
+		List<HotelierEntity> hoteliers = hotelierService.findHoteliersByHotel(hotel);
+		return HotelService.headers(Response.ok(hoteliers)).build();
 	}
 }
