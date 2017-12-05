@@ -9,6 +9,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -44,8 +45,8 @@ public class OfferRest extends Application {
 	}
 	
 	@GET
-	@Path("search/{city}")
-	public Response search(@PathParam("city") String city) {
+	@Path("search")
+	public Response search(@QueryParam("city") String city) {
 		List<HotelEntity> hotels = hotelService.findHotelsByCity(city);
 		return OfferService.headers(Response.ok(hotels)).build();
 	}
