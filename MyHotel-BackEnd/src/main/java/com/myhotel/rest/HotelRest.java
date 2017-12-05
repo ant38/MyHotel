@@ -15,9 +15,11 @@ import javax.ws.rs.core.Response;
 
 import com.myhotel.beans.domain.HotelEntity;
 import com.myhotel.beans.domain.HotelImage;
+import com.myhotel.beans.domain.RoomEntity;
 import com.myhotel.beans.domain.SpecificityEntity;
 import com.myhotel.beans.domain.UserCommentEntity;
 import com.myhotel.beans.service.HotelService;
+import com.myhotel.beans.service.RoomService;
 import com.myhotel.beans.service.SpecificityService;
 import com.myhotel.beans.service.UserCommentService;
 
@@ -34,6 +36,8 @@ public class HotelRest extends Application {
 	SpecificityService specificityService;
 	@Inject
 	UserCommentService userCommentService;
+	@Inject
+	RoomService roomService;
 	
 	@GET
 	public Response getHotels() {
@@ -70,5 +74,13 @@ public class HotelRest extends Application {
 		HotelEntity hotel = hotelService.find(id);
 		List<UserCommentEntity> userComments = userCommentService.findCommentsByHotel(hotel);
 		return HotelService.headers(Response.ok(userComments)).build();
+	}
+	
+	@GET
+	@Path("{id}/getRooms")
+	public Response getRooms(@PathParam("id") Long id) {
+		HotelEntity hotel = hotelService.find(id);
+		List<RoomEntity> rooms = roomService.findRoomsByHotel(hotel);
+		return HotelService.headers(Response.ok(rooms)).build();
 	}
 }
