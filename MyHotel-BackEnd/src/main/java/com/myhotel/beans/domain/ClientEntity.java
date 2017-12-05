@@ -55,7 +55,7 @@ public class ClientEntity extends BaseEntity implements Serializable {
     private String email;
 
     @Column(name="\"phone\"")
-    @Digits(integer = 4, fraction = 0)
+    @Digits(integer = 20, fraction = 0)
     private Integer phone;
 
     public void setBookings(List<BookingEntity> bookings) {
