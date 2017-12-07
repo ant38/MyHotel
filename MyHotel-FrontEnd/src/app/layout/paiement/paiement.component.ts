@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ConfirmationResaComponent } from '../confirmationResa/index';
 
 @Component({
-  selector: 'paiement',
+  selector: 'app-paiement',
   templateUrl: './paiement.component.html',
   styleUrls: ['./paiement.component.css']
 })

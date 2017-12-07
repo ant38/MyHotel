@@ -3,7 +3,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { HttpModule } from "@angular/http";
 import { FormControl } from '@angular/forms';
-import { PaiementComponent } from '../paiement/index';
+import { PaiementComponent } from '../layout/paiement/paiement.component';
 
 /*
 export class Hotel {

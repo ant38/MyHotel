@@ -2,6 +2,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule,FormsModule }    from '@angular/forms';
 import { HttpModule, Headers } from '@angular/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 
 // used to create fake backend
@@ -15,15 +16,23 @@ import { routing }        from './app.routing';
 import { AlertComponent } from './_directives/index';
 import { AuthGuard } from './_guards/index';
 import { AlertService, AuthenticationService, UserService, HotelService } from './_services/index';
+
 import { HomeComponent } from './home/index';
 import { LoginComponent } from './login/index';
 import { RegisterComponent } from './register/index';
-import { DashboardComponent } from './layout/dashboard/index';
-import { OffreComponent } from './layout/offre/index';
-import { PaiementComponent } from './layout/paiement/index';
-import { ConfirmationResaComponent } from './layout/confirmationResa/index';
-import { RechercheComponent } from './layout/recherche/index';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { DashboardComponent } from './dashboard/index';
+import { RechercheComponent } from './recherche/index';
+import { ReservationComponent } from './reservation/reservation.component';
+import { ConfirmationComponent } from './confirmation/confirmation.component';
+import { DescriptionComponent } from './description/description.component';
+
+import { OffreCompletComponent } from './layout/offre-complet/offre-complet.component';
+import { OffreDescComponent } from './layout/offre-desc/offre-desc.component';
+import { PaiementComponent } from './layout/paiement/paiement.component';
+import { RecapitulatifComponent } from './layout/recapitulatif/recapitulatif.component';
+import { RechercheBarreComponent } from './layout/recherche-barre/recherche-barre.component';
+import { RecherchePlusComponent } from './layout/recherche-plus/recherche-plus.component';
+
 
 @NgModule({
     imports: [
@@ -40,11 +49,16 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
         HomeComponent,
         LoginComponent,
         DashboardComponent,
+        ReservationComponent,
+        ConfirmationComponent,
         RegisterComponent,
-        OffreComponent,
-        PaiementComponent,
-        ConfirmationResaComponent,
-        RechercheComponent
+        DescriptionComponent,
+        RechercheComponent,
+        RecapitulatifComponent,
+        RecherchePlusComponent,
+        RechercheBarreComponent,
+        OffreDescComponent,
+        OffreCompletComponent
     ],
     providers: [
         AuthGuard,

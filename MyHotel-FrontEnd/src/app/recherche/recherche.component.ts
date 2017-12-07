@@ -1,6 +1,6 @@
 import { Component, OnInit, NgModule } from '@angular/core';
 import { FormControl } from "@angular/forms";
-import { HotelService } from "../../_services/index";
+import { HotelService } from "../_services/index";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { log } from 'util';
 
