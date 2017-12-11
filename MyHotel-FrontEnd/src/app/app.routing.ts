@@ -1,29 +1,39 @@
 ﻿import { NgModule }             from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { AuthGuard } from './_guards/index';
+// Pages à explorer
 import { HomeComponent } from './home/index'; 
 import { LoginComponent } from './login/index';
 import { RegisterComponent } from './register/index';
-import { DashboardComponent } from './layout/dashboard/index';
-import { AuthGuard } from './_guards/index';
-import { OffreComponent } from './layout/offre/index';
-import { PaiementComponent } from './layout/paiement/index';
-import { ConfirmationResaComponent } from './layout/confirmationResa/index';
-import { RechercheComponent } from './layout/recherche/index';
+import { DashboardComponent } from './dashboard/index';
+import { RechercheComponent } from './recherche/index';
+import { ReservationComponent } from './reservation/reservation.component';
+import { ConfirmationComponent } from './confirmation/confirmation.component';
+import { DescriptionComponent } from './description/description.component';
+
+// Composants
+import { RecapitulatifComponent } from './layout/recapitulatif/recapitulatif.component';
+import { RecherchePlusComponent } from './layout/recherche-plus/recherche-plus.component';
+import { RechercheBarreComponent } from './layout/recherche-barre/recherche-barre.component';
+import { OffreDescComponent } from './layout/offre-desc/offre-desc.component';
+import { OffreCompletComponent } from './layout/offre-complet/offre-complet.component';
 
 const appRoutes: Routes = [
 
-  { path: 'dashboard', component: DashboardComponent },
+  
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'offre', component: OffreComponent },
-  { path: 'paiement', component: PaiementComponent, canActivate: [AuthGuard] },
-  { path: 'confirmationResa', component: ConfirmationResaComponent, canActivate: [AuthGuard] },
+  { path: 'dashboard', component: DashboardComponent },
   { path: 'recherche', component: RechercheComponent },
+  { path: 'reservation', component: ReservationComponent },
+  { path: 'confirmation', component: ConfirmationComponent },
+  { path: 'description', component: DescriptionComponent },
+  
   // otherwise redirect to home(DashBoard)
-  { path: '**', redirectTo: '' }
+  { path: '**', redirectTo: 'dashboard' }
 ];
 
 export const routing = RouterModule.forRoot(appRoutes);

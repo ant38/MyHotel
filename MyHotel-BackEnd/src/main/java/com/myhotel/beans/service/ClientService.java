@@ -75,4 +75,13 @@ public class ClientService extends BaseService<ClientEntity> implements Serializ
         return client;
     }
     
+    @Transactional
+    public long isClient(String username, String password) {
+    	return entityManager
+    			.createQuery("SELECT COUNT(o) FROM Client o WHERE o.username = :username AND o.password = :password", Long.class)
+    			.setParameter("username", username)
+    			.setParameter("password", password)
+    			.getSingleResult();
+    }
+    
 }

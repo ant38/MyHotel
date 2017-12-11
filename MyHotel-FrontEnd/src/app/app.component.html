@@ -1,13 +1,38 @@
 ﻿<!-- main app container -->
+<div class="header clearfix">
+	 <nav class="navbar">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" routerLink="/dashboard" routerLinkActive="active">MyHotel</a>
+    </div>
+
+    <ul class="nav navbar-nav navbar-right">
+      <li class="active"><a routerLink="/dashboard" routerLinkActive="active">Accueil</a></li>
+      <li><a routerLink="/register" routerLinkActive="active" *ngIf="getUser()==null"><span class="glyphicon glyphicon-user"></span> S'enregistrer</a></li>
+      <li><a routerLink="/login" routerLinkActive="active" *ngIf="getUser()==null"><span class="glyphicon glyphicon-log-in"></span> S'identifier</a></li>
+      <a routerLink="/home" routerLinkActive="active"  *ngIf="getUser()!=null"> Mon espace</a>
+    </ul>
+  </div>
+</nav> 
+        <!--<nav align="right">
+          <ul class="nav nav-pills pull-right">
+	    <a routerLink="/dashboard" routerLinkActive="active">Accueil</a>
+
+	<div class="btn-group">
+            <a routerLink="/login" routerLinkActive="active" *ngIf="getUser()==null" class="btn btn-primary">S'identifier</a>
+            <a routerLink="/register" routerLinkActive="active" *ngIf="getUser()==null" class="btn btn-primary">S'enregistrer</a>
+          <a routerLink="/home" routerLinkActive="active"  *ngIf="getUser()!=null">Mon espace</a>
+	</div>
+
+          </ul>
+        </nav>
+
+        <h3 class="text-muted"><a routerLink="/dashboard" routerLinkActive="active">MyHotel</a></h3>-->
+</div>
+
 <div class="jumbotron">
     <div class="container">
-        <nav align="right">
-          <a routerLink="/dashboard" routerLinkActive="active">Accueil</a>
-          ﻿<!--<?php if(currentUser) : ?>-->
-          <a routerLink="/login" routerLinkActive="active" *ngIf="getUser()==null">S'identifier</a>
-          <a routerLink="/register" routerLinkActive="active" *ngIf="getUser()==null">S'enregistrer</a>
-          <a routerLink="/home" routerLinkActive="active"  *ngIf="getUser()!=null">Mon espace</a>
-        </nav>
+        
         <div class="col-sm-8 col-sm-offset-2">
             <alert></alert>
             <h1>{{title}}</h1>
