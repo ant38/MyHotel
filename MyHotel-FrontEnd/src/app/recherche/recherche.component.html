@@ -4,16 +4,13 @@
             <input class="form-control" (keyup)="onKeyLieu($event)" [(ngModel)]="lieuVar" formControlName="lieu">
         </label>
 
-        <label class="center-box">Petit déjeuner:
-            <input class="checkbox" type="checkbox" checked (change)="handleChange($event)" [(ngModel)]="petitDejVar" formControlName="petitDej">
+        <label class="center-box">DateIn:
+            <input type="date" (click)="onDateIn($event)" [(ngModel)]="dateInVar" formControlName="dateIn" />
         </label>
 
-        <label class="center-box">Date d'entrée:
-                <input class="input-group-addon" type='text' class="form-control" (click)="onClic" [(ngModel)]="dateInVar" formControlName="dateIn" />
-                <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                </span>
-        </label>
+        <label class="center-box">Petit déjeuner:
+            <input class="checkbox" type="checkbox" checked (change)="handleChange($event)" [(ngModel)]="petitDejVar" formControlName="petitDej">
+        </label>  
     </div>
 </form>
 
@@ -21,14 +18,4 @@
 
 <div *ngFor="let hotel of allHotel">
     <h1>{{hotel.name}}</h1>
-</div>
-
-
-<div class="form-group">
-    <div class='input-group date' id='datetimepicker7'>
-        <input type='text' class="form-control" />
-        <span class="input-group-addon">
-            <span class="glyphicon glyphicon-calendar"></span>
-        </span>
-    </div>
 </div>
