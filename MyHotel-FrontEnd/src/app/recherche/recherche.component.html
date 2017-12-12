@@ -1,21 +1,4 @@
-<form [formGroup]="hotelForm">
-    <div class="form-group">
-        <label class="center-block">Lieu:
-            <input class="form-control" (keyup)="onKeyLieu($event)" [(ngModel)]="lieuVar" formControlName="lieu">
-        </label>
 
-        <label class="center-box">DateIn:
-            <input type="date" (click)="onDateIn($event)" [(ngModel)]="dateInVar" formControlName="dateIn" />
-        </label>
-
-        <label class="center-box">Petit déjeuner:
-            <input class="checkbox" type="checkbox" checked (change)="handleChange($event)" [(ngModel)]="petitDejVar" formControlName="petitDej">
-        </label>  
-    </div>
-</form>
-
-<!-- <p>heroForm value: {{ hotelForm.value | json}}</p> -->
-
-<div *ngFor="let hotel of allHotel">
-    <h1>{{hotel.name}}</h1>
-</div>
+<app-filtre-petit-dejeuner></app-filtre-petit-dejeuner>
+<app-filtre-lieu></app-filtre-lieu>
+<app-filtre-date-arrive></app-filtre-date-arrive>
