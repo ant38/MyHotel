@@ -4,6 +4,7 @@ import com.myhotel.beans.domain.BookingEntity;
 import com.myhotel.beans.domain.ClientEntity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Named;
@@ -85,11 +86,16 @@ public class ClientService extends BaseService<ClientEntity> implements Serializ
     }
 
     @Transactional
-    public long newClient(String username, String password,String prenom, String nom) {
-        return entityManager.createQuery("INSERT INTO Client o VALUES (username,password,prenom,nom)", ClientEntity.class).setParameter("username", username)
-    			.setParameter("password", password)
-                        .setParameter("prenom", prenom)
-                        .setParameter("nom", nom).executeUpdate();
+    public long newClient(String username, String password,String prenom, String nom, Date dateNaissance, String email) {
+        ClientEntity client = new ClientEntity();
+        client.setUsername(username);
+        client.setPassword(password);
+        client.setPrenom(prenom);
+        client.setNom(nom);
+        client.setDateNaissance(dateNaissance);
+        client.setEmail(email);
+        entityManager.persist(client);
+        return 1;
     }
     
 }
