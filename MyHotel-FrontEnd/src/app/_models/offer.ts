@@ -1,11 +1,9 @@
-import { Hotel } from "./hotel";
+import { Room } from "./room";
 export class Offer {
     id_offre: number;
-    name: string;
-    dateIn: Date;
-    dateOut: Date;
-    nbPersonne: number;
-    hotel: Hotel;
-    prix: number;
-    description: string;
+    version: number;
+    dateStart: Date;
+    dateEnd: Date;
+    price: number;
+    rooms: Room[];
 }
