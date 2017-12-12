@@ -46,4 +46,11 @@ public class ClientRest extends Application {
 		Long result = clientService.isClient(username, password);
 		return ClientService.headers(Response.ok(result>0)).build();
 	}
+
+	@POST
+	@Path("newClient")
+	public Response newClient(@QueryParam("username") String username, @QueryParam("password") String password, @QueryParam("prenom") String prenom, @QueryParam("nom") String nom) {
+		Long result = clientService.newClient(username, password,prenom, nom);
+		return ClientService.headers(Response.ok(result==1)).build();
+	}
 }

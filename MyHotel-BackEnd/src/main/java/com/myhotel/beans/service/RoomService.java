@@ -6,8 +6,11 @@ import com.myhotel.beans.domain.OfferEntity;
 import com.myhotel.beans.domain.RoomEntity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.transaction.Transactional;
 
@@ -15,6 +18,9 @@ import javax.transaction.Transactional;
 public class RoomService extends BaseService<RoomEntity> implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
+    @Inject
+    BookingService bookingService;
     
     public RoomService(){
         super(RoomEntity.class);
@@ -82,6 +88,36 @@ public class RoomService extends BaseService<RoomEntity> implements Serializable
         room = find(room.getId());
         room.getBookings().size();
         return room;
+    }
+    
+    private boolean isAvailable(RoomEntity room, Date dateIn, Date dateOut) {
+    	List<BookingEntity> bookings = bookingService.findBookingsByRoom(room);
+    	
+    	for(int i=0; i<bookings.size(); i++) {
+    		if(dateOut.after(bookings.get(i).getDateIn()) && dateIn.before(bookings.get(i).getDateOut())) {
+    			return false;
+    		}
+    	}
+    	
+    	return true;
+    }
+    
+    @Transactional
+    public List<RoomEntity> findRooms(List<HotelEntity> hotels, Long adults, Long children, Date dateIn, Date dateOut) {
+    	List<RoomEntity> rooms = entityManager
+    			.createQuery("SELECT o FROM Room o WHERE o.hotel IN :hotels AND places >= :beds")
+    			.setParameter("hotels", hotels)
+    			.setParameter("beds", (int)(adults+children))
+    			.getResultList();
+    	
+    	List<RoomEntity> availableRooms = new ArrayList<>();
+    	for (int i = 0; i < rooms.size(); i++) {
+			if(isAvailable(rooms.get(i), dateIn, dateOut)) {
+				availableRooms.add(rooms.get(i));
+			}
+		}
+    	
+    	return availableRooms;
     }
     
 }
