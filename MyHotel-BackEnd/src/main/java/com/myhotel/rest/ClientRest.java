@@ -44,8 +44,8 @@ public class ClientRest extends Application {
 	@POST
 	@Path("isClient")
 	public Response isClient(@QueryParam("username") String username, @QueryParam("password") String password) {
-		Long result = clientService.isClient(username, password);
-		return ClientService.headers(Response.ok(result>0)).build();
+		ClientEntity client = clientService.isClient(username, password);
+		return ClientService.headers(Response.ok(client)).build();
 	}
 
 	@POST

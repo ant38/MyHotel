@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.inject.Named;
+import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
 
 @Named
@@ -77,13 +78,19 @@ public class ClientService extends BaseService<ClientEntity> implements Serializ
     }
     
     @Transactional
-    public long isClient(String username, String password) {
-    	return entityManager
-    			.createQuery("SELECT COUNT(o) FROM Client o WHERE o.username = :username AND o.password = :password", Long.class)
-    			.setParameter("username", username)
-    			.setParameter("password", password)
-    			.getSingleResult();
+    public ClientEntity isClient(String username, String password) {
+    	try {
+	    	return entityManager
+	    			.createQuery("SELECT o FROM Client o WHERE o.username = :username AND o.password = :password", ClientEntity.class)
+	    			.setParameter("username", username)
+	    			.setParameter("password", password)
+	    			.getSingleResult();
+    	} catch(NoResultException e) {
+    		return null;
+    	}
     }
+    
+    
 
     @Transactional
     public long newClient(String username, String password,String prenom, String nom, Date dateNaissance, String email) {
