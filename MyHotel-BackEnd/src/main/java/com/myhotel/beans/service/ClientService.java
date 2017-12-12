@@ -83,5 +83,13 @@ public class ClientService extends BaseService<ClientEntity> implements Serializ
     			.setParameter("password", password)
     			.getSingleResult();
     }
+
+    @Transactional
+    public long newClient(String username, String password,String prenom, String nom) {
+        return entityManager.createQuery("INSERT INTO Client o VALUES (username,password,prenom,nom)", ClientEntity.class).setParameter("username", username)
+    			.setParameter("password", password)
+                        .setParameter("prenom", prenom)
+                        .setParameter("nom", nom).executeUpdate();
+    }
     
 }

@@ -7,7 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FiltreLieuComponent implements OnInit {
 
+  lieuVar: string;
+
   constructor() { }
+
+  onKeyLieu(e){
+    console.log(this.lieuVar);
+  }    
 
   ngOnInit() {
   }
