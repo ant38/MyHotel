@@ -1,11 +1,7 @@
-import { Component, OnInit, NgModule } from '@angular/core';
-import { FormControl } from "@angular/forms";
-import { HotelService } from "../_services/index";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { log } from 'util';
-
-//Filtres utilisés
-import { FiltreAvisComponent, FiltreDateArriveComponent, FiltreDateDepartComponent, FiltreLieuComponent, FiltreNombreNuitComponent, FiltreNombrePersonneComponent, FiltrePetitDejeunerComponent, FiltrePrixComponent } from "../filtres/index";
+import { Component} from '@angular/core';
+import { FiltreLieuComponent } from '../filtres/filtre-lieu/filtre-lieu.component';
+import { FiltrePetitDejeunerComponent } from '../filtres/filtre-petit-dejeuner/filtre-petit-dejeuner.component';
+import { FiltreDateArriveComponent } from '../filtres/filtre-date-arrive/filtre-date-arrive.component';
 
 @Component ({
     selector: 'recherche',
@@ -13,37 +9,4 @@ import { FiltreAvisComponent, FiltreDateArriveComponent, FiltreDateDepartCompone
     //styleUrls: ['./confirmation.component.css']
 })
 
-export class RechercheComponent {
-    allHotel: any = null;
-    hotelForm: FormGroup; // <-- hotelForm is of type FormGroup
-    lieuVar: string;
-    petitDejVar: boolean = false;
-
-    constructor(private hotelService: HotelService, private fb: FormBuilder) { // <-- inject FormBuilder
-        this.createForm();       
-    }
-
-    createForm() {
-        this.hotelForm = this.fb.group({
-            lieu: '', //Validators.required ], // <-- the FormControl called "lieu"
-            petitDej: '',
-        })
-    }
-    
-    handleChange(e) {
-        console.log(this.petitDejVar)
-    }
-
-    onKeyLieu(event: any){
-        console.log(this.lieuVar);
-    }    
-
-    getHotels(): void {
-        this.hotelService.getAllHotel().subscribe(hotels => this.allHotel = hotels);
-        console.log(this.allHotel);
-    }
-
-    ngOnInit() {
-        this.getHotels();
-    }
- }
+export class RechercheComponent { }

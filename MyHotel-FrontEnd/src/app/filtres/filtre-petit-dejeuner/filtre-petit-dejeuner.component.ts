@@ -7,7 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FiltrePetitDejeunerComponent implements OnInit {
 
+  petitDejVar: boolean = false;
+  
   constructor() { }
+  handleChange(e) {
+    console.log(this.petitDejVar)
+}
 
   ngOnInit() {
   }
