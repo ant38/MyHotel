@@ -4,6 +4,9 @@ import { HotelService } from "../_services/index";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { log } from 'util';
 
+//Filtres utilisés
+import { FiltreAvisComponent, FiltreDateArriveComponent, FiltreDateDepartComponent, FiltreLieuComponent, FiltreNombreNuitComponent, FiltreNombrePersonneComponent, FiltrePetitDejeunerComponent, FiltrePrixComponent } from "../filtres/index";
+
 @Component ({
     selector: 'recherche',
     templateUrl: './recherche.component.html',
