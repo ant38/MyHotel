@@ -1,8 +1,14 @@
 export class Hotel {
     id: number;
+    version: number;
+    address: string;
+    ville: string;
+    codePostal: number;
+    pays: string;
     name: string;
-    lieu: string;
+    description: string;
     etoiles: number;
-    dateIn: Date;
-    dateOut: Date;
+    website: Date;
+    paypal: Date;
+    babyBed: boolean;
 }
