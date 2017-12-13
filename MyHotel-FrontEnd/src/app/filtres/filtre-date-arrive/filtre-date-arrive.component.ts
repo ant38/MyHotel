@@ -7,14 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./filtre-date-arrive.component.css']
 })
 export class FiltreDateArriveComponent implements OnInit {
-  dateInVar: string;
-
-  constructor() { }
-  
+  dateInVar: string;  
 
   ngOnInit() {
-    const myInput = document.querySelector('#myInput');
-    myInput.addEventListener("change", function() {
+    const myInput1 = document.querySelector('#myInput1');
+    myInput1.addEventListener("change", function() {
         let input = this.value;
         let dateEntered = new Date(input);
         console.log(input);
@@ -24,5 +21,4 @@ export class FiltreDateArriveComponent implements OnInit {
         console.log(this.dateInVar);
     });
   }
-
 }

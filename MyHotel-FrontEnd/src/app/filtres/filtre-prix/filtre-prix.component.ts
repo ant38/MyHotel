@@ -7,8 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FiltrePrixComponent implements OnInit {
 
+  prixVar: number;
+
   constructor() { }
 
+  onKeyPrix(e) {
+    console.log(this.prixVar);
+  }
   ngOnInit() {
   }
 
