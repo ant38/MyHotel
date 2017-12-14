@@ -3,12 +3,12 @@
     <form name="form" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate>
         <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
             <label for="firstName">First Name</label>
-            <input type="text" class="form-control" name="firstName" [(ngModel)]="model.firstName" #firstName="ngModel" required />
+            <input type="text" class="form-control" name="firstName" [(ngModel)]="model.prenom" #firstName="ngModel" required />
             <div *ngIf="f.submitted && !firstName.valid" class="help-block">First Name is required</div>
         </div>
         <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
             <label for="lastName">Last Name</label>
-            <input type="text" class="form-control" name="lastName" [(ngModel)]="model.lastName" #lastName="ngModel" required />
+            <input type="text" class="form-control" name="lastName" [(ngModel)]="model.nom" #lastName="ngModel" required />
             <div *ngIf="f.submitted && !lastName.valid" class="help-block">Last Name is required</div>
         </div>
         <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
@@ -24,14 +24,14 @@
 
         <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
             <label for="dateNaissance">date Naissance</label>
-            <input type="text" class="form-control" name="dateNaissance" [(ngModel)]="model.dateNaissance" #dateNaissance="ngModel" required />
-            <div *ngIf="f.submitted && !username.valid" class="help-block">dateNaissance is required</div>
+            <input type="text" class="form-control" name="dateNaissance" placeholder="dd/mm/yyyy" [(ngModel)]="model.dateNaissance" #dateNaissance="ngModel" required />
+            <div *ngIf="f.submitted && !dateNaissance.valid" class="help-block">dateNaissance is required</div>
         </div>
 
         <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
             <label for="email">email</label>
             <input type="text" class="form-control" name="email" [(ngModel)]="model.email" #email="ngModel" required />
-            <div *ngIf="f.submitted && !username.valid" class="help-block">email is required</div>
+            <div *ngIf="f.submitted && !email.valid" class="help-block">email is required</div>
         </div>
         <div class="form-group">
             <button [disabled]="loading" class="btn btn-primary">Register</button>

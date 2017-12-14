@@ -10,6 +10,9 @@ strict.dtd">
 
     <!-- bootstrap css -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.2/css/star-rating.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.2/js/star-rating.min.js"></script>
 
     <!-- Custom styles for this template -->
     <!--<link href="jumbotron-narrow.css" rel="stylesheet">-->
@@ -19,7 +22,31 @@ strict.dtd">
     <script>
         System.import('app').catch(function (err) { console.error(err); });
     </script>-->
+<style>
+repeat {
+    display:block;
+}
 
+repeat[n="1"]:before {
+   content: "★";
+}
+
+repeat[n="2"]:before {
+   content: "★★";
+}
+
+repeat[n="3"]:before {
+   content: "★★★";
+}
+
+repeat[n="4"]:before {
+   content: "★★★★";
+}
+
+repeat[n="5"]:before {
+   content: "★★★★★";
+}
+</style>
 </head>
 <body>
     <app>Loading...</app>

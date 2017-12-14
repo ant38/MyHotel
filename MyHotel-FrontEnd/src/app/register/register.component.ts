@@ -24,6 +24,12 @@ export class RegisterComponent {
                 data => {
                     this.alertService.success('Registration successful', true);
                     this.router.navigate(['/login']);
+
+/*		    this.http.post('http://localhost:3333/sendmail', emailid, {headers: headers}).subscribe((data) => {
+            if(data.json().success) {
+              console.log('Sent successfully');
+            }
+         });*/
                 },
                 error => {
                     this.alertService.error(error);
