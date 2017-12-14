@@ -1,6 +1,7 @@
 export class Hotel {
     id: number;
     version: number;
+    image: HTMLImageElement;  //Image used as <img> element
     address: string;
     town: string;
     codePostal: number;

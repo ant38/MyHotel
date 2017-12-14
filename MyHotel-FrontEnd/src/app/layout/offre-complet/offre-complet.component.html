@@ -5,14 +5,14 @@
 
 <div *ngIf="offre">
   <h1>{{hotel.name}}</h1>
-
+<!-- <img src={{hotel.image}} align="left"> -->
 <label for="input-3" class="control-label">Class {{hotel.stars}}</label>
 
 <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
 <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
 
 <label for="input-1" class="control-label">Give a rating for Skill:</label><br/>
-<input id="input-1" name="input-1" class="rating rating-loading" data-min="0" data-max="5" data-step="0.1" value="2">
+<input id="input-1" name="input-1" class="rating rating-loading" data-min="0" data-max="5" data-step="0.1" value={{hotel.stars}}>
 
 <br/>
   {{hotel.address}}<br/>
