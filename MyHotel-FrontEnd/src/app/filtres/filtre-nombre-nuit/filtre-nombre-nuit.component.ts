@@ -7,8 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FiltreNombreNuitComponent implements OnInit {
 
+  nbNuitVar: number;
+
   constructor() { }
 
+  onKeyNuit(e) {
+    console.log(this.nbNuitVar);
+  }
   ngOnInit() {
   }
 
