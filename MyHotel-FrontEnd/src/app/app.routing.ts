@@ -28,9 +28,9 @@ const appRoutes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'recherche', component: RechercheComponent },
-  { path: 'reservation', component: ReservationComponent },
-  { path: 'confirmation', component: ConfirmationComponent },
-  { path: 'description', component: DescriptionComponent },
+  { path: 'reservation/:id', component: ReservationComponent },
+  { path: 'confirmation/:id', component: ConfirmationComponent },
+  { path: 'description/:id', component: DescriptionComponent },
   
   // otherwise redirect to home(DashBoard)
   { path: '**', redirectTo: 'dashboard' }
