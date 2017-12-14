@@ -7,7 +7,7 @@ export class Hotel {
     country: string;
     name: string;
     description: string;
-    starring: number;
+    stars: number;
     website: Date;
     paypal: Date;
     babyBed: boolean;

@@ -14,21 +14,7 @@ import { Hotel } from '../_models/hotel';
 export class DescriptionComponent {
     constructor(private route: ActivatedRoute, private offreService: OffreService) {}
 
-    offre: Offer;
-    chambres: Room[];
-    hotel: Hotel;
-
-
-    getOffre(): void {
-        const id = +this.route.snapshot.paramMap.get('id');
-        console.log(id);
-        this.offreService.getOffre(id).subscribe(offre => {this.offre = offre; this.chambres = this.offre.rooms; this.hotel = this.chambres[0].hotel;});
-        
-    }
-
     ngOnInit() {
-        this.getOffre();
-        console.log(this.offre);
     }
 
 }
