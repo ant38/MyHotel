@@ -9,4 +9,7 @@ import { FiltreDateArriveComponent } from '../filtres/filtre-date-arrive/filtre-
     //styleUrls: ['./confirmation.component.css']
 })
 
-export class RechercheComponent { }
+export class RechercheComponent {
+
+    constructor() { }
+}

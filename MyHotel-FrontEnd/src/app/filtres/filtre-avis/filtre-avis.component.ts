@@ -7,8 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FiltreAvisComponent implements OnInit {
 
+  avisVar: string;
+
   constructor() { }
 
+  onKeyAvis(e) {
+    console.log(this.avisVar);
+  }
   ngOnInit() {
   }
 
