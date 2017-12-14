@@ -1,6 +1,5 @@
 package com.myhotel.rest;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -44,20 +43,7 @@ public class ClientRest extends Application {
 	@POST
 	@Path("isClient")
 	public Response isClient(@QueryParam("username") String username, @QueryParam("password") String password) {
-		ClientEntity client = clientService.isClient(username, password);
-		return ClientService.headers(Response.ok(client)).build();
-	}
-
-	@POST
-	@Path("newClient")
-	public Response newClient(
-			@QueryParam("username") String username,
-			@QueryParam("password") String password,
-			@QueryParam("prenom") String prenom,
-			@QueryParam("nom") String nom,
-			@QueryParam("dateNaissance") Date dateNaissance,
-			@QueryParam("email") String email) {
-		Long result = clientService.newClient(username, password,prenom, nom, dateNaissance, email);
-		return ClientService.headers(Response.ok(result==1)).build();
+		Long result = clientService.isClient(username, password);
+		return ClientService.headers(Response.ok(result>0)).build();
 	}
 }

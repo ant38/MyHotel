@@ -1,0 +1,19 @@
+	//Se placer dans la racine du projet (là où il y a le Dockerfile)
+
+	//Executer cette commande une fois, elle créée une base d'image docker (bien respecter le nom wildfly-config)
+
+docker build . -t wildfly-config -f Dockerbase
+
+	//Executer cette commande à chaque modification, build classique
+
+docker build . -t wildfly-app
+
+	//Executer cette commande pour run l'image docker wildfly-app
+
+docker run --hostname wildfly-app --name wildfly-app -p 8080:8080 -p 9990:9990 -d wildfly-app
+
+	//L'identifiant et le mot de passe wildfly demandé dans le 9990 est admin admin
+
+	//pour delete les images docker du système
+
+docker rmi $(docker images -qf "dangling=true")

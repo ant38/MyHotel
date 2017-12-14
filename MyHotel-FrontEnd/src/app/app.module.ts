@@ -32,14 +32,6 @@ import { PaiementComponent } from './layout/paiement/paiement.component';
 import { RecapitulatifComponent } from './layout/recapitulatif/recapitulatif.component';
 import { RechercheBarreComponent } from './layout/recherche-barre/recherche-barre.component';
 import { RecherchePlusComponent } from './layout/recherche-plus/recherche-plus.component';
-import { FiltreLieuComponent } from './filtres/filtre-lieu/filtre-lieu.component';
-import { FiltreDateArriveComponent } from './filtres/filtre-date-arrive/filtre-date-arrive.component';
-import { FiltreDateDepartComponent } from './filtres/filtre-date-depart/filtre-date-depart.component';
-import { FiltreNombrePersonneComponent } from './filtres/filtre-nombre-personne/filtre-nombre-personne.component';
-import { FiltreNombreNuitComponent } from './filtres/filtre-nombre-nuit/filtre-nombre-nuit.component';
-import { FiltrePrixComponent } from './filtres/filtre-prix/filtre-prix.component';
-import { FiltreAvisComponent } from './filtres/filtre-avis/filtre-avis.component';
-import { FiltrePetitDejeunerComponent } from './filtres/filtre-petit-dejeuner/filtre-petit-dejeuner.component';
 
 
 @NgModule({
@@ -66,15 +58,7 @@ import { FiltrePetitDejeunerComponent } from './filtres/filtre-petit-dejeuner/fi
         RecherchePlusComponent,
         RechercheBarreComponent,
         OffreDescComponent,
-        OffreCompletComponent,
-        FiltreLieuComponent,
-        FiltreDateArriveComponent,
-        FiltreDateDepartComponent,
-        FiltreNombrePersonneComponent,
-        FiltreNombreNuitComponent,
-        FiltrePrixComponent,
-        FiltreAvisComponent,
-        FiltrePetitDejeunerComponent
+        OffreCompletComponent
     ],
     providers: [
         AuthGuard,

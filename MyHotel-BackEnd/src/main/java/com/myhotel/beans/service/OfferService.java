@@ -66,9 +66,4 @@ public class OfferService extends BaseService<OfferEntity> implements Serializab
         return offer;
     }
     
-    @Transactional
-    public void insert(OfferEntity offer) {
-    	entityManager.persist(offer);
-    }
-    
 }
