@@ -1,3 +1,13 @@
 <p>
   offre-complet works!
 </p>
+
+
+<div *ngIf="offre">
+  <h1>{{hotel.name}}</h1>
+  <h3>{{hotel.stars}}</h3>
+  {{hotel.address}}<br/>
+  {{hotel.town}}<br/>
+  {{hotel.description}}<br/>
+  {{hotel.website}}<br/>
+</div>
