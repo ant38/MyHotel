@@ -8,7 +8,6 @@ import { Hotel } from '../_models/hotel';
 @Component ({
     selector: 'description',
     templateUrl: './description.component.html'
-    //styleUrls: ['./description.component.css']
 })
 
 export class DescriptionComponent {

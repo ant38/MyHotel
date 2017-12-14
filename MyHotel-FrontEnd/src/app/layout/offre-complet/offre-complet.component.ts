@@ -6,7 +6,7 @@ import { Hotel, Offer, Room } from '../../_models/index';
 @Component({
   selector: 'app-offre-complet',
   templateUrl: './offre-complet.component.html',
-  styleUrls: ['./offre-complet.component.css']
+  styleUrls: ['./offre-complet.component.css'] 
 })
 export class OffreCompletComponent implements OnInit {
   
