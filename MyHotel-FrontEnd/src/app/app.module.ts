@@ -15,7 +15,7 @@ import { routing }        from './app.routing';
 
 import { AlertComponent } from './_directives/index';
 import { AuthGuard } from './_guards/index';
-import { AlertService, AuthenticationService, UserService, HotelService } from './_services/index';
+import { AlertService, AuthenticationService, UserService, HotelService, OffreService } from './_services/index';
 
 import { HomeComponent } from './home/index';
 import { LoginComponent } from './login/index';
@@ -32,6 +32,7 @@ import { PaiementComponent } from './layout/paiement/paiement.component';
 import { RecapitulatifComponent } from './layout/recapitulatif/recapitulatif.component';
 import { RechercheBarreComponent } from './layout/recherche-barre/recherche-barre.component';
 import { RecherchePlusComponent } from './layout/recherche-plus/recherche-plus.component';
+
 import { FiltreLieuComponent } from './filtres/filtre-lieu/filtre-lieu.component';
 import { FiltreDateArriveComponent } from './filtres/filtre-date-arrive/filtre-date-arrive.component';
 import { FiltreDateDepartComponent } from './filtres/filtre-date-depart/filtre-date-depart.component';
@@ -82,6 +83,7 @@ import { FiltrePetitDejeunerComponent } from './filtres/filtre-petit-dejeuner/fi
         AuthenticationService,
         UserService,
         HotelService,
+        OffreService,
         HttpClientModule,
     
         // providers used to create fake backend
