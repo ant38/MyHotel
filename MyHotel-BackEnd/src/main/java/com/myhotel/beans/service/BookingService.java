@@ -3,14 +3,17 @@ package com.myhotel.beans.service;
 import com.myhotel.beans.domain.BookingEntity;
 import com.myhotel.beans.domain.ClientEntity;
 import com.myhotel.beans.domain.HotelEntity;
+import com.myhotel.beans.domain.OfferEntity;
 import com.myhotel.beans.domain.RoomEntity;
 import com.myhotel.config.MailConfig;
 import com.myhotel.config.SMTPAuthenticator;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -24,6 +27,11 @@ import javax.transaction.Transactional;
 public class BookingService extends BaseService<BookingEntity> implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
+	@Inject
+	private OfferService offerService;
+	@Inject
+	private ClientService clientService;
     
     public BookingService(){
         super(BookingEntity.class);
@@ -81,6 +89,30 @@ public class BookingService extends BaseService<BookingEntity> implements Serial
         booking = find(booking.getId());
         booking.getClients().size();
         return booking;
+    }
+    
+    @Transactional
+    public BookingEntity book(Long offerId, Long clientId, Long paid) {
+    	OfferEntity offer = offerService.find(offerId);
+		BookingEntity booking = new BookingEntity();
+		List<ClientEntity> clients = new ArrayList<>();
+		ClientEntity client = clientService.find(clientId);
+		entityManager.detach(client);
+		clients.add(client);
+		booking.setClients(clients);
+		client.getBookings().add(booking);
+		booking.setDateIn(offer.getDateStart());
+		booking.setDateOut(offer.getDateEnd());
+		booking.setPaid(paid > 0);
+		List<RoomEntity> rooms = offer.getRooms();
+		for(int i=0; i<rooms.size(); i++) {
+			RoomEntity room = rooms.get(i);
+			room.getBookings().add(booking);
+			entityManager.detach(room);
+			booking.getRooms().add(room);
+		}
+		entityManager.persist(booking);
+		return booking;
     }
     
     @Transactional

@@ -9,6 +9,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -35,6 +36,13 @@ public class BookingRest extends Application {
 	@Path("{id}")
 	public Response getBooking(@PathParam("id") Long id) {
 		BookingEntity booking = bookingService.find(id);
+		return BookingService.headers(Response.ok(booking)).build();
+	}
+	
+	@GET
+	@Path("book")
+	public Response book(@QueryParam("offerId") Long offerId, @QueryParam("clientId") Long clientId, @QueryParam("paid") Long paid) {
+		BookingEntity booking = bookingService.book(offerId, clientId, paid);
 		return BookingService.headers(Response.ok(booking)).build();
 	}
 	
