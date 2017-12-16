@@ -19,6 +19,8 @@ import { RechercheBarreComponent } from './layout/recherche-barre/recherche-barr
 import { OffreDescComponent } from './layout/offre-desc/offre-desc.component';
 import { OffreCompletComponent } from './layout/offre-complet/offre-complet.component';
 
+import { PayComponent } from './layout/paiement/paiement.component';
+
 const appRoutes: Routes = [
 
   
@@ -28,6 +30,7 @@ const appRoutes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'recherche', component: RechercheComponent },
+  { path: 'paiement', component: PayComponent },
   { path: 'reservation/:id', component: ReservationComponent },
   { path: 'confirmation/:id', component: ConfirmationComponent },
   { path: 'description/:id', component: DescriptionComponent },

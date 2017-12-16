@@ -11,6 +11,7 @@
       <li><a routerLink="/register" routerLinkActive="active" *ngIf="getUser()==null"><span class="glyphicon glyphicon-user"></span> S'enregistrer</a></li>
       <li><a routerLink="/login" routerLinkActive="active" *ngIf="getUser()==null"><span class="glyphicon glyphicon-log-in"></span> S'identifier</a></li>
       <li><a routerLink="/home" routerLinkActive="active"  *ngIf="getUser()!=null"> Mon espace</a></li>
+      <li><a routerLink="/login" routerLinkActive="active"  *ngIf="getUser()!=null"> Log Out</a></li>
     </ul>
   </div>
 </nav> 
@@ -37,6 +38,7 @@
             <router-outlet></router-outlet>
     </div>
 </div>
+
 <script>
 
 $("#input-id").rating();
