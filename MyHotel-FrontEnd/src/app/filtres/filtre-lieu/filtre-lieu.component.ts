@@ -14,7 +14,7 @@ export class FiltreLieuComponent implements OnInit {
   constructor() { }
 
   onChangeLieu(e){
-    console.log(this.lieuVar);
+    //console.log(this.lieuVar);
     this.lieuChange.emit(this.lieuVar);
   }    
 

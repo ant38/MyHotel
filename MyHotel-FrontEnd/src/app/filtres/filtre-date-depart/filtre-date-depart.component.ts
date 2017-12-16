@@ -12,7 +12,7 @@ export class FiltreDateDepartComponent implements OnInit {
   dateOutChange: EventEmitter<Date> = new EventEmitter<Date>();
 
   onChangeDateOut(e){
-    console.log("onChangeDateOut");
+    //console.log("onChangeDateOut");
     this.dateOutChange.emit(this.dateOutVar);
   } 
 

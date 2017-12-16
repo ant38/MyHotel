@@ -22,7 +22,6 @@ export class RechercheBarreComponent implements OnInit {
 
   setLieu(city) {
     this.city=city;
-    console.log("setLieu dans barre component");
     this.search();
   }
   setAdults(adults) {
@@ -47,7 +46,6 @@ export class RechercheBarreComponent implements OnInit {
   }
   
   search(){
-    console.log("dans search de barre component");
     this.parametre.emit(
       { city: this.city,
         adults: this.adults,

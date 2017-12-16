@@ -15,7 +15,7 @@ export class FiltreDateArriveComponent implements OnInit {
   constructor() { }
 
   onChangeDateIn(e) {
-    console.log("onChangeDateIn");
+    //console.log("onChangeDateIn");
     this.dateInChange.emit(this.dateInVar);
   } 
 

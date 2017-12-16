@@ -25,7 +25,9 @@ export class RechercheComponent {
             var dateOutString = (dateOut.getMonth()+1)+"/"+(dateOut.getDate())+"/"+(dateOut.getFullYear());
            
             this.offreService.search(object.city, object.adults, object.children, dateInString, dateOutString)
-                .subscribe(offres => {this.offres = offres});
+                .subscribe(offres => {this.offres = offres; console.log(this.offres);});
+
+            
         }
     }
 }
