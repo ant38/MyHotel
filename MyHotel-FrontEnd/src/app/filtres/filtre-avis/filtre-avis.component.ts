@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NouisliderModule } from 'ng2-nouislider';
 
 @Component({
   selector: 'app-filtre-avis',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FiltreAvisComponent implements OnInit {
 
-  avisVar: string;
+  avisVar: number[] = [0,5];
 
   constructor() { }
 

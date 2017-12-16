@@ -1,1 +1,2 @@
-<label>avis</label><input type="input" (keyup)="onKeyAvis($event)" [(ngModel)]="avisVar">
+Avis:
+<nouislider [connect]="true" [min]="0" [max]="5" [step]="1" [(ngModel)]="avisVar" (ngModelChange)="onKeyAvis($event)"></nouislider>

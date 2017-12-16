@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule,FormsModule }    from '@angular/forms';
 import { HttpModule, Headers } from '@angular/http';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { NouisliderModule } from 'ng2-nouislider';
 
 
 // used to create fake backend
@@ -28,7 +29,7 @@ import { DescriptionComponent } from './description/description.component';
 
 import { OffreCompletComponent } from './layout/offre-complet/offre-complet.component';
 import { OffreDescComponent } from './layout/offre-desc/offre-desc.component';
-import { PaiementComponent } from './layout/paiement/paiement.component';
+import { PayComponent } from './layout/paiement/paiement.component';
 import { RecapitulatifComponent } from './layout/recapitulatif/recapitulatif.component';
 import { RechercheBarreComponent } from './layout/recherche-barre/recherche-barre.component';
 import { RecherchePlusComponent } from './layout/recherche-plus/recherche-plus.component';
@@ -50,6 +51,7 @@ import { FiltrePetitDejeunerComponent } from './filtres/filtre-petit-dejeuner/fi
         FormsModule,
         HttpModule,
         HttpClientModule,
+        NouisliderModule,
         routing
     ],
     declarations: [
@@ -75,7 +77,8 @@ import { FiltrePetitDejeunerComponent } from './filtres/filtre-petit-dejeuner/fi
         FiltreNombreNuitComponent,
         FiltrePrixComponent,
         FiltreAvisComponent,
-        FiltrePetitDejeunerComponent
+        FiltrePetitDejeunerComponent,
+        PayComponent
     ],
     providers: [
         AuthGuard,

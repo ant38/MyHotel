@@ -1,2 +1,4 @@
-<label>Nombre de nuit</label>
-<input type="input" (keyup)="onKeyNuit($event)" [(ngModel)]="nbNuitVar" style="display:inline">
+<div class="form-group">
+    <label for="nbNuits">Nombre de Nuits:</label>
+    <input id="nbNuits" class="form-control" type="input" (keyup)="onKeyNuit($event)" [(ngModel)]="nbNuitVar">
+</div>
