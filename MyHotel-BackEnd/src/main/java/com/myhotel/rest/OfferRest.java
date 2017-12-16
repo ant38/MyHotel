@@ -7,6 +7,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -56,7 +57,7 @@ public class OfferRest extends Application {
 	@GET
 	@Path("search")
 	public Response search(
-			@QueryParam("city") String city,
+			@DefaultValue("") @QueryParam("city") String city,
 			@QueryParam("adults") Long adults,
 			@QueryParam("children") Long children,
 			@QueryParam("dateIn") Date dateIn,
