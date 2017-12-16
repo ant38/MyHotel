@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NouisliderModule } from 'ng2-nouislider';
 
 @Component({
   selector: 'app-filtre-prix',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FiltrePrixComponent implements OnInit {
 
-  prixVar: number;
+  prixVar: number[] = [0,500];
 
   constructor() { }
 
