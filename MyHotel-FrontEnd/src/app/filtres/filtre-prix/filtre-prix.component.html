@@ -1,4 +1,5 @@
 Prix:
 
-<input type="input" (keyup)="onKeyPrix($event)" [(ngModel)]="prixVar">
+<!--<input type="input" (keyup)="onKeyPrix($event)" [(ngModel)]="prixVar">-->
 
+<nouislider [connect]="true" [min]="0" [max]="150" [step]="1" [(ngModel)]="prixVar" (ngModelChange)="onChange($event)"></nouislider>
