@@ -14,7 +14,6 @@ export class FiltrePetitDejeunerComponent implements OnInit {
     console.log(this.petitDejVar)
 }
 
-  ngOnInit() {
-  }
+  ngOnInit() {  }
 
 }

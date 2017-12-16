@@ -12,4 +12,6 @@ export class RechercheBarreComponent implements OnInit {
   ngOnInit() {
   }
 
+  
+
 }

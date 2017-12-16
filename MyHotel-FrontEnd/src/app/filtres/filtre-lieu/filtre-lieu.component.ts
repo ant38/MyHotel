@@ -14,13 +14,12 @@ export class FiltreLieuComponent implements OnInit {
   constructor() { }
 
   getLieu(): string {
-    return onkeyLieu(e){this.lieuVar};
+    return this.lieuVar;
   }
-  // onKeyLieu(e){
-  //   console.log(this.lieuVar);
-  // } 
+  onKeyLieu(e){
+    console.log(this.lieuVar);
+  } 
 
-  ngOnInit() {
-  }
+  ngOnInit() {  }
 
 }
