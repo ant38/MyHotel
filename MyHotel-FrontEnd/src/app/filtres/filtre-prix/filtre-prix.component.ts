@@ -8,7 +8,7 @@ import { NouisliderModule } from 'ng2-nouislider';
 })
 export class FiltrePrixComponent implements OnInit {
 
-  prixVar: any = [0,500];
+  prixVar: number[] = [0,500];
 
   constructor() { }
 
