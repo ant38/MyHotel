@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 
 @Component({
@@ -7,18 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./filtre-date-arrive.component.css']
 })
 export class FiltreDateArriveComponent implements OnInit {
-  dateInVar: string;  
+  dateInVar: Date;
+
+  @Output() 
+  dateInChange: EventEmitter<Date> = new EventEmitter<Date>();
+
+  constructor() { }
+
+  onChangeDateIn(e) {
+    //console.log("onChangeDateIn");
+    this.dateInChange.emit(this.dateInVar);
+  } 
 
   ngOnInit() {
-    const myInput1 = document.querySelector('#myInput1');
-    myInput1.addEventListener("change", function() {
-        let input = this.value;
-        let dateEntered = new Date(input);
-        console.log(input);
-        console.log(dateEntered);
-
-        this.dateInVar = this.value;
-        console.log(this.dateInVar);
-    });
   }
 }
