@@ -8,7 +8,7 @@ import { NouisliderModule } from 'ng2-nouislider';
 })
 export class FiltreAvisComponent implements OnInit {
 
-  avisVar: string;
+  avisVar: number[] = [0,5];
 
   constructor() { }
 
