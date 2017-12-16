@@ -1,3 +1,13 @@
 <p>
   reservation works!
 </p>
+<div>
+    <app-offre-reservation></app-offre-reservation>
+</div>
+
+
+
+<button (click)="goBack()"> Retourner aux descriptions </button>
+<a routerLink="/confirmation/{{id}}">
+    <button> Confirmer </button>
+</a>
