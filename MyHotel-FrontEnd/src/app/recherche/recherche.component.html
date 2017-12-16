@@ -1,4 +1,4 @@
-<app-recherche-barre></app-recherche-barre>
+<app-recherche-barre (parametre)="search($event)"></app-recherche-barre>
 
 <h1></h1>
 <div class="container">
@@ -8,6 +8,7 @@
         </div>
         <div class="col-md-9">
             Liste des offres:
+            <div *ngIf="offres"> {{offres[0]}}</div>
         </div>
     </div>
 </div>

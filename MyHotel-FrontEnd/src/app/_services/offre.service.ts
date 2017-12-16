@@ -20,4 +20,8 @@ export class OffreService {
     getOffre(id): Observable<Offer> {
       return this.http.get<Offer>(this.offresURL+'/'+id);
     }
+
+    search(city, adults, children, dateIn, dateOut): Observable<Offer[]> {
+      return this.http.get<Offer[]>(this.offresURL+"/search?city="+city+"&adults="+adults+"&children="+children+"&dateIn="+dateIn+"&dateOut="+dateOut);
+    }
 }

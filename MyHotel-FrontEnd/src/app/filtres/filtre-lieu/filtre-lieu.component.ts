@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-filtre-lieu',
@@ -8,11 +8,14 @@ import { Component, OnInit } from '@angular/core';
 export class FiltreLieuComponent implements OnInit {
 
   lieuVar: string;
+  @Output() 
+  lieuChange: EventEmitter<string> = new EventEmitter<string>();
 
   constructor() { }
 
-  onKeyLieu(e){
+  onChangeLieu(e){
     console.log(this.lieuVar);
+    this.lieuChange.emit(this.lieuVar);
   }    
 
   ngOnInit() {
