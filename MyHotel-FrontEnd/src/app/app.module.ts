@@ -2,7 +2,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule,FormsModule }    from '@angular/forms';
 import { HttpModule, Headers } from '@angular/http';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NouisliderModule } from 'ng2-nouislider';
 
 
@@ -16,6 +16,8 @@ import { routing }        from './app.routing';
 
 import { AlertComponent } from './_directives/index';
 import { AuthGuard } from './_guards/index';
+
+import { JwtInterceptor } from './_helpers/index';
 import { AlertService, AuthenticationService, UserService, HotelService, OffreService } from './_services/index';
 
 import { HomeComponent } from './home/index';
@@ -85,6 +87,12 @@ import { FiltrePetitDejeunerComponent } from './filtres/filtre-petit-dejeuner/fi
         AlertService,
         AuthenticationService,
         UserService,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: JwtInterceptor,
+            multi: true
+        },
+
         HotelService,
         OffreService,
         HttpClientModule,
