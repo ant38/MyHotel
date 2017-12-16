@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-filtre-nombre-nuit',
@@ -8,6 +8,12 @@ import { Component, OnInit } from '@angular/core';
 export class FiltreNombreNuitComponent implements OnInit {
 
   nbNuitVar: number;
+  @Output() 
+  nbNuitChange: EventEmitter<number> = new EventEmitter<number>();
+
+  onChangeNbNuit(e){
+    this.nbNuitChange.emit(this.nbNuitVar);
+  } 
 
   constructor() { }
 

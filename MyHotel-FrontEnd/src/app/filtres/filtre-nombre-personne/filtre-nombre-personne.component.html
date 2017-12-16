@@ -1,4 +1,15 @@
-<div class="form-group">
-    <label for="nbPers">Nombre de Personnes:</label>
-    <input id="nbPers" class="form-control" type="input" (keyup)="onKeyPers($event)" [(ngModel)]="nbPersVar">
+<div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-6">
+        <div class="form-group">
+            <label for="nbAdults">Nombre d'adultes:</label>
+            <input id="nbAdults" class="form-control" type="input" (keyup)="onChangeAdults($event)" [(ngModel)]="nbAdultsVar">
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-6">
+        <div class="form-group">
+            <label for="nbChildren">Nombre d'enfants:</label>
+            <input id="nbChildren" class="form-control" type="input" (keyup)="onChangeChildren($event)" [(ngModel)]="nbChildrenVar">
+        </div>
+    </div>
 </div>
+

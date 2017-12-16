@@ -92,3 +92,6 @@ local.properties
 .cache-main
 .scala_dependencies
 .worksheet
+
+#config
+src/main/java/com/myhotel/config/MailConfig.java

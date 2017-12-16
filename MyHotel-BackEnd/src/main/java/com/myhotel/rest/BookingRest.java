@@ -37,4 +37,11 @@ public class BookingRest extends Application {
 		BookingEntity booking = bookingService.find(id);
 		return BookingService.headers(Response.ok(booking)).build();
 	}
+	
+	@GET
+	@Path("{id}/sendMail")
+	public Response sendMail(@PathParam("id") Long id) {
+		bookingService.sendMail(id);
+		return BookingService.headers(Response.ok()).build();
+	}
 }

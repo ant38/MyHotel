@@ -2,7 +2,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule,FormsModule }    from '@angular/forms';
 import { HttpModule, Headers } from '@angular/http';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NouisliderModule } from 'ng2-nouislider';
 
 
@@ -16,6 +16,8 @@ import { routing }        from './app.routing';
 
 import { AlertComponent } from './_directives/index';
 import { AuthGuard } from './_guards/index';
+
+import { JwtInterceptor } from './_helpers/index';
 import { AlertService, AuthenticationService, UserService, HotelService, OffreService } from './_services/index';
 
 import { HomeComponent } from './home/index';
@@ -29,7 +31,7 @@ import { DescriptionComponent } from './description/description.component';
 
 import { OffreCompletComponent } from './layout/offre-complet/offre-complet.component';
 import { OffreDescComponent } from './layout/offre-desc/offre-desc.component';
-import { PaiementComponent } from './layout/paiement/paiement.component';
+import { PayComponent } from './layout/paiement/paiement.component';
 import { RecapitulatifComponent } from './layout/recapitulatif/recapitulatif.component';
 import { RechercheBarreComponent } from './layout/recherche-barre/recherche-barre.component';
 import { RecherchePlusComponent } from './layout/recherche-plus/recherche-plus.component';
@@ -80,13 +82,19 @@ import { OffreReservationComponent } from './layout/offre-reservation/offre-rese
         FiltreAvisComponent,
         FiltrePetitDejeunerComponent,
         OffreReservationComponent,
-        OffreReservationComponent
+        PayComponent
     ],
     providers: [
         AuthGuard,
         AlertService,
         AuthenticationService,
         UserService,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: JwtInterceptor,
+            multi: true
+        },
+
         HotelService,
         OffreService,
         HttpClientModule,
