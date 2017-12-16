@@ -16,10 +16,10 @@ export class UserService {
     }
 
     create(user: User) {
-//let headers = new Headers({ 'Content-Type': 'application/json' });
+//let headers = new Headers({ 'Content-Type': 'application/json' });model.prenom
     //let options = new RequestOptions({ headers: headers });
     let body = JSON.stringify(user);
-        return this.http.post('http://18.216.255.59/MyHotel/rest/newClient/', null, { params: { username: user.username, password: user.password, prenom: user.prenom,nom: user.nom,dateNaissance: user.dateNaissance,email: user.email }}).map((response: Response) => response.json());
+        return this.http.post('http://18.216.255.59/MyHotel/rest/clients/newClient', null, { params: { prenom: user.prenom,nom: user.nom,username: user.username, password: user.password, dateNaissance: user.dateNaissance,email: user.email }}).map((response: Response) => response.json());
     }
 
     update(user: User) {

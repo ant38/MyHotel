@@ -1,2 +1,4 @@
-<label>Nombre de personne</label>
-<input type="input" (keyup)="onKeyPers($event)" [(ngModel)]="nbPersVar" style="display:inline">
+<div class="form-group">
+    <label for="nbPers">Nombre de Personnes:</label>
+    <input id="nbPers" class="form-control" type="input" (keyup)="onKeyPers($event)" [(ngModel)]="nbPersVar">
+</div>

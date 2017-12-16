@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule,FormsModule }    from '@angular/forms';
 import { HttpModule, Headers } from '@angular/http';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { NouisliderModule } from 'ng2-nouislider';
 
 
 // used to create fake backend
@@ -50,6 +51,7 @@ import { FiltrePetitDejeunerComponent } from './filtres/filtre-petit-dejeuner/fi
         FormsModule,
         HttpModule,
         HttpClientModule,
+        NouisliderModule,
         routing
     ],
     declarations: [

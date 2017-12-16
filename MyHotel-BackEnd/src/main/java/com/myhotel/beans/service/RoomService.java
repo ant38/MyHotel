@@ -104,6 +104,10 @@ public class RoomService extends BaseService<RoomEntity> implements Serializable
     
     @Transactional
     public List<RoomEntity> findRooms(List<HotelEntity> hotels, Long adults, Long children, Date dateIn, Date dateOut) {
+    	if(hotels.size() < 1) {
+    		return new ArrayList<RoomEntity>();
+    	}
+    	
     	List<RoomEntity> rooms = entityManager
     			.createQuery("SELECT o FROM Room o WHERE o.hotel IN :hotels AND places >= :beds")
     			.setParameter("hotels", hotels)
