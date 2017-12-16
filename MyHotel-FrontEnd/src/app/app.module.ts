@@ -44,6 +44,7 @@ import { FiltreNombreNuitComponent } from './filtres/filtre-nombre-nuit/filtre-n
 import { FiltrePrixComponent } from './filtres/filtre-prix/filtre-prix.component';
 import { FiltreAvisComponent } from './filtres/filtre-avis/filtre-avis.component';
 import { FiltrePetitDejeunerComponent } from './filtres/filtre-petit-dejeuner/filtre-petit-dejeuner.component';
+import { OffreReservationComponent } from './layout/offre-reservation/offre-reservation.component';
 
 
 @NgModule({
@@ -80,6 +81,7 @@ import { FiltrePetitDejeunerComponent } from './filtres/filtre-petit-dejeuner/fi
         FiltrePrixComponent,
         FiltreAvisComponent,
         FiltrePetitDejeunerComponent,
+        OffreReservationComponent,
         PayComponent
     ],
     providers: [
@@ -106,3 +108,4 @@ import { FiltrePetitDejeunerComponent } from './filtres/filtre-petit-dejeuner/fi
 })
 
 export class AppModule { }
+

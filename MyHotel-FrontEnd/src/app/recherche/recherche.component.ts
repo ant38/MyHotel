@@ -13,6 +13,7 @@ import { Offer } from '../_models/index';
 
 export class RechercheComponent {
 
+
     offres: Offer[];
     
     constructor(private offreService: OffreService) { }

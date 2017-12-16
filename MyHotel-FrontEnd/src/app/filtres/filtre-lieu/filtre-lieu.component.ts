@@ -1,15 +1,16 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Injectable } from '@angular/core';
 
 @Component({
   selector: 'app-filtre-lieu',
   templateUrl: './filtre-lieu.component.html',
   styleUrls: ['./filtre-lieu.component.css']
 })
+
+@Injectable()
 export class FiltreLieuComponent implements OnInit {
 
   lieuVar: string;
-  @Output() 
-  lieuChange: EventEmitter<string> = new EventEmitter<string>();
+  @Output() lieuChange: EventEmitter<string> = new EventEmitter<string>();
 
   constructor() { }
 
@@ -18,7 +19,6 @@ export class FiltreLieuComponent implements OnInit {
     this.lieuChange.emit(this.lieuVar);
   }    
 
-  ngOnInit() {
-  }
+  ngOnInit() {  }
 
 }
