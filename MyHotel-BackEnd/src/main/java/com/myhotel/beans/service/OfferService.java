@@ -107,8 +107,8 @@ public class OfferService extends BaseService<OfferEntity> implements Serializab
 					OfferEntity offer = new OfferEntity();
 					offer.setDateStart(dateTimeStart.toDate());
 					offer.setDateEnd(dateTimeEnd.toDate());
-					offer.setPrice(100.0);
 					RoomEntity room = roomService.find(rooms.get(i).getId());
+					offer.setPrice(room.getPrice());
 					boolean continueFor = false;
 					for(int j=0; j<offers.size(); j++) {
 						if(offers.get(j).getRooms().contains(room)) {
