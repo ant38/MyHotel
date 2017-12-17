@@ -109,6 +109,7 @@ public class BookingService extends BaseService<BookingEntity> implements Serial
 			booking.getRooms().add(room);
 		}
 		entityManager.persist(booking);
+		sendMail(booking.getId());
 		return booking;
     }
     

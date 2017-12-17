@@ -1,25 +1,6 @@
-<div class="btn-group">
-            <a routerLink='/paiement' routerLinkActive="active" class="btn btn-primary">Paiement</a>
-            <a routerLink='/recherche' routerLinkActive="active" class="btn btn-primary">Recherche</a>
-        <div>
-            <router-outlet></router-outlet>
-        </div>
-    </div>
-
-
-<div class="searchField">
-    <fieldset class="form-group">
-        <input class="form-control">
-    </fieldset>
-
-    <fieldset class="form-group">
-            <input class="form-control" type="text">
-    </fieldset>
-
-    <fieldset class="form-group">
-        <input class="form-control" type="date" name="bday">
-    </fieldset>
-    <fieldset class="form-group">
-        <input class="form-control" type="date" name="bday">
-    </fieldset>
+<div class="row">
+    <div class="col-md-10"><app-recherche-barre></app-recherche-barre></div>
+    <div class="col-md-2"><button type="button" class="btn btn-default btn-lg"  routerLink="/recherche"> Rechercher</button></div>
 </div>
+
+

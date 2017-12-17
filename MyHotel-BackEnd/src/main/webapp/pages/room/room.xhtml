@@ -143,6 +143,17 @@
             <h:outputText value="#{room.roomNumber}" ><f:convertNumber /></h:outputText>
           </p:column>
 
+          <p:column headerText="#{messages.field_label_room_price}" sortBy="#{room.price}" filterBy="#{room.price}">
+            <f:facet name="filter">
+                <p:inputText id="priceFilter"
+                        onkeypress="if (event.keyCode == 13) {PF('roomTable').filter(); updatePriceFilter(); return false; }" >
+                    <p:remoteCommand name="updatePriceFilter" update="roomTable:priceFilter" />
+                    <f:convertNumber integerOnly="true" />
+                </p:inputText>
+            </f:facet>
+            <h:outputText value="#{room.price}" ><f:convertNumber /></h:outputText>
+          </p:column>
+
           <p:column headerText="#{messages.field_label_room_hotel}" sortBy="#{room.hotel}" filterBy="#{room.hotel}">
             <f:facet name="filter">
             <p:selectOneMenu  id="hotelFilter"
