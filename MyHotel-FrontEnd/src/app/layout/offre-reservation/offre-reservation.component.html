@@ -1,9 +1,42 @@
-
-
 <div *ngIf="offre">
-  <br/>
-    {{hotel.address}}<br/>
-    {{hotel.town}}<br/>
-
-</div>
-
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-1 col-sm-2 col-md-2">
+        <h1>Récapitulatif</h1>
+        <h2><div class="list-group-item-heading" >{{offre.rooms[0].hotel.name}}</div></h2>
+        {{offre.rooms[0].hotel.address}}<br>
+        {{offre.rooms[0].hotel.town}}<br>
+        {{offre.rooms[0].hotel.website}}
+        <br>
+          <img src="offre.rooms[0].hotel.image">
+      </div>
+      <div class="col-xs-11 col-sm-10 col-md-10">
+        <div class="row">
+          <div class="col-xs-10 col-sm-10 col-md-10">
+          </div>
+          <div class="col-xs-2 col-sm-2 col-md-2">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-10 col-md-10">
+            <p>Du {{offre.dateStart | date :'dd MMM yyyy'}} au {{offre.dateEnd | date :'dd MMM yyyy'}} </p>
+        </div>
+        <div class="col-xs-12 col-sm-2 col-md-2">
+            <button type="button" class="btn btn-default btn-lg"> 
+                Prix: {{offre.price}}
+                <span class="glyphicon glyphicon-euro" aria-hidden="true"></span>
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div *ngFor="let room of offre.rooms, let i=index">
+            <div class="col-md-9">
+              <div><p>{{room.places}} personnes</p></div>              
+            </div>
+        </div>
+        
+    </div>
+  </div>  
+</div> 

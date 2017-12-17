@@ -21,7 +21,7 @@ export class OffreService {
       return this.http.get<Offer>(this.offresURL+'/'+id);
     }
 
-    search(city, adults, children, dateIn, dateOut): Observable<Offer[]> {
-      return this.http.get<Offer[]>(this.offresURL+"/search?city="+city+"&adults="+adults+"&children="+children+"&dateIn="+dateIn+"&dateOut="+dateOut);
+    search(city, adults, children, dateIn, dateOut, days=0): Observable<Offer[]> {
+      return this.http.get<Offer[]>(this.offresURL+"/search?city="+city+"&adults="+adults+"&children="+children+"&dateIn="+dateIn+"&dateOut="+dateOut+"&days="+days);
     }
 }

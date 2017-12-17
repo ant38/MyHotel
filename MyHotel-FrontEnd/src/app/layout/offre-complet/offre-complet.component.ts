@@ -19,7 +19,7 @@ export class OffreCompletComponent implements OnInit {
   getOffre(): void {
     const id = +this.route.snapshot.paramMap.get('id');
     console.log(id);
-    this.offreService.getOffre(id).subscribe(offre => {this.offre = offre; this.chambres = this.offre.rooms; this.hotel = this.chambres[0].hotel; console.log(this.offre);});
+    this.offreService.getOffre(id).subscribe(offre => {console.log("into service");this.offre = offre; this.chambres = this.offre.rooms; this.hotel = this.chambres[0].hotel; console.log(this.offre);});
   }
   ngOnInit() {
     this.getOffre();
