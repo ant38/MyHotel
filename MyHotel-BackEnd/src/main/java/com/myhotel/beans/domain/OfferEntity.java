@@ -35,9 +35,8 @@ public class OfferEntity extends BaseEntity implements Serializable {
     private Date dateEnd;
 
     @Column(name="\"price\"")
-    @Digits(integer = 4, fraction = 0)
     @NotNull
-    private Integer price;
+    private Double price;
 
     public void setRooms(List<RoomEntity> rooms) {
         this.rooms = rooms;
@@ -79,11 +78,11 @@ public class OfferEntity extends BaseEntity implements Serializable {
         this.dateEnd = dateEnd;
     }
 
-    public Integer getPrice() {
+    public Double getPrice() {
         return this.price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
