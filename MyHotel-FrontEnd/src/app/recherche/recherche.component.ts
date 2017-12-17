@@ -19,13 +19,17 @@ export class RechercheComponent {
     constructor(private offreService: OffreService) { }
 
     search(object): void {
-        if (object.city!=null && object.adults!= null && object.children!=null && object.dateIn!=null && object.dateOut!=null){
+        if (object.adults!= null && object.dateIn!=null && object.dateOut!=null){
+            if (object.city==null){object.city="";};
+            if (object.children==null){object.children=0;};
+            if (object.days==null){object.days=0;};
+            
             var dateIn = new Date(object.dateIn);
             var dateOut = new Date(object.dateOut);
             var dateInString = (dateIn.getMonth()+1)+"/"+(dateIn.getDate())+"/"+(dateIn.getFullYear());
             var dateOutString = (dateOut.getMonth()+1)+"/"+(dateOut.getDate())+"/"+(dateOut.getFullYear());
            
-            this.offreService.search(object.city, object.adults, object.children, dateInString, dateOutString)
+            this.offreService.search(object.city, object.adults, object.children, dateInString, dateOutString, object.days)
                 .subscribe(offres => {this.offres = offres; console.log(this.offres);});
 
             

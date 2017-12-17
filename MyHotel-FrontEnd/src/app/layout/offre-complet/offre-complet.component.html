@@ -1,28 +1,28 @@
-<div *ngIf="offre">
+<div *ngIf="hotel">
     <div class="container">
       <div class="row">
         <div class="col-xs-1 col-sm-2 col-md-2">
-            <img src="offre.rooms[0].hotel.image">
+            <img src="hotel.image">
         </div>
         <div class="col-xs-11 col-sm-10 col-md-10">
           <div class="row">
             <div class="col-xs-10 col-sm-10 col-md-10">
-                <h2><div class="list-group-item-heading" >{{offre.rooms[0].hotel.name}}
-                <span *ngIf="offre.rooms[0].hotel.stars>0" class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                <span *ngIf="offre.rooms[0].hotel.stars>1" class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                <span *ngIf="offre.rooms[0].hotel.stars>2" class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                <span *ngIf="offre.rooms[0].hotel.stars>3" class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                <span *ngIf="offre.rooms[0].hotel.stars>4" class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                <h2><div class="list-group-item-heading" >{{hotel.name}}
+                <span *ngIf="hotel.stars>0" class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                <span *ngIf="hotel.stars>1" class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                <span *ngIf="hotel.stars>2" class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                <span *ngIf="hotel.stars>3" class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                <span *ngIf="hotel.stars>4" class="glyphicon glyphicon-star" aria-hidden="true"></span>
               </div></h2>
             </div>
             <div class="col-xs-2 col-sm-2 col-md-2">
               <p>Avis:</p>
             </div>
           </div>
-          <p>{{offre.rooms[0].hotel.address}}<br>
-              {{offre.rooms[0].hotel.town}}<br>
-              {{offre.rooms[0].hotel.description}}<br>
-              {{offre.rooms[0].hotel.website}}
+          <p>{{hotel.address}}<br>
+              {{hotel.town}}<br>
+              {{hotel.description}}<br>
+              {{hotel.website}}
           </p>
         </div>
       </div>
@@ -40,7 +40,7 @@
       </div>
       <div class="row">
           
-          <div *ngFor="let room of offre.rooms, let i=index">
+          <div *ngFor="let room of chambres, let i=index">
               <div class="col-md-3"> <p>Chambre {{i+1}}</p></div>
               <div class="col-md-9">
                       <div><p>{{room.places}} personnes</p></div>

@@ -16,7 +16,7 @@ export class RechercheBarreComponent implements OnInit {
   children: number;
   dateIn: Date;
   dateOut: Date;
-  nbNuit: number;
+  days: number;
 
   constructor() { }
 
@@ -40,8 +40,8 @@ export class RechercheBarreComponent implements OnInit {
     this.dateOut=dateOut;
     this.search();
   }
-  setnbNuit(nbNuit){
-    this.nbNuit=nbNuit;
+  setnbNuit(days){
+    this.days=days;
     this.search();
   }
   
@@ -51,7 +51,8 @@ export class RechercheBarreComponent implements OnInit {
         adults: this.adults,
         children: this.children,
         dateIn: this.dateIn,
-        dateOut: this.dateOut
+        dateOut: this.dateOut,
+        days: this.days
       });
   }
   ngOnInit() {
