@@ -9,14 +9,14 @@
         <div class="col-md-10">
             <div class="container">
                 <div *ngIf="offres">
-                    <ul>
-                        <li *ngFor="let offre of offres; let i = index">
+                    <ul class="list-group">
+                        <li *ngFor="let offre of offres; let i = index" class="list-group-item">
                                 <app-offre-desc [(offre)]="offres[i]"></app-offre-desc>
                         </li>
                     </ul>                    
                 </div>
                 <div *ngIf="!offres">
-                    <h2>Il n'existe pas d'offre correspondant votre recherche.</h2>
+                    <h3>Il n'existe pas d'offre correspondant à votre recherche.</h3>
                 </div>
             </div>
 
