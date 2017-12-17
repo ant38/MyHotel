@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'confirmation',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConfirmationComponent implements OnInit {
 
-  constructor() { }
+  constructor(private route: ActivatedRoute) { }
+  
+  booking_id: number;
 
   ngOnInit() {
+    this.booking_id = +this.route.snapshot.paramMap.get('id');
   }
 
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { OffreService, BookingService } from '../_services/index';
 import { LoadChildren } from '@angular/router/src/config';
@@ -13,12 +13,10 @@ import { Offer } from '../_models';
 })
 export class ReservationComponent {
 
-  offreId: number;
-  clientId: number;
-  paid: number;
+  constructor(private route: ActivatedRoute, private offreService: OffreService, private bookingService: BookingService, private location: Location, public router: Router) { }
 
-  constructor(private route: ActivatedRoute, private offreService: OffreService, private bookingService: BookingService, private location: Location) { }
   id: any;
+  clientId: number;
   logged: boolean = false;
   prix: number;
   offre: Offer;
@@ -27,20 +25,20 @@ export class ReservationComponent {
     this.location.back();
   }
 
-    book(object){
-    var offreId = object.offre.id;
-    var clientId = object.client.id;
-    var paid = object.paid;
-    this.bookingService.book(offreId, clientId, paid).subscribe(book=>{});
+  book(paid){
+    console.log("in book");
+    this.bookingService.book(this.id, this.clientId, paid).subscribe(book=>{this.router.navigate(['confirmation/'+book[0].id_booking]);});
+
   }
 
   ngOnInit() {
-    const idBis = +this.route.snapshot.paramMap.get('id');
     this.id = +this.route.snapshot.paramMap.get('id');
     if (localStorage.getItem("currentUser") != null) {
       this.logged = true;
+      var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      this.clientId = currentUser.id;
     }
-    this.offreService.getOffre(idBis).subscribe(offre => {this.offre = offre});
+    this.offreService.getOffre(this.id).subscribe(offre => {this.offre = offre});
   }
 
 

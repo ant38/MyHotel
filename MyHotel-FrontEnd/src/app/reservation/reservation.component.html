@@ -8,9 +8,9 @@
 <div align="center">
     <button (click)="openCheckout()" class="btn btn-success btn-lg">Réserver et Payer</button>
     <ng-container *ngIf="logged">
-        <a routerLink="/confirmation/{{id}}">
-            <button type="button" class="btn btn-success btn-lg"> Réserver sans Payer </button>
-        </a>
+
+        <button type="button" class="btn btn-success btn-lg" (click)="book(0)"> Réserver sans Payer </button>
+
     </ng-container>
     
 </div>
