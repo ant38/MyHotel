@@ -67,8 +67,11 @@ public class RoomEntity extends BaseEntity implements Serializable {
     @Digits(integer = 4, fraction = 0)
     @NotNull
     private Integer roomNumber;
+    
+    @Column(name="\"price\"")
+    private Double price;
 
-    @ManyToOne(optional=true)
+	@ManyToOne(optional=true)
     @JoinColumn(name = "HOTEL_ID", referencedColumnName = "ID")
     private HotelEntity hotel;
 
@@ -170,6 +173,14 @@ public class RoomEntity extends BaseEntity implements Serializable {
     public void setRoomNumber(Integer roomNumber) {
         this.roomNumber = roomNumber;
     }
+
+    public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
 
     public HotelEntity getHotel() {
         return this.hotel;
