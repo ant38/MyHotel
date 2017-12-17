@@ -1,7 +1,15 @@
 <div>
 <app-offre-complet></app-offre-complet>
 </div>
-<button (click)="goBack()"> Retourner aux résultats </button>
-<a routerLink="/reservation/{{id}}">
-    <button> Réserver </button>
-</a>
+<br>
+<br>
+<br>
+<div align="center">
+    <a routerLink="/reservation/{{id}}">
+        <button type="button" class="btn btn-success btn-lg"> Réserver </button>
+    </a>
+</div>
+<br>
+<div align="center">
+    <button type="button" class="btn btn-default btn-lg" (click)="goBack()"> Retourner aux résultats </button>   
+</div>
