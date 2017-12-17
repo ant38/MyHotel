@@ -60,6 +60,11 @@
                     label="#{messages.field_label_room_roomNumber}" />
                 <p:message for="roomNumberEditInput" display="icon" />
 
+                <h:outputLabel value="#{messages.field_label_room_price}:" for="priceEditInput" />
+                <p:inputText value="#{roomBean.room.price}"  id="priceEditInput" 
+                    label="#{messages.field_label_room_price}" />
+                <p:message for="priceEditInput" display="icon" />
+
                 <h:outputLabel value="#{messages.field_label_room_hotel}:" for="hotelSelectInput" rendered="#{not hideHotelSelectInput}"/>
                 <h:panelGroup rendered="#{not hideHotelSelectInput}">
                     <p:selectOneMenu value="#{roomBean.room.hotel}"
