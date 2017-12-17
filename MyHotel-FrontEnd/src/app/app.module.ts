@@ -4,6 +4,7 @@ import { ReactiveFormsModule,FormsModule }    from '@angular/forms';
 import { HttpModule, Headers } from '@angular/http';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NouisliderModule } from 'ng2-nouislider';
+import { MyDatePickerModule } from 'mydatepicker';
 
 
 // used to create fake backend
@@ -55,6 +56,7 @@ import { OffreReservationComponent } from './layout/offre-reservation/offre-rese
         HttpModule,
         HttpClientModule,
         NouisliderModule,
+        MyDatePickerModule,
         routing
     ],
     declarations: [

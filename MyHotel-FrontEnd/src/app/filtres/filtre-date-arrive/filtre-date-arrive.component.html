@@ -1,4 +1,4 @@
 <div class="form-group">
-    <label for="myInput1">Date Arrivée:</label>
-    <input id="myInput1" class="form-control" type="date" (change)="onChangeDateIn($event)" [(ngModel)]="dateInVar"/>
+        <label for="dateIn">Date Arrivée:</label>
+        <my-date-picker name="dateIn" [options]="myOptions" [selDate]="dateInVar" (dateChanged)="onDateChanged($event)" ></my-date-picker>
 </div>
