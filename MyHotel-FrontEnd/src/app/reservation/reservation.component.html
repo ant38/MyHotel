@@ -2,10 +2,19 @@
     <app-offre-reservation></app-offre-reservation>
 </div>
 
-<button (click)="goBack()"> Retourner aux descriptions </button>
-<a routerLink="/paiement">
-    <button> Payer </button>
-</a>
-<a routerLink="/sansPayer">
-    <button> Réserver sans payer</button>
-</a>
+<br>
+<br>
+<br>
+<div align="center">
+    <button (click)="openCheckout()" class="btn btn-success btn-lg">Réserver et Payer</button>
+    <ng-container *ngIf="logged">
+        <a routerLink="/confirmation/{{id}}">
+            <button type="button" class="btn btn-success btn-lg"> Réserver sans Payer </button>
+        </a>
+    </ng-container>
+    
+</div>
+<br>
+<div align="center">
+    <button type="button" class="col-lg-10" class="btn btn-default btn-lg" (click)="goBack()"> Retourner aux descriptions </button>   
+</div>
