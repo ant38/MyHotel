@@ -24,6 +24,7 @@ export class OffreReservationComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getOffre();
   }
 
 }
