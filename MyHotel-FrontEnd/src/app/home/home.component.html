@@ -11,7 +11,5 @@
             Your email - {{this.currentUser.email}}
         </li>
     </ul>
-    <div *ngFor="let book of books, let i=index">
-        <div *ngIf="book.clients[0].username==this.currentUser.username"><p>{{book.dateIn}} to Hotel {{book.rooms[0].hotel.name}}</p></div>
-    </div>
+
 </div>

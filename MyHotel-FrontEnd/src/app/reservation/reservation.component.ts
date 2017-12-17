@@ -48,8 +48,7 @@ export class ReservationComponent {
     this.prix = this.offre.price;
     var handler = (<any>window).StripeCheckout.configure({
       key: 'pk_test_oi0sKPJYLGjdvOXOM8tE8cMa',
-      locale: 'french',
-      currency: 'EUR',
+      locale: 'auto',
       token: function (token: any) {
       }
     });
