@@ -15,7 +15,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.myhotel.beans.domain.BookingEntity;
+import com.myhotel.beans.domain.OfferEntity;
 import com.myhotel.beans.service.BookingService;
+import com.myhotel.beans.service.OfferService;
 
 @Stateless
 @ApplicationPath("/rest")
@@ -25,6 +27,9 @@ public class BookingRest extends Application {
 
 	@Inject
 	private BookingService bookingService;
+	
+	@Inject
+	private OfferService offerService;
 	
 	@GET
 	public Response getBookings() {
@@ -42,7 +47,8 @@ public class BookingRest extends Application {
 	@GET
 	@Path("book")
 	public Response book(@QueryParam("offerId") Long offerId, @QueryParam("clientId") Long clientId, @QueryParam("paid") Long paid) {
-		BookingEntity booking = bookingService.book(offerId, clientId, paid);
+		OfferEntity offer = offerService.find(offerId);
+		BookingEntity booking = bookingService.book(offer, clientId, paid);
 		return BookingService.headers(Response.ok(booking)).build();
 	}
 	

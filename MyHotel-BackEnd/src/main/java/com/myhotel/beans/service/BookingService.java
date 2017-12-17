@@ -29,8 +29,6 @@ public class BookingService extends BaseService<BookingEntity> implements Serial
     private static final long serialVersionUID = 1L;
     
 	@Inject
-	private OfferService offerService;
-	@Inject
 	private ClientService clientService;
     
     public BookingService(){
@@ -92,8 +90,7 @@ public class BookingService extends BaseService<BookingEntity> implements Serial
     }
     
     @Transactional
-    public BookingEntity book(Long offerId, Long clientId, Long paid) {
-    	OfferEntity offer = offerService.find(offerId);
+    public BookingEntity book(OfferEntity offer, Long clientId, Long paid) {
 		BookingEntity booking = new BookingEntity();
 		List<ClientEntity> clients = new ArrayList<>();
 		ClientEntity client = clientService.find(clientId);
