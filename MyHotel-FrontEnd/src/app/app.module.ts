@@ -18,7 +18,7 @@ import { AlertComponent } from './_directives/index';
 import { AuthGuard } from './_guards/index';
 
 import { JwtInterceptor } from './_helpers/index';
-import { AlertService, AuthenticationService, UserService, HotelService, OffreService } from './_services/index';
+import { AlertService, AuthenticationService, UserService, HotelService, OffreService, BookingService } from './_services/index';
 
 import { HomeComponent } from './home/index';
 import { LoginComponent } from './login/index';
@@ -97,6 +97,7 @@ import { OffreReservationComponent } from './layout/offre-reservation/offre-rese
 
         HotelService,
         OffreService,
+        BookingService,
         HttpClientModule,
     
         // providers used to create fake backend
