@@ -111,10 +111,14 @@ public class HotelService extends BaseService<HotelEntity> implements Serializab
     
     @Transactional
     public List<HotelEntity> findHotelsByCity(String city) {
-    	return entityManager
-    			.createQuery("SELECT o FROM Hotel o WHERE o.town = :city")
-    			.setParameter("city", city)
-    			.getResultList();
+    	if(city.equals("")) {
+    		return findAllHotelEntities();
+    	} else {
+	    	return entityManager
+	    			.createQuery("SELECT o FROM Hotel o WHERE o.town = :city")
+	    			.setParameter("city", city)
+	    			.getResultList();
+    	}
     }
     
 }

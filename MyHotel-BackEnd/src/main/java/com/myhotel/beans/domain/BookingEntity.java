@@ -1,6 +1,7 @@
 package com.myhotel.beans.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -42,7 +43,7 @@ public class BookingEntity extends BaseEntity implements Serializable {
               joinColumns={@JoinColumn(name="BOOKING_ID", referencedColumnName="ID")},
               inverseJoinColumns={@JoinColumn(name="ROOM_ID", referencedColumnName="ID")})
     @JsonManagedReference
-    private List<RoomEntity> rooms;
+    private List<RoomEntity> rooms = new ArrayList<>();
 
     @ManyToMany(fetch=FetchType.LAZY, cascade = CascadeType.DETACH)
     @JoinTable(name="BOOKING_CLIENTS",

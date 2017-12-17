@@ -21,7 +21,7 @@ import { AuthGuard } from './_guards/index';
 //import { AuthErrorHandler } from './_services/index';
 
 import { JwtInterceptor } from './_helpers/index';
-import { AlertService, AuthenticationService, UserService, HotelService, OffreService } from './_services/index';
+import { AlertService, AuthenticationService, UserService, HotelService, OffreService, BookingService } from './_services/index';
 
 import { HomeComponent } from './home/index';
 import { LoginComponent } from './login/index';
@@ -47,6 +47,7 @@ import { FiltreNombreNuitComponent } from './filtres/filtre-nombre-nuit/filtre-n
 import { FiltrePrixComponent } from './filtres/filtre-prix/filtre-prix.component';
 import { FiltreAvisComponent } from './filtres/filtre-avis/filtre-avis.component';
 import { FiltrePetitDejeunerComponent } from './filtres/filtre-petit-dejeuner/filtre-petit-dejeuner.component';
+import { OffreReservationComponent } from './layout/offre-reservation/offre-reservation.component';
 
 
 @NgModule({
@@ -83,6 +84,7 @@ import { FiltrePetitDejeunerComponent } from './filtres/filtre-petit-dejeuner/fi
         FiltrePrixComponent,
         FiltreAvisComponent,
         FiltrePetitDejeunerComponent,
+        OffreReservationComponent,
         PayComponent
     ],
     providers: [
@@ -107,6 +109,7 @@ import { FiltrePetitDejeunerComponent } from './filtres/filtre-petit-dejeuner/fi
 
         HotelService,
         OffreService,
+        BookingService,
         HttpClientModule,
     
         // providers used to create fake backend
@@ -118,3 +121,4 @@ import { FiltrePetitDejeunerComponent } from './filtres/filtre-petit-dejeuner/fi
 })
 
 export class AppModule { }
+

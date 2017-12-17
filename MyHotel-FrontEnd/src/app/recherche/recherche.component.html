@@ -1,13 +1,25 @@
-<app-recherche-barre></app-recherche-barre>
+<app-recherche-barre (parametre)="search($event)"></app-recherche-barre>
 
 <h1></h1>
 <div class="container">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-2">
             <app-recherche-plus></app-recherche-plus>
         </div>
-        <div class="col-md-9">
-            Liste des offres:
+        <div class="col-md-10">
+            <div class="container">
+                <div *ngIf="offres">
+                    <ul class="list-group">
+                        <li *ngFor="let offre of offres; let i = index" class="list-group-item">
+                                <app-offre-desc [(offre)]="offres[i]"></app-offre-desc>
+                        </li>
+                    </ul>                    
+                </div>
+                <div *ngIf="!offres">
+                    <h3>Il n'existe pas d'offres correspondant à votre recherche.</h3>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
