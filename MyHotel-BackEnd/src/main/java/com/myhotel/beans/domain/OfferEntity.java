@@ -1,6 +1,7 @@
 package com.myhotel.beans.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -48,7 +49,7 @@ public class OfferEntity extends BaseEntity implements Serializable {
 
     @ManyToMany(mappedBy="offers", fetch=FetchType.LAZY, cascade = CascadeType.DETACH)
     @JsonManagedReference
-    private List<RoomEntity> rooms;
+    private List<RoomEntity> rooms = new ArrayList<>();
 
     public void setSaves(List<SaveEntity> saves) {
         this.saves = saves;

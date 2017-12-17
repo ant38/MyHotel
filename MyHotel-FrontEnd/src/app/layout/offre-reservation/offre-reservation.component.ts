@@ -12,7 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 export class OffreReservationComponent implements OnInit {
 
   offre: Offer;
-  chambres: Room[];
+  room: Room[];
   hotel: Hotel;
 
   constructor(private route: ActivatedRoute, private offreService: OffreService) { }
@@ -20,10 +20,11 @@ export class OffreReservationComponent implements OnInit {
   getOffre(): void {
     const id = +this.route.snapshot.paramMap.get('id');
     console.log(id);
-    this.offreService.getOffre(id).subscribe(offre => {this.offre = offre; this.chambres = this.offre.rooms; this.hotel = this.chambres[0].hotel; console.log(this.offre);});
+    this.offreService.getOffre(id).subscribe(offre => {this.offre = offre; this.room = this.offre.rooms; this.hotel = this.room[0].hotel; console.log(this.offre);});
   }
 
   ngOnInit() {
+    this.getOffre();
   }
 
 }
