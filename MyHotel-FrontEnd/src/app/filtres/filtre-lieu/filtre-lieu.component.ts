@@ -15,10 +15,16 @@ export class FiltreLieuComponent implements OnInit {
   constructor() { }
 
   onChangeLieu(e){
-    //console.log(this.lieuVar);
     this.lieuChange.emit(this.lieuVar);
+    localStorage.setItem("lieu", this.lieuVar);
   }    
 
-  ngOnInit() {  }
+  ngOnInit() {
+    if (localStorage.getItem("lieu")!=null){
+      this.lieuVar = localStorage.getItem("lieu");
+      this.lieuChange.emit(this.lieuVar);
+    }
+
+  }
 
 }

@@ -1,21 +1,25 @@
-﻿import { NgModule }      from '@angular/core';
+﻿import { NgModule }      from '@angular/core';//ErrorHandler
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule,FormsModule }    from '@angular/forms';
 import { HttpModule, Headers } from '@angular/http';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NouisliderModule } from 'ng2-nouislider';
+import { MyDatePickerModule } from 'mydatepicker';
 
 
 // used to create fake backend
 import { fakeBackendProvider } from './_helpers/index';
 import { MockBackend, MockConnection } from '@angular/http/testing';
-import { BaseRequestOptions } from '@angular/http';
+import { RequestOptions, BaseRequestOptions } from '@angular/http';
 
 import { AppComponent }  from './app.component';
 import { routing }        from './app.routing';
 
 import { AlertComponent } from './_directives/index';
 import { AuthGuard } from './_guards/index';
+
+//import { DefaultRequestOptions } from './_services/options.service';
+//import { AuthErrorHandler } from './_services/index';
 
 import { JwtInterceptor } from './_helpers/index';
 import { AlertService, AuthenticationService, UserService, HotelService, OffreService, BookingService } from './_services/index';
@@ -55,6 +59,7 @@ import { OffreReservationComponent } from './layout/offre-reservation/offre-rese
         HttpModule,
         HttpClientModule,
         NouisliderModule,
+        MyDatePickerModule,
         routing
     ],
     declarations: [
@@ -94,6 +99,15 @@ import { OffreReservationComponent } from './layout/offre-reservation/offre-rese
             useClass: JwtInterceptor,
             multi: true
         },
+        /*{
+      provide: RequestOptions,
+      useClass: DefaultRequestOptions
+        },
+        requestOptionsProvider,
+        {
+      provide: ErrorHandler, 
+      useClass: AuthErrorHandler  //error for LogOut
+        },*/
 
         HotelService,
         OffreService,

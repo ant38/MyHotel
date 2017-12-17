@@ -14,6 +14,15 @@ import { PayComponent } from '../layout/paiement/paiement.component';
 export class DashboardComponent {
   constructor() {}
 
+  ngOnInit() {
+      localStorage.removeItem("lieu");
+      localStorage.removeItem("dateIn");
+      localStorage.removeItem("dateOut");
+      localStorage.removeItem("nbNuit");
+      localStorage.removeItem("nbAdults");
+      localStorage.removeItem("nbChildren");      
+  }
+
 }
 
 

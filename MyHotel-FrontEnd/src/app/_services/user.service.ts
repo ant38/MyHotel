@@ -30,6 +30,8 @@ export class UserService {
         return this.http.delete('http://18.216.255.59/MyHotel/rest/clients' + id, this.jwt()).map((response: Response) => response.json());
     }
 
+    
+
     // private helper methods
 
     private jwt() {
