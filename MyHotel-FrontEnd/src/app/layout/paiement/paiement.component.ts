@@ -9,8 +9,7 @@ export class PayComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {  }
 
   openCheckout() {
     var handler = (<any>window).StripeCheckout.configure({
