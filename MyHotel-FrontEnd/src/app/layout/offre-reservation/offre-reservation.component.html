@@ -1,24 +1,29 @@
 <div *ngIf="offre">
   <div class="container">
     <div class="row">
-      <div class="col-xs-1 col-sm-2 col-md-10">
-        <h1>Récapitulatif</h1>
-        <h2><div class="list-group-item-heading" >{{offre.rooms[0].hotel.name}}</div></h2>
-        {{offre.rooms[0].hotel.address}}<br>
-        {{offre.rooms[0].hotel.town}}<br>
-        <a href="{{offre.rooms[0].hotel.webSite}}" target="_blank">Site internet</a>
-        <br>
-          <img src="offre.rooms[0].hotel.Image">
+      <h1>Récapitulatif</h1>
+      <div class="col-xs-1 col-sm-2 col-md-2">
+      <img src="data:image/png;base64,{{image}}" width='130'>
+      <!-- <img src={{hotel.image}} align="left"> http://.../hotels/{id}/getImage renvoie byte[]-->
       </div>
       <div class="col-xs-11 col-sm-10 col-md-10">
         <div class="row">
-          <div class="col-xs-10 col-sm-10 col-md-10">
-          </div>
-          <div class="col-xs-2 col-sm-2 col-md-2">
-          </div>
+          <h2><div class="list-group-item-heading" >{{offre.rooms[0].hotel.name}}
+            <span *ngIf="hotel.stars>0" class="glyphicon glyphicon-star" aria-hidden="true"></span>
+            <span *ngIf="hotel.stars>1" class="glyphicon glyphicon-star" aria-hidden="true"></span>
+            <span *ngIf="hotel.stars>2" class="glyphicon glyphicon-star" aria-hidden="true"></span>
+            <span *ngIf="hotel.stars>3" class="glyphicon glyphicon-star" aria-hidden="true"></span>
+            <span *ngIf="hotel.stars>4" class="glyphicon glyphicon-star" aria-hidden="true"></span>
+          </div></h2>
         </div>
+        <p>{{offre.rooms[0].hotel.address}}<br>
+          {{offre.rooms[0].hotel.town}}<br>
+          {{offre.rooms[0].hotel.description}}<br>
+          <a href="{{offre.rooms[0].hotel.webSite}}" target="_blank">Site internet</a>
+        </p>
       </div>
     </div>
+
     <div class="row">
         <div class="col-xs-12 col-sm-10 col-md-10">
             <p>Du {{offre.dateStart | date :'dd MMM yyyy'}} au {{offre.dateEnd | date :'dd MMM yyyy'}} </p>

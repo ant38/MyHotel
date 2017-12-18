@@ -15,4 +15,8 @@ export class HotelService {
     return this.http.get<Hotel[]>(this.hotelURL);
   }
 
+  getImageHotel(id) : Observable<any> {
+    return this.http.get<any>(this.hotelURL+"/"+id+"/getImage");
+  }
+
 }
