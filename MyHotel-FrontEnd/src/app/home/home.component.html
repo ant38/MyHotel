@@ -1,14 +1,18 @@
 ﻿<div class="col-md-6 col-md-offset-3" *ngIf="this.currentUser!=null">
-    <h1 >Hi {{this.currentUser.prenom}} !</h1>
-    <p>You've logged in MyHotel.</p>
-    <h3>Your profil:</h3>
+    <h1 >Bonjour {{this.currentUser.prenom}} !</h1>
+    <p>Bienvenue sur MyHotel.</p>
+    <h3>Votre profil:</h3>
     <ul>
         <li>
-            Your username - {{this.currentUser.username}} ({{this.currentUser.prenom}} {{this.currentUser.nom}})
-            - <a (click)="deleteUser(user.id)">Delete</a>
+            Votre nom d'utilisateur - {{this.currentUser.username}} ({{this.currentUser.prenom}} {{this.currentUser.nom}})
+            
         </li>
         <li>
-            Your email - {{this.currentUser.email}}
+            Votre email - {{this.currentUser.email}}
+        </li>
+        <li>
+            Souhaitez-vous supprimer votre compte? 
+            - <a (click)="deleteUser(user.id)">Supprimer</a>
         </li>
     </ul>
 

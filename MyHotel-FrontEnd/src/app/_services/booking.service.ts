@@ -18,8 +18,8 @@ export class BookingService {
     return this.http.get<Booking>(this.BookingsURL+'/'+id);
   }
 
-  book(offreId, clientId, paid): Observable<Booking[]> {
-    return this.http.get<Booking[]>(this.BookingsURL+"/book?offerId="+offreId+"&clientId="+clientId+"&paid="+paid);
+  book(offreId, clientId, paid): Observable<Booking> {
+    return this.http.get<Booking>(this.BookingsURL+"/book?offerId="+offreId+"&clientId="+clientId+"&paid="+paid);
   }
 }
 /*

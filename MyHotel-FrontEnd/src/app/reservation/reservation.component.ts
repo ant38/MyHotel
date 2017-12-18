@@ -27,7 +27,7 @@ export class ReservationComponent {
 
   book(paid){
     console.log("in book");
-    this.bookingService.book(this.id, this.clientId, paid).subscribe(book=>{this.router.navigate(['confirmation/'+book[0].id_booking]);});
+    this.bookingService.book(this.id, this.clientId, paid).subscribe(mybook=>{console.log(mybook.id);this.router.navigate(['confirmation/'+mybook.id]);});
 
   }
 

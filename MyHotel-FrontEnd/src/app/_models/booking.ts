@@ -1,7 +1,7 @@
 import { Room } from "./room";
 import { User } from "./user";
 export class Booking {
-    id_booking: number;
+    id: number;
     version: number;
     dateIn: Date;
     dateOut: Date;
