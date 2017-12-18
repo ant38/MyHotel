@@ -96,6 +96,7 @@ public class OfferService extends BaseService<OfferEntity> implements Serializab
 			DateTime dateTimeEnd;
 			if(days < 1) {
 				dateTimeEnd = dateTimeOut;
+				days = new Long(Days.daysBetween(dateTimeIn, dateTimeOut).getDays());
 			} else {
 				dateTimeEnd = dateTimeStart.plusDays(days.intValue());
 			}
@@ -108,7 +109,7 @@ public class OfferService extends BaseService<OfferEntity> implements Serializab
 					offer.setDateStart(dateTimeStart.toDate());
 					offer.setDateEnd(dateTimeEnd.toDate());
 					RoomEntity room = roomService.find(rooms.get(i).getId());
-					offer.setPrice(room.getPrice());
+					offer.setPrice(room.getPrice() * days);
 					boolean continueFor = false;
 					for(int j=0; j<offers.size(); j++) {
 						if(offers.get(j).getRooms().contains(room)) {
