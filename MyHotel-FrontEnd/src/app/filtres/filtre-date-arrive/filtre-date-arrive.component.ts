@@ -29,7 +29,7 @@ export class FiltreDateArriveComponent implements OnInit {
     // Update value of selDate variable
     this.dateInVar = event.date;
     this.dateInChange.emit(event.jsdate);
-    localStorage.setItem("dateOut",event.formatted);
+    localStorage.setItem("dateIn",event.formatted);
   }
 
   // Calling this function clears the selected date
@@ -37,8 +37,8 @@ export class FiltreDateArriveComponent implements OnInit {
     this.dateInVar = {year: 0, month: 0, day: 0};
   }
   ngOnInit(){
-    if (localStorage.getItem("dateOut")!=null){
-      var mydate = new Date(localStorage.getItem("dateOut"));
+    if (localStorage.getItem("dateIn")!=null){
+      var mydate = new Date(localStorage.getItem("dateIn"));
       this.dateInVar = { year: mydate.getFullYear(), 
                           month: mydate.getMonth() + 1, 
                           day: mydate.getDate()};
