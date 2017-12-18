@@ -54,7 +54,7 @@ export class ReservationComponent {
 
     handler.open({
       name: 'Paiement par carte',
-      description: 'saisir votre email:',
+      description: 'Si vous ne voulez pas payer en ligne, s\'enregister SVP !',
       amount: this.prix*100 //le prix est divisé par 100 : par ex 2000 c'est a dire 20.00
     });
   }
