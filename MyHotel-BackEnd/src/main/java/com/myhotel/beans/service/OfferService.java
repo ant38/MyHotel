@@ -90,7 +90,7 @@ public class OfferService extends BaseService<OfferEntity> implements Serializab
     	DateTime dateTimeIn = new DateTime(dateIn);
     	DateTime dateTimeOut = new DateTime(dateOut);
 		
-		if(days <= Days.daysBetween(dateTimeIn, dateTimeOut).getDays()) {
+		if(days <= Days.daysBetween(dateTimeIn, dateTimeOut).getDays() && Days.daysBetween(dateTimeIn, dateTimeOut).getDays() > 0) {
 			List<HotelEntity> hotels = hotelService.findHotelsByCity(city);
 			DateTime dateTimeStart = dateTimeIn;
 			DateTime dateTimeEnd;
