@@ -12,7 +12,9 @@ export class AuthenticationService {
 	return this.http.post('http://18.216.255.59/MyHotel/rest/clients/isClient', null, { params: { username: username, password: password }}).map((response: Response) =>  {
                 // login successful if there's a jwt token in the response
                 let user = response.json();
-	console.log(user);
+	              console.log(user);
+    //localStorage.setItem(TOKEN_NAME, response.headers.get("Authorization")); //'id_token'
+                console.log(response.headers.get("Authorization"));
                 if (user) {// && user.token
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
                     localStorage.setItem('currentUser', JSON.stringify(user));
