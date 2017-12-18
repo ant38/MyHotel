@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Hotel, Offer, Room } from '../../_models/index';
-import { OffreService } from '../../_services/index';
+import { OffreService, HotelService } from '../../_services/index';
 import { ActivatedRoute } from '@angular/router';
 import { forEach } from '@angular/router/src/utils/collection';
 
@@ -16,12 +16,16 @@ export class OffreReservationComponent implements OnInit {
   room: Room[];
   hotel: Hotel;
   nbPers: Number;
+  image: any;
 
-  constructor(private route: ActivatedRoute, private offreService: OffreService) { }
+  constructor(private route: ActivatedRoute, private offreService: OffreService, private hotelService: HotelService) { }
 
   getOffre(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.offreService.getOffre(id).subscribe(offre => {this.offre = offre; this.room = this.offre.rooms; this.hotel = this.room[0].hotel;});
+    this.offreService.getOffre(id).subscribe(offre => {this.offre = offre; this.room = this.offre.rooms; this.hotel = this.room[0].hotel; this.getImage(this.hotel.id);});
+  }
+  getImage(id){
+    this.hotelService.getImageHotel(id).subscribe(img => {this.image = img.content});
   }
 
   ngOnInit() {
@@ -34,12 +38,8 @@ export class OffreReservationComponent implements OnInit {
   }
 
   getNbPersonnes(): Number {
-    this.nbPers = 0;
-    this.room.forEach(function(element) {
-      this.nbPers += element.places;
-    }.bind(this));
-    console.log(this.nbPers);
-    return this.nbPers;
+    return Number(localStorage.getItem("nbAdults"))+Number(localStorage.getItem("nbChildren"));
+
   }
 
 }
